@@ -1,4 +1,4 @@
-package xtextract
+package textractutil
 
 const (
 	BlockTypeLine   = "LINE"

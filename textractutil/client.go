@@ -1,4 +1,4 @@
-package xtextract
+package textractutil
 
 import (
 	"context"
@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/textract"
-	"github.com/grokify/awsgo/xtextract/ocrutil"
+	"github.com/grokify/awsgo/textractutil/ocrutil"
 	"github.com/grokify/mogo/encoding/jsonutil"
 	"github.com/grokify/mogo/image/imageutil"
 )

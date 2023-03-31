@@ -1,10 +1,10 @@
-package xtextract
+package textractutil
 
 import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go/service/textract"
-	"github.com/grokify/awsgo/xtextract/ocrutil"
+	"github.com/grokify/awsgo/textractutil/ocrutil"
 	"github.com/grokify/mogo/pointer"
 )
 
