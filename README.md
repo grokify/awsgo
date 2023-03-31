@@ -13,7 +13,7 @@ AWSgo provices helper libraries for the AWS Go SDK:
 ## Installation
 
 ```
-$ go get github.com/grokify/awsgo
+$ go get github.com/grokify/awsgo/...
 ```
 
  [build-status-svg]: https://github.com/grokify/awsgo/workflows/test/badge.svg
