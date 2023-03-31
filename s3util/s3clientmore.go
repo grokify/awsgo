@@ -81,8 +81,7 @@ func (cm *S3ClientMore) ObjectGetSimple(bucket, key string) (*s3.GetObjectOutput
 		Bucket: aws.String(bucket),
 		Key:    aws.String(key),
 	})
-	errorsutil.Wrap(err, "err in S3ClientMore.ObjectGetSimple..cm.S3Client.GetObject")
-	return out, err
+	return out, errorsutil.Wrap(err, "err in S3ClientMore.ObjectGetSimple..cm.S3Client.GetObject")
 }
 
 func (cm *S3ClientMore) ObjectGetToFile(bucket, key, filename string) (int64, error) {

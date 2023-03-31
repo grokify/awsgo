@@ -312,7 +312,10 @@ func ObjectInputFile(filename string) (*s3.PutObjectInput, error) {
 	var size int64 = fileInfo.Size()
 
 	buffer := make([]byte, size)
-	file.Read(buffer)
+	_, err = file.Read(buffer)
+	if err != nil {
+		return nil, err
+	}
 	fileBytes := bytes.NewReader(buffer)
 	fileType := http.DetectContentType(buffer)
 
