@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
-	gocredentials "github.com/grokify/goauth/credentials"
+	"github.com/grokify/goauth"
 )
 
 /*
@@ -38,8 +38,8 @@ type AWSConfigMore struct {
 	PathStyleForce  bool
 }
 
-func AWSConfigMoreCredentialBasic(creds gocredentials.Credentials) (*AWSConfigMore, error) {
-	if creds.Type == gocredentials.TypeBasic {
+func AWSConfigMoreCredentialBasic(creds goauth.Credentials) (*AWSConfigMore, error) {
+	if creds.Type == goauth.TypeBasic {
 		return &AWSConfigMore{
 			CredentialsType: CredentialsTypeStatic,
 			StaticID:        creds.Basic.Username,

@@ -3,8 +3,8 @@ module github.com/grokify/awsgo
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.241
-	github.com/grokify/goauth v0.17.7
+	github.com/aws/aws-sdk-go v1.44.242
+	github.com/grokify/goauth v0.18.0
 	github.com/grokify/mogo v0.49.1
 )
 
@@ -20,10 +20,10 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/valyala/fastjson v1.6.4 // indirect
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29 // indirect
-	golang.org/x/image v0.6.0 // indirect
-	golang.org/x/net v0.8.0 // indirect
-	golang.org/x/oauth2 v0.6.0 // indirect
-	golang.org/x/text v0.8.0 // indirect
+	golang.org/x/image v0.7.0 // indirect
+	golang.org/x/net v0.9.0 // indirect
+	golang.org/x/oauth2 v0.7.0 // indirect
+	golang.org/x/text v0.9.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/oleiade/reflections.v1 v1.0.0 // indirect
