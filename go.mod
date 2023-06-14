@@ -3,7 +3,7 @@ module github.com/grokify/awsgo
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.281
+	github.com/aws/aws-sdk-go v1.44.282
 	github.com/grokify/goauth v0.19.0
 	github.com/grokify/mogo v0.50.0
 )
