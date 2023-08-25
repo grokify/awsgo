@@ -1,5 +1,5 @@
-github.com/aws/aws-sdk-go v1.44.326 h1:/6xD/9mKZ2RMTDfbhh9qCxw+CaTbJRvfHJ/NHPFbI38=
-github.com/aws/aws-sdk-go v1.44.326/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
+github.com/aws/aws-sdk-go v1.44.331 h1:hEwdOTv6973uegCUY2EY8jyyq0OUg9INc0HOzcu2bjw=
+github.com/aws/aws-sdk-go v1.44.331/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/buger/jsonparser v1.1.1 h1:2PnMjfWD7wBILjqQbt530v576A/cAbQvEW9gGIpYMUs=
 github.com/buger/jsonparser v1.1.1/go.mod h1:6RYKKt7H4d4+iWqouImQ9R2FZql3VbhNgx27UK13J/0=
 github.com/cockroachdb/apd v1.1.0 h1:3LFP3629v+1aKXU5Q37mxmRxX/pIu1nijXydLShEq5I=
