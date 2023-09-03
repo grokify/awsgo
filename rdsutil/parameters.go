@@ -1,6 +1,9 @@
 ﻿package rdsutil
 
 import (
+	"sort"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/service/rds"
 	"github.com/grokify/gocharts/v2/data/table"
 	"github.com/grokify/mogo/pointer"
@@ -9,9 +12,30 @@ import (
 
 type Parameters []rds.Parameter
 
-func (p Parameters) ToPointers() []*rds.Parameter {
+func (p Parameters) Map() map[string]string {
+	m := map[string]string{}
+	for _, pi := range p {
+		m[pointer.Dereference(pi.ParameterName)] = pointer.Dereference(pi.ParameterValue)
+	}
+	return m
+}
+
+func (p Parameters) Names() []string {
+	var names []string
+	for _, pi := range p {
+		names = append(names, pointer.Dereference(pi.ParameterName))
+	}
+	sort.Strings(names)
+	return names
+}
+
+func (p Parameters) ToPointers(applyMethod string) []*rds.Parameter {
+	applyMethod = strings.TrimSpace(applyMethod)
 	ptrs := []*rds.Parameter{}
 	for _, px := range p {
+		if applyMethod != "" {
+			px.ApplyMethod = pointer.Pointer(applyMethod)
+		}
 		ptrs = append(ptrs, &px)
 	}
 	return ptrs
@@ -41,4 +65,14 @@ func (p Parameters) Table() table.Table {
 		})
 	}
 	return tbl
+}
+
+func MapToParameters(m map[string]string) Parameters {
+	params := Parameters{}
+	for k, v := range m {
+		params = append(params, rds.Parameter{
+			ParameterName:  pointer.Pointer(k),
+			ParameterValue: pointer.Pointer(v)})
+	}
+	return params
 }
