@@ -205,3 +205,20 @@ func (svc *ParameterGroupService) DescribeEngineDefaultParameters(dbParameterGro
 	}
 	return params, nil
 }
+
+// ModifyDBParameterGroup is a wrapper for https://docs.aws.amazon.com/sdk-for-go/api/service/rds/#RDS.ModifyDBParameterGroup .
+// If `dbParameterGroupName` or `params` are provided, they are used to override the value in `opts`.
+func (svc *ParameterGroupService) ModifyDBParameterGroup(dbParameterGroupName string, params Parameters, opts *rds.ModifyDBParameterGroupInput) (*rds.DBParameterGroupNameMessage, error) {
+	if opts != nil {
+		opts = &rds.ModifyDBParameterGroupInput{}
+	}
+	dbParameterGroupName = strings.TrimSpace(dbParameterGroupName)
+	if dbParameterGroupName != "" {
+		opts.DBParameterGroupName = pointer.Pointer(dbParameterGroupName)
+	}
+	if len(params) > 0 {
+		ptrs := params.ToPointers()
+		opts.Parameters = ptrs
+	}
+	return svc.rdsClient.ModifyDBParameterGroup(opts)
+}
