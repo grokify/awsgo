@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go/service/rds"
+	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/pointer"
 )
 
@@ -208,7 +209,7 @@ func (svc *ParameterGroupService) DescribeEngineDefaultParameters(dbParameterGro
 }
 
 // ModifyDBParameterGroup is a wrapper for https://docs.aws.amazon.com/sdk-for-go/api/service/rds/#RDS.ModifyDBParameterGroup .
-func (svc *ParameterGroupService) ModifyDBParameterGroup(dbParameterGroupName, applyMethod string, params map[string]string) (*rds.DBParameterGroupNameMessage, error) {
+func (svc *ParameterGroupService) ModifyDBParameterGroup(dbParameterGroupName string, params map[string]string) (*rds.DBParameterGroupNameMessage, error) {
 	dbParameterGroupName = strings.TrimSpace(dbParameterGroupName)
 	if dbParameterGroupName == "" {
 		return nil, errors.New("db parameter group name must be provided")
@@ -216,11 +217,22 @@ func (svc *ParameterGroupService) ModifyDBParameterGroup(dbParameterGroupName, a
 	if len(params) == 0 {
 		return nil, errors.New("no parameters to modify")
 	}
-	pslice := MapToParameters(params)
+
+	paramsNow, err := svc.DescribeDBParameterGroup(dbParameterGroupName, nil)
+	if err != nil {
+		return nil, errorsutil.Wrap(err, "from svc.DescribeDBParameterGroup")
+	}
+	paramsSetNow := NewParametersSet()
+	paramsSetNow.AddParameters(paramsNow...)
+
+	pslice, err := paramsSetNow.ModifyMapToPointerSlice(params)
+	if err != nil {
+		return nil, err
+	}
 
 	opts := &rds.ModifyDBParameterGroupInput{
 		DBParameterGroupName: pointer.Pointer(dbParameterGroupName),
-		Parameters:           pslice.ToPointers(applyMethod)}
+		Parameters:           pslice}
 
 	return svc.rdsClient.ModifyDBParameterGroup(opts)
 }

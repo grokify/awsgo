@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/aws/aws-sdk-go v1.45.2
 	github.com/grokify/goauth v0.20.1
-	github.com/grokify/gocharts/v2 v2.11.2
+	github.com/grokify/gocharts/v2 v2.12.0
 	github.com/grokify/mogo v0.55.0
 )
 
@@ -50,3 +50,5 @@ require (
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/oleiade/reflections.v1 v1.0.0 // indirect
 )
+
+// replace github.com/grokify/gocharts/v2 => ../gocharts

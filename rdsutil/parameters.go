@@ -2,7 +2,6 @@
 
 import (
 	"sort"
-	"strings"
 
 	"github.com/aws/aws-sdk-go/service/rds"
 	"github.com/grokify/gocharts/v2/data/table"
@@ -29,13 +28,9 @@ func (p Parameters) Names() []string {
 	return names
 }
 
-func (p Parameters) ToPointers(applyMethod string) []*rds.Parameter {
-	applyMethod = strings.TrimSpace(applyMethod)
+func (p Parameters) ToPointers() []*rds.Parameter {
 	ptrs := []*rds.Parameter{}
 	for _, px := range p {
-		if applyMethod != "" {
-			px.ApplyMethod = pointer.Pointer(applyMethod)
-		}
 		ptrs = append(ptrs, &px)
 	}
 	return ptrs

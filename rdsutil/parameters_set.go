@@ -2,6 +2,7 @@
 
 import (
 	"errors"
+	"fmt"
 	"sort"
 
 	"github.com/aws/aws-sdk-go/service/rds"
@@ -51,4 +52,21 @@ func (ps *ParametersSet) GetValue(key string) (string, error) {
 	} else {
 		return pointer.Dereference(pi.ParameterValue), nil
 	}
+}
+
+// ModifyMapToPointerSlice converts a `map[string]string` to a `[]*rds.Parameter` adding the
+// current ApplyType.` This is used in `ModifyDBParameterGroup()`.
+func (ps *ParametersSet) ModifyMapToPointerSlice(m map[string]string) ([]*rds.Parameter, error) {
+	params := []*rds.Parameter{}
+	for k, v := range m {
+		p := rds.Parameter{
+			ParameterName:  pointer.Pointer(k),
+			ParameterValue: pointer.Pointer(v)}
+		if cur, ok := ps.Data[k]; ok {
+			p.ApplyType = pointer.Pointer(*cur.ApplyType)
+		} else {
+			return params, fmt.Errorf("param not found for (%s)", k)
+		}
+	}
+	return params, nil
 }
