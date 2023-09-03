@@ -38,13 +38,21 @@ type AWSConfigMore struct {
 	PathStyleForce  bool
 }
 
+func NewAWSConfigMoreStatic(region, accessKeyID, accessKeySecret string) *AWSConfigMore {
+	return &AWSConfigMore{
+		CredentialsType: CredentialsTypeStatic,
+		StaticID:        accessKeyID,
+		StaticSecret:    accessKeySecret,
+		Region:          region,
+	}
+}
+
 func AWSConfigMoreCredentialBasic(creds goauth.Credentials) (*AWSConfigMore, error) {
 	if creds.Type == goauth.TypeBasic {
-		return &AWSConfigMore{
-			CredentialsType: CredentialsTypeStatic,
-			StaticID:        creds.Basic.Username,
-			StaticSecret:    creds.Basic.Password,
-		}, nil
+		return NewAWSConfigMoreStatic(
+			"",
+			creds.Basic.Username,
+			creds.Basic.Password), nil
 	}
 	return nil, errors.New("creds type not supported")
 }
