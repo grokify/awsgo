@@ -129,7 +129,8 @@ func (svc *ParameterGroupService) CreateDBClusterParameterGroup(
 	return svc.rdsClient.CreateDBClusterParameterGroup(opts)
 }
 
-func (svc *ParameterGroupService) DescribeDBParameters(dbParameterGroupName string, opts *rds.DescribeDBParametersInput) (Parameters, error) {
+// DescribeDBParameterGroup returnsthe parameters for a parameter group. The corresponding AWS SDk Method is `DescribeDBParameters()`.
+func (svc *ParameterGroupService) DescribeDBParameterGroup(dbParameterGroupName string, opts *rds.DescribeDBParametersInput) (Parameters, error) {
 	params := []rds.Parameter{}
 	if opts == nil {
 		opts = &rds.DescribeDBParametersInput{}
@@ -207,18 +208,19 @@ func (svc *ParameterGroupService) DescribeEngineDefaultParameters(dbParameterGro
 }
 
 // ModifyDBParameterGroup is a wrapper for https://docs.aws.amazon.com/sdk-for-go/api/service/rds/#RDS.ModifyDBParameterGroup .
-// If `dbParameterGroupName` or `params` are provided, they are used to override the value in `opts`.
-func (svc *ParameterGroupService) ModifyDBParameterGroup(dbParameterGroupName string, params Parameters, opts *rds.ModifyDBParameterGroupInput) (*rds.DBParameterGroupNameMessage, error) {
-	if opts != nil {
-		opts = &rds.ModifyDBParameterGroupInput{}
-	}
+func (svc *ParameterGroupService) ModifyDBParameterGroup(dbParameterGroupName, applyMethod string, params map[string]string) (*rds.DBParameterGroupNameMessage, error) {
 	dbParameterGroupName = strings.TrimSpace(dbParameterGroupName)
-	if dbParameterGroupName != "" {
-		opts.DBParameterGroupName = pointer.Pointer(dbParameterGroupName)
+	if dbParameterGroupName == "" {
+		return nil, errors.New("db parameter group name must be provided")
 	}
-	if len(params) > 0 {
-		ptrs := params.ToPointers()
-		opts.Parameters = ptrs
+	if len(params) == 0 {
+		return nil, errors.New("no parameters to modify")
 	}
+	pslice := MapToParameters(params)
+
+	opts := &rds.ModifyDBParameterGroupInput{
+		DBParameterGroupName: pointer.Pointer(dbParameterGroupName),
+		Parameters:           pslice.ToPointers(applyMethod)}
+
 	return svc.rdsClient.ModifyDBParameterGroup(opts)
 }
