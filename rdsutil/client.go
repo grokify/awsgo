@@ -10,14 +10,18 @@ import (
 )
 
 type RDSClientMore struct {
-	client *rds.RDS
+	client         *rds.RDS
+	ParameterGroup *ParameterGroupService
 }
 
 func NewRDSClientMore(cm *config.AWSConfigMore) (*RDSClientMore, error) {
 	if svc, err := NewRDSClient(cm); err != nil {
 		return nil, err
 	} else {
-		return &RDSClientMore{client: svc}, nil
+		return &RDSClientMore{
+			client:         svc,
+			ParameterGroup: &ParameterGroupService{rdsClient: svc},
+		}, nil
 	}
 }
 
