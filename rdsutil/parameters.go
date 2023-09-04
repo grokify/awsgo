@@ -54,9 +54,8 @@ func (p Parameters) Table() table.Table {
 			pointer.Dereference(pi.Description),
 			pointer.Dereference(pi.ApplyType),
 			pointer.Dereference(pi.DataType),
-			pointer.Dereference(pi.DataType),
 			strconvutil.FormatBoolMore(pointer.Dereference(pi.IsModifiable), "Modifiable", "Non Modifiable"),
-			pointer.Dereference(pi.DataType),
+			pointer.Dereference(pi.Source),
 		})
 	}
 	return tbl

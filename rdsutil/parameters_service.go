@@ -12,6 +12,7 @@ import (
 const (
 	DBPGFAuroraMySQL57 = "aurora-mysql5.7"
 	DBPGFMySQL80       = "mysql8.0"
+	DBPGFMySQL57       = "mysql5.7"
 
 // * aurora-mysql8.0
 //
