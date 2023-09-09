@@ -131,6 +131,20 @@ func (svc *ParameterGroupService) CreateDBClusterParameterGroup(
 	return svc.rdsClient.CreateDBClusterParameterGroup(opts)
 }
 
+func (svc *ParameterGroupService) DescribeDBParameterGroupSets(dbParameterGroupNames []string, opts *rds.DescribeDBParametersInput) (*ParametersSets, error) {
+	pss := NewParametersSets()
+	for _, name := range dbParameterGroupNames {
+		params, err := svc.DescribeDBParameterGroup(name, opts)
+		if err != nil {
+			return pss, err
+		}
+		ps := NewParametersSet()
+		ps.AddParameters(params...)
+		pss.Data[name] = ps
+	}
+	return pss, nil
+}
+
 // DescribeDBParameterGroup returnsthe parameters for a parameter group. The corresponding AWS SDk Method is `DescribeDBParameters()`.
 func (svc *ParameterGroupService) DescribeDBParameterGroup(dbParameterGroupName string, opts *rds.DescribeDBParametersInput) (Parameters, error) {
 	params := []rds.Parameter{}
