@@ -1,6 +1,8 @@
 ﻿package rdsutil
 
 import (
+	"encoding/json"
+	"os"
 	"sort"
 
 	"github.com/aws/aws-sdk-go/service/rds"
@@ -8,6 +10,25 @@ import (
 	"github.com/grokify/mogo/pointer"
 	"github.com/grokify/mogo/strconv/strconvutil"
 )
+
+// ParametersResponse representes the response from the AWS CLI utility for reading
+// database parameter groups.
+type ParametersResponse struct {
+	Parameters Parameters
+}
+
+func ParametersResponseReadFile(name string) (ParametersResponse, error) {
+	b, err := os.ReadFile(name)
+	if err != nil {
+		return ParametersResponse{}, err
+	}
+	return ParametersResponseReadBytes(b)
+}
+
+func ParametersResponseReadBytes(b []byte) (ParametersResponse, error) {
+	var params ParametersResponse
+	return params, json.Unmarshal(b, &params)
+}
 
 type Parameters []rds.Parameter
 
