@@ -3,7 +3,7 @@ module github.com/grokify/awsgo
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.45.6
+	github.com/aws/aws-sdk-go v1.45.9
 	github.com/grokify/goauth v0.20.2
 	github.com/grokify/gocharts/v2 v2.12.0
 	github.com/grokify/mogo v0.55.0
@@ -13,7 +13,6 @@ require (
 	cloud.google.com/go/compute v1.23.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
-	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.0.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
