@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.45.10
 	github.com/grokify/goauth v0.20.2
 	github.com/grokify/gocharts/v2 v2.12.0
-	github.com/grokify/mogo v0.55.0
+	github.com/grokify/mogo v0.56.0
 )
 
 require (
