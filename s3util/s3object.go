@@ -309,7 +309,7 @@ func ObjectInputFile(filename string) (*s3.PutObjectInput, error) {
 	if err != nil {
 		return nil, err
 	}
-	var size int64 = fileInfo.Size()
+	var size = fileInfo.Size() // int64
 
 	buffer := make([]byte, size)
 	_, err = file.Read(buffer)
@@ -342,7 +342,7 @@ func UploadInputFile(bucket, key, filename string) (*s3manager.UploadInput, erro
 	if err != nil {
 		return nil, err
 	}
-	var size int64 = fileInfo.Size()
+	var size = fileInfo.Size() // int64
 
 	buffer := make([]byte, size)
 	_, err = f.Read(buffer)

@@ -51,8 +51,8 @@ func (p Parameters) Names() []string {
 
 func (p Parameters) ToPointers() []*rds.Parameter {
 	ptrs := []*rds.Parameter{}
-	for _, px := range p {
-		ptrs = append(ptrs, &px)
+	for i := range p {
+		ptrs = append(ptrs, &p[i])
 	}
 	return ptrs
 }
