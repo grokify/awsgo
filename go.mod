@@ -2,7 +2,7 @@ module github.com/grokify/awsgo
 
 go 1.21
 
-toolchain go1.21.1
+// toolchain go1.21.1
 
 require (
 	github.com/aws/aws-sdk-go v1.46.1
