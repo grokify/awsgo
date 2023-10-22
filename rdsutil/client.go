@@ -1,4 +1,4 @@
-﻿package rdsutil
+package rdsutil
 
 import (
 	"errors"

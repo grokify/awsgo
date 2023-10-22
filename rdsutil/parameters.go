@@ -1,4 +1,4 @@
-﻿package rdsutil
+package rdsutil
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ import (
 	"github.com/grokify/mogo/strconv/strconvutil"
 )
 
-// ParametersResponse representes the response from the AWS CLI utility for reading
+// ParametersResponse represents the response from the AWS CLI utility for reading
 // database parameter groups.
 type ParametersResponse struct {
 	Parameters Parameters
