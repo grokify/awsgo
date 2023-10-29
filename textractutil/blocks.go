@@ -28,11 +28,11 @@ func (b Blocks) LinesByBlockText() map[string][]string {
 	for _, bi := range b {
 		key := strings.Join(
 			[]string{
-				strings.TrimSpace(pointer.ToString(bi.BlockType)),
-				strings.TrimSpace(pointer.ToString(bi.TextType)),
+				strings.TrimSpace(pointer.Dereference(bi.BlockType)),
+				strings.TrimSpace(pointer.Dereference(bi.TextType)),
 			},
 			"__")
-		s := strings.TrimSpace(pointer.ToString(bi.Text))
+		s := strings.TrimSpace(pointer.Dereference(bi.Text))
 		m[key] = append(m[key], s)
 	}
 	return m
@@ -52,10 +52,10 @@ func (b Blocks) TextResults() ocrutil.TextResults {
 func (b Blocks) Lines() []string {
 	lines := []string{}
 	for _, bi := range b {
-		if strings.TrimSpace(pointer.ToString(bi.BlockType)) != BlockTypeLine {
+		if strings.TrimSpace(pointer.Dereference(bi.BlockType)) != BlockTypeLine {
 			continue
 		}
-		s := strings.TrimSpace(pointer.ToString(bi.Text))
+		s := strings.TrimSpace(pointer.Dereference(bi.Text))
 		lines = append(lines, s)
 	}
 	return lines

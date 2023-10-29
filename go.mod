@@ -5,23 +5,24 @@ go 1.21
 // toolchain go1.21.1
 
 require (
-	github.com/aws/aws-sdk-go v1.46.5
+	github.com/aws/aws-sdk-go v1.46.6
 	github.com/grokify/goauth v0.20.4
-	github.com/grokify/gocharts/v2 v2.13.0
-	github.com/grokify/mogo v0.57.0
+	github.com/grokify/gocharts/v2 v2.14.1
+	github.com/grokify/mogo v0.59.0
 )
 
 require (
-	cloud.google.com/go/compute v1.23.1 // indirect
+	cloud.google.com/go/compute v1.23.2 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
+	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.0.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
-	github.com/google/uuid v1.3.1 // indirect
-	github.com/googleapis/enterprise-certificate-proxy v0.3.1 // indirect
+	github.com/google/uuid v1.4.0 // indirect
+	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.0 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
@@ -34,7 +35,7 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fastjson v1.6.4 // indirect
 	github.com/valyala/quicktemplate v1.7.0 // indirect
-	github.com/xuri/efp v0.0.0-20230802181842-ad255f2331ca // indirect
+	github.com/xuri/efp v0.0.0-20231025114914-d1ff6096ae53 // indirect
 	github.com/xuri/excelize/v2 v2.8.0 // indirect
 	github.com/xuri/nfp v0.0.0-20230919160717-d98342af3f05 // indirect
 	go.opencensus.io v0.24.0 // indirect
