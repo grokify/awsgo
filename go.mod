@@ -7,8 +7,8 @@ go 1.21
 require (
 	github.com/aws/aws-sdk-go v1.47.2
 	github.com/grokify/goauth v0.20.4
-	github.com/grokify/gocharts/v2 v2.14.1
-	github.com/grokify/mogo v0.60.0
+	github.com/grokify/gocharts/v2 v2.15.1
+	github.com/grokify/mogo v0.60.1
 )
 
 require (
@@ -43,8 +43,8 @@ require (
 	golang.org/x/image v0.13.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/oauth2 v0.13.0 // indirect
-	golang.org/x/sys v0.13.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/sys v0.14.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/api v0.148.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
