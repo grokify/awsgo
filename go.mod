@@ -5,7 +5,7 @@ go 1.21
 // toolchain go1.21.1
 
 require (
-	github.com/aws/aws-sdk-go v1.48.3
+	github.com/aws/aws-sdk-go v1.48.9
 	github.com/grokify/goauth v0.20.4
 	github.com/grokify/gocharts/v2 v2.15.1
 	github.com/grokify/mogo v0.60.1
