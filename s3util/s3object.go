@@ -32,37 +32,9 @@ https://www.backblaze.com/b2/docs/s3_compatible_api.html
 
 https://help.backblaze.com/hc/en-us/articles/360047629713-Using-the-AWS-Go-SDK-with-B2
 
+https://help.backblaze.com/hc/en-us/articles/360047425453-Getting-Started-with-the-S3-Compatible-API
 
-ERROR 1:
-
-Failed to upload object zocollo/SLD/US-Mint_1871_S1D_JW_38632341_max.jpg, err (MethodNotAllowed: Method Not Allowed
-	status code: 405, request id: , host id: )
-
-use S3 URL instead of URL to get file from UI.
-
-ERROR 2:
-
-Failed to upload object zocollo/SLD/US-Mint_1871_S1D_JW_38632341_max.jpg, err (InvalidAccessKeyId: Malformed Access Key Id
-	status code: 403, request id: f080666715f1d452, host id: adY1ub2tbbltvo3dQbg8=)
-
-Use application key instead fo "master application key"
-
-ERROR 2:
-
-Failed to upload object zocollo/SLD/US-Mint_1871_S1D_JW_38632341_max.jpg, err (InvalidAccessKeyId: The key '000253b6317a4bd0000000002' is not valid
-	status code: 403, request id: f2d448d7c8236f5d, host id: adY5upGujbttvQHdvbrM=)
-
-FIX: Change Region to us-west-000 from us-west-002
-
-EROR 3:
-
-Failed to upload object zocollo/SLD/US-Mint_1871_S1D_JW_38632341_max.jpg, err (AccessDenied: Not allowed to access bucket because it is not s3-enabled: zocollo
-	status code: 403, request id: c567a9b72a28dbce, host id: aMkE1+jO+YuY2uTNuMWY3TWEONG1iWGS/)
-
-
-	https://help.backblaze.com/hc/en-us/articles/360047425453-Getting-Started-with-the-S3-Compatible-API
-
-	Note: Buckets created prior to May 4th, 2020 are not S3 Compatible. If you do not have any S3 Compatible buckets, simply create a new bucket!
+Note: Buckets created prior to May 4th, 2020 are not S3 Compatible. If you do not have any S3 Compatible buckets, simply create a new bucket!
 
 */
 
@@ -182,13 +154,13 @@ func (cm *S3ClientMore) ObjectFileUploadOld(bucket, key, filename string) (*s3ma
 	return cm.Uploader.Upload(input)
 }
 
-func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple.SimpleRequest, sclient *httpsimple.SimpleClient) (*s3.PutObjectOutput, error) {
+func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3.PutObjectOutput, error) {
 	err := checkBucketAndKey(bucket, key)
 	if err != nil {
 		return nil, err
 	}
 	if sclient == nil {
-		sclient = &httpsimple.SimpleClient{}
+		sclient = &httpsimple.Client{}
 	}
 	resp, err := sclient.Do(sreq)
 	if err != nil {
@@ -200,13 +172,13 @@ func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple
 	return cm.ObjectHTTPResponsePut(bucket, key, resp)
 }
 
-func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsimple.SimpleRequest, sclient *httpsimple.SimpleClient) (*s3manager.UploadOutput, error) {
+func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3manager.UploadOutput, error) {
 	err := checkBucketAndKey(bucket, key)
 	if err != nil {
 		return nil, err
 	}
 	if sclient == nil {
-		sclient = &httpsimple.SimpleClient{}
+		sclient = &httpsimple.Client{}
 	}
 	resp, err := sclient.Do(sreq)
 	if err != nil {

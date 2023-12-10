@@ -29,7 +29,7 @@ type S3ClientMore struct {
 	Uploader   *s3manager.Uploader
 }
 
-func NewS3Client(cm config.AWSConfigMore) (*s3.S3, *session.Session, error) {
+func NewS3Client(cm config.AWSConfig) (*s3.S3, *session.Session, error) {
 	ses, err := cm.NewSession()
 	if err != nil {
 		return nil, ses, err
@@ -42,7 +42,7 @@ func NewS3ClientMoreSession(sess *session.Session) (*S3ClientMore, error) {
 	return cm, cm.SetSession(sess)
 }
 
-func NewS3ClientMore(cm config.AWSConfigMore) (*S3ClientMore, error) {
+func NewS3ClientMore(cm config.AWSConfig) (*S3ClientMore, error) {
 	sess, err := cm.NewSession()
 	if err != nil {
 		return nil, err

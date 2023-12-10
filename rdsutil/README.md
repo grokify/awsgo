@@ -5,7 +5,7 @@
 1. [How can I troubleshoot connectivity to an Amazon RDS DB instance that uses a public or private subnet of a VPC?](https://repost.aws/knowledge-center/rds-connectivity-instance-subnet-vpc)
 1. [Encrypting client connections to MySQL DB instances with SSL/TLS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-ssl-connections.html#USER_ConnectToInstanceSSL.CLI)
 1. [Working with DB parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Listing)
-
+1. [Amazon RDS examples using SDK for Go V2](https://docs.aws.amazon.com/code-library/latest/ug/go_2_rds_code_examples.html)
 
 
 ## MySQL CLI Errors

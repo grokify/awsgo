@@ -29,26 +29,26 @@ GOOGLE: https://cloud.google.com/document-ai/docs/process-documents-client-libra
 
 */
 
-type TextractClientMore struct {
+type TextractClient struct {
 	textractClient *textract.Textract
 }
 
-func NewTextractClientMore(sess *session.Session, region string) (*TextractClientMore, error) {
+func NewTextractClient(sess *session.Session, region string) (*TextractClient, error) {
 	c, err := NewClient(sess, region)
 	if err != nil {
 		return nil, err
 	}
-	return &TextractClientMore{textractClient: c}, nil
+	return &TextractClient{textractClient: c}, nil
 }
 
-func (cm TextractClientMore) DetectText(ctx context.Context, b []byte, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
+func (cm TextractClient) DetectText(ctx context.Context, b []byte, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
 	if len(b) == 0 {
 		return nil, ocrutil.ErrNoInputData
 	}
 	return cm.DetectTextFromDocument(ctx, DocumentFromBytes(b), opts...)
 }
 
-func (cm TextractClientMore) DetectTextFromFile(ctx context.Context, filename string, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
+func (cm TextractClient) DetectTextFromFile(ctx context.Context, filename string, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
 	doc, err := DocumentFromFilename(filename)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (cm TextractClientMore) DetectTextFromFile(ctx context.Context, filename st
 	return cm.DetectTextFromDocument(ctx, doc, opts...)
 }
 
-func (cm TextractClientMore) DetectTextFromImage(ctx context.Context, img image.Image, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
+func (cm TextractClient) DetectTextFromImage(ctx context.Context, img image.Image, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
 	doc, err := DocumentFromImage(img)
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (cm TextractClientMore) DetectTextFromImage(ctx context.Context, img image.
 	return cm.DetectTextFromDocument(ctx, doc, opts...)
 }
 
-func (cm TextractClientMore) DetectTextFromImageLocationsVertical(ctx context.Context, imglocations []string, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
+func (cm TextractClient) DetectTextFromImageLocationsVertical(ctx context.Context, imglocations []string, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
 	img, err := imageutil.MergeYSameXRead(imglocations, true)
 	if err != nil {
 		return nil, err
@@ -72,11 +72,11 @@ func (cm TextractClientMore) DetectTextFromImageLocationsVertical(ctx context.Co
 	return cm.DetectTextFromImage(ctx, img, opts...)
 }
 
-func (cm TextractClientMore) OCRSync(ctx context.Context, b []byte) (ocrutil.TextResults, error) {
+func (cm TextractClient) OCRSync(ctx context.Context, b []byte) (ocrutil.TextResults, error) {
 	return cm.outputToTextResults(cm.DetectText(ctx, b))
 }
 
-func (cm TextractClientMore) OCRSyncImageWriteFile(ctx context.Context, outfilename string, perm os.FileMode, imgs []image.Image) (ocrutil.TextResults, error) {
+func (cm TextractClient) OCRSyncImageWriteFile(ctx context.Context, outfilename string, perm os.FileMode, imgs []image.Image) (ocrutil.TextResults, error) {
 	if len(imgs) == 0 {
 		return ocrutil.TextResults{}, errors.New("no images")
 	}
@@ -96,7 +96,7 @@ func (cm TextractClientMore) OCRSyncImageWriteFile(ctx context.Context, outfilen
 	return tr, err
 }
 
-func (cm TextractClientMore) OCRSyncImageLocationsWriteFile(ctx context.Context, outfilename string, perm os.FileMode, imglocations []string) (ocrutil.TextResults, error) {
+func (cm TextractClient) OCRSyncImageLocationsWriteFile(ctx context.Context, outfilename string, perm os.FileMode, imglocations []string) (ocrutil.TextResults, error) {
 	tr, err := cm.outputToTextResults(cm.DetectTextFromImageLocationsVertical(ctx, imglocations))
 	if err != nil {
 		return tr, err
@@ -109,7 +109,7 @@ func (cm TextractClientMore) OCRSyncImageLocationsWriteFile(ctx context.Context,
 	return tr, err
 }
 
-func (cm TextractClientMore) outputToTextResults(output *textract.DetectDocumentTextOutput, err error) (ocrutil.TextResults, error) {
+func (cm TextractClient) outputToTextResults(output *textract.DetectDocumentTextOutput, err error) (ocrutil.TextResults, error) {
 	if err != nil {
 		return ocrutil.TextResults{}, err
 	}
@@ -120,7 +120,7 @@ func (cm TextractClientMore) outputToTextResults(output *textract.DetectDocument
 	return tr, nil
 }
 
-func (cm TextractClientMore) DetectTextFromDocument(ctx context.Context, doc *textract.Document, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
+func (cm TextractClient) DetectTextFromDocument(ctx context.Context, doc *textract.Document, opts ...request.Option) (*textract.DetectDocumentTextOutput, error) {
 	// See: https://docs.aws.amazon.com/sdk-for-go/api/service/textract/#Textract.DetectDocumentTextRequest
 	input := &textract.DetectDocumentTextInput{}
 	input = input.SetDocument(doc)

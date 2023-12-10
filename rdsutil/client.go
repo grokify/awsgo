@@ -1,10 +1,6 @@
 package rdsutil
 
 import (
-	"errors"
-	"strings"
-
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/rds"
 	"github.com/grokify/awsgo/config"
 )
@@ -14,8 +10,10 @@ type RDSClientMore struct {
 	Parameter *ParameterGroupService
 }
 
-func NewRDSClientMore(cm *config.AWSConfigMore) (*RDSClientMore, error) {
-	if svc, err := NewRDSClient(cm); err != nil {
+func NewRDSClientMore(cfg *config.AWSConfig) (*RDSClientMore, error) {
+	if cfg == nil {
+		return nil, config.ErrAWSConfigCannotBeNil
+	} else if svc, err := NewRDSClient(cfg); err != nil {
 		return nil, err
 	} else {
 		return &RDSClientMore{
@@ -25,19 +23,31 @@ func NewRDSClientMore(cm *config.AWSConfigMore) (*RDSClientMore, error) {
 	}
 }
 
-func NewRDSClient(cm *config.AWSConfigMore) (*rds.RDS, error) {
-	if cm == nil {
-		return nil, errors.New("config.AWSConfigMore cannot be nil")
+/*
+func NewRDSClientOld(cfg *config.AWSConfig) (*rds.RDS, error) {
+	if cfg == nil {
+		return nil, config.ErrAWSConfigCannotBeNil
 	}
-	mySession, err := cm.NewSession()
+	mySession, err := cfg.NewSession()
 	if err != nil {
 		return nil, err
 	}
 	cfgs := []*aws.Config{}
-	region := strings.TrimSpace(cm.Region)
+	region := strings.TrimSpace(cfg.Region)
 	if region != "" {
 		cfgs = append(cfgs, aws.NewConfig().WithRegion(region))
 	}
 	svc := rds.New(mySession, cfgs...)
 	return svc, nil
+}
+*/
+
+func NewRDSClient(cfg *config.AWSConfig) (*rds.RDS, error) {
+	if cfg == nil {
+		return nil, config.ErrAWSConfigCannotBeNil
+	} else if ses, cfgs, err := cfg.ClientParams(); err != nil {
+		return nil, err
+	} else {
+		return rds.New(ses, cfgs...), nil
+	}
 }
