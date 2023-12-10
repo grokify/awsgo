@@ -33,13 +33,13 @@ func main() {
 
 	codes, err := svcs.ServiceCodes()
 	logutil.FatalErr(err)
-	fmtutil.PrintJSON(codes)
+	fmtutil.MustPrintJSON(codes)
 
 	fmt.Printf("NUM CODES (%d)\n", len(codes))
 
 	prods, err := prc.Products("   AmazonRDS")
 	logutil.FatalErr(err)
-	fmtutil.PrintJSON(prods)
+	fmtutil.MustPrintJSON(prods)
 
 	fmt.Println("DONE")
 }
