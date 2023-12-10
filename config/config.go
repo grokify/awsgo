@@ -84,40 +84,40 @@ func AWSConfigMoreCredentialsBasic(creds *goauth.Credentials) (*AWSConfig, error
 	}
 }
 
-func (cm AWSConfig) Config() *aws.Config {
-	cfg := &aws.Config{}
-	credsType := strings.ToLower(strings.TrimSpace(cm.CredentialsType))
+func (cfg AWSConfig) Config() *aws.Config {
+	ac := &aws.Config{}
+	credsType := strings.ToLower(strings.TrimSpace(cfg.CredentialsType))
 
 	if credsType == CredentialsTypeStatic {
-		cfg.Credentials = credentials.NewStaticCredentials(cm.StaticID, cm.StaticSecret, cm.StaticToken)
+		ac.Credentials = credentials.NewStaticCredentials(cfg.StaticID, cfg.StaticSecret, cfg.StaticToken)
 	} else if credsType == CredentialsTypeShared {
-		cfg.Credentials = credentials.NewSharedCredentials("", cm.SharedProfile)
+		ac.Credentials = credentials.NewSharedCredentials("", cfg.SharedProfile)
 	}
-	if len(cm.Endpoint) > 0 {
-		cfg.Endpoint = aws.String(cm.Endpoint)
+	if len(cfg.Endpoint) > 0 {
+		ac.Endpoint = aws.String(cfg.Endpoint)
 	}
 	/*
 		if cm.Region == "" {
-			cfg.Region = aws.String(cm.Region)
+			ac.Region = aws.String(cm.Region)
 		} else {
-			cfg.Region = aws.String(RegionUSWest1)
+			ac.Region = aws.String(RegionUSWest1)
 		}
 	*/
-	cfg.Region = pointer.Pointer(cm.RegionOrDefault(RegionUSEast1))
-	cfg.S3ForcePathStyle = aws.Bool(cm.PathStyleForce)
-	return cfg
+	ac.Region = pointer.Pointer(cfg.RegionOrDefault(RegionUSEast1))
+	ac.S3ForcePathStyle = aws.Bool(cfg.PathStyleForce)
+	return ac
 }
 
-func (cm AWSConfig) RegionOrDefault(def string) string {
-	if region := strings.TrimSpace(cm.Region); region == "" {
+func (cfg AWSConfig) RegionOrDefault(def string) string {
+	if region := strings.TrimSpace(cfg.Region); region == "" {
 		return def
 	} else {
 		return region
 	}
 }
 
-func (cm AWSConfig) NewSession() (*session.Session, error) {
-	return session.NewSession(cm.Config())
+func (cfg AWSConfig) NewSession() (*session.Session, error) {
+	return session.NewSession(cfg.Config())
 	/*
 		if cm.CredentialsType == CredentialsTypeEnvironment {
 			return session.NewSession()
@@ -128,12 +128,12 @@ func (cm AWSConfig) NewSession() (*session.Session, error) {
 }
 
 // ClientParams returns the params used to set up a service.
-func (acf AWSConfig) ClientParams() (client.ConfigProvider, []*aws.Config, error) {
-	ses, err := acf.NewSession()
+func (cfg AWSConfig) ClientParams() (client.ConfigProvider, []*aws.Config, error) {
+	ses, err := cfg.NewSession()
 	if err != nil {
 		return nil, []*aws.Config{}, err
 	}
-	cfgs := []*aws.Config{acf.Config()}
+	cfgs := []*aws.Config{cfg.Config()}
 	/*
 		cfgs := []*aws.Config{}
 		region := strings.TrimSpace(cfg.Region)
