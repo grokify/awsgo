@@ -16,6 +16,25 @@ AWSgo provices helper libraries for the AWS Go SDK:
 $ go get github.com/grokify/awsgo/...
 ```
 
+## Configuration
+
+AWS Basic Auth can be used using [`goauth`](https://github.com/grokify/goauth) with the following configuration:
+
+```
+{
+	"credentials": {
+		"AWS": {
+			"service": "aws",
+			"type": "basic",
+			"basic": {
+				"username": "my_username",
+				"password": "my_password"
+			}
+		}
+	}
+}
+``````
+
  [build-status-svg]: https://github.com/grokify/awsgo/workflows/test/badge.svg
  [build-status-url]: https://github.com/grokify/awsgo/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/awsgo
