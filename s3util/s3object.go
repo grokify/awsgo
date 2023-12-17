@@ -146,12 +146,11 @@ func (cm *S3ClientMore) ObjectFileUpload(bucket, key, filename string) (*s3manag
 func (cm *S3ClientMore) ObjectFileUploadOld(bucket, key, filename string) (*s3manager.UploadOutput, error) {
 	if cm.S3Client == nil {
 		return nil, ErrS3ClientNotSet
-	}
-	input, err := UploadInputFile(bucket, key, filename)
-	if err != nil {
+	} else if input, err := UploadInputFile(bucket, key, filename); err != nil {
 		return nil, errorsutil.Wrap(err, "err in S3ClientMore.ObjectPutFile..UploadInputFile")
+	} else {
+		return cm.Uploader.Upload(input)
 	}
-	return cm.Uploader.Upload(input)
 }
 
 func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3.PutObjectOutput, error) {
@@ -162,14 +161,13 @@ func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple
 	if sclient == nil {
 		sclient = &httpsimple.Client{}
 	}
-	resp, err := sclient.Do(sreq)
-	if err != nil {
+	if resp, err := sclient.Do(sreq); err != nil {
 		return nil, err
 	} else if resp.StatusCode >= 300 {
 		return nil, fmt.Errorf("http status code (%d)", resp.StatusCode)
+	} else {
+		return cm.ObjectHTTPResponsePut(bucket, key, resp)
 	}
-
-	return cm.ObjectHTTPResponsePut(bucket, key, resp)
 }
 
 func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3manager.UploadOutput, error) {
@@ -185,8 +183,9 @@ func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsim
 		return nil, err
 	} else if resp.StatusCode >= 300 {
 		return nil, fmt.Errorf("http status code (%d)", resp.StatusCode)
+	} else {
+		return cm.ObjectReaderUpload(bucket, key, resp.Header.Get(httputilmore.HeaderContentType), resp.Body)
 	}
-	return cm.ObjectReaderUpload(bucket, key, resp.Header.Get(httputilmore.HeaderContentType), resp.Body)
 }
 
 func (cm *S3ClientMore) ObjectHTTPResponsePut(bucket, key string, resp *http.Response) (*s3.PutObjectOutput, error) {
