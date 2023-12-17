@@ -66,12 +66,11 @@ func (cm *S3ClientMore) ObjectsKeys(bucket, keypath string) ([]string, error) {
 }
 
 func (cm *S3ClientMore) ObjectsKeysPrint(bucket, keypath string) ([]string, error) {
-	keys, err := cm.ObjectsKeys(bucket, keypath)
-	if err != nil {
+	if keys, err := cm.ObjectsKeys(bucket, keypath); err != nil {
 		return keys, err
+	} else {
+		return keys, fmtutil.PrintJSON(keys)
 	}
-	err = fmtutil.PrintJSON(keys)
-	return keys, err
 }
 
 // ObjectsSize iterates all objects in a given S3 bucket and prefix to sum up objects' total size in bytes
@@ -154,11 +153,9 @@ func (cm *S3ClientMore) ObjectFileUploadOld(bucket, key, filename string) (*s3ma
 }
 
 func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3.PutObjectOutput, error) {
-	err := checkBucketAndKey(bucket, key)
-	if err != nil {
+	if err := checkBucketAndKey(bucket, key); err != nil {
 		return nil, err
-	}
-	if sclient == nil {
+	} else if sclient == nil {
 		sclient = &httpsimple.Client{}
 	}
 	if resp, err := sclient.Do(sreq); err != nil {
@@ -171,15 +168,12 @@ func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple
 }
 
 func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3manager.UploadOutput, error) {
-	err := checkBucketAndKey(bucket, key)
-	if err != nil {
+	if err := checkBucketAndKey(bucket, key); err != nil {
 		return nil, err
-	}
-	if sclient == nil {
+	} else if sclient == nil {
 		sclient = &httpsimple.Client{}
 	}
-	resp, err := sclient.Do(sreq)
-	if err != nil {
+	if resp, err := sclient.Do(sreq); err != nil {
 		return nil, err
 	} else if resp.StatusCode >= 300 {
 		return nil, fmt.Errorf("http status code (%d)", resp.StatusCode)
@@ -191,20 +185,15 @@ func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsim
 func (cm *S3ClientMore) ObjectHTTPResponsePut(bucket, key string, resp *http.Response) (*s3.PutObjectOutput, error) {
 	if cm.S3Client == nil {
 		return nil, ErrS3ClientNotSet
-	}
-	err := checkBucketAndKey(bucket, key)
-	if err != nil {
+	} else if err := checkBucketAndKey(bucket, key); err != nil {
 		return nil, err
-	}
-	input, err := ObjectInputHTTPResponseMore(bucket, key, resp)
-	if err != nil {
+	} else if input, err := ObjectInputHTTPResponseMore(bucket, key, resp); err != nil {
 		return nil, err
-	}
-	out, err := cm.S3Client.PutObject(input)
-	if err != nil {
+	} else if out, err := cm.S3Client.PutObject(input); err != nil {
 		return out, errorsutil.Wrapf(err, "failed to upload object %s/%s", bucket, key)
+	} else {
+		return out, nil
 	}
-	return out, nil
 }
 
 func ObjectInputHTTPResponseMore(bucket, key string, resp *http.Response) (*s3.PutObjectInput, error) {
@@ -259,13 +248,13 @@ func (cm *S3ClientMore) ObjectReaderUpload(bucket, key, contentType string, r io
 
 func ObjectInputFileMore(bucket, key, filename string) (*s3.PutObjectInput, error) {
 	// Modified from https://help.backblaze.com/hc/en-us/articles/360047629713-Using-the-AWS-Go-SDK-with-B2
-	input, err := ObjectInputFile(filename)
-	if err != nil {
+	if input, err := ObjectInputFile(filename); err != nil {
 		return nil, err
+	} else {
+		input.Bucket = aws.String(bucket)
+		input.Key = aws.String(key)
+		return input, nil
 	}
-	input.Bucket = aws.String(bucket)
-	input.Key = aws.String(key)
-	return input, nil
 }
 
 func ObjectInputFile(filename string) (*s3.PutObjectInput, error) {
