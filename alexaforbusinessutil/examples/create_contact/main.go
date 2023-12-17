@@ -21,7 +21,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
-	a4b "github.com/aws/aws-sdk-go/service/alexaforbusiness"
+	"github.com/aws/aws-sdk-go/service/alexaforbusiness"
 )
 
 type ContactInputBuilder struct {
@@ -31,8 +31,8 @@ type ContactInputBuilder struct {
 	PhoneNumber string
 }
 
-func (b *ContactInputBuilder) ToCreateContactInput() *a4b.CreateContactInput {
-	return &a4b.CreateContactInput{
+func (b *ContactInputBuilder) ToCreateContactInput() *alexaforbusiness.CreateContactInput {
+	return &alexaforbusiness.CreateContactInput{
 		DisplayName: &b.DisplayName,
 		FirstName:   &b.FirstName,
 		LastName:    &b.LastName,
@@ -45,7 +45,7 @@ func main() {
 	mySession := session.Must(session.NewSession())
 
 	// https://docs.aws.amazon.com/sdk-for-go/api/service/alexaforbusiness/#New
-	svc := a4b.New(mySession, aws.NewConfig().WithRegion("us-east-1"))
+	svc := alexaforbusiness.New(mySession, aws.NewConfig().WithRegion("us-east-1"))
 
 	if 1 == 0 {
 		contact := ContactInputBuilder{
@@ -61,11 +61,11 @@ func main() {
 	}
 
 	if 1 == 1 {
-		req := a4b.SearchContactsInput{}
+		req := alexaforbusiness.SearchContactsInput{}
 
 		key := "DisplayName"
 		name := ""
-		filter := a4b.Filter{
+		filter := alexaforbusiness.Filter{
 			Key:    &key,
 			Values: []*string{}}
 		filter.Values = append(filter.Values, &name)
