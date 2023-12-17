@@ -40,7 +40,6 @@ func (b *ContactInputBuilder) ToCreateContactInput() *alexaforbusiness.CreateCon
 }
 
 func main() {
-
 	// Create Session
 	mySession := session.Must(session.NewSession())
 
@@ -57,7 +56,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmtutil.PrintJSON(resp)
+		fmtutil.MustPrintJSON(resp)
 	}
 
 	if 1 == 1 {
@@ -74,7 +73,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmtutil.PrintJSON(resp)
+		fmtutil.MustPrintJSON(resp)
 	}
 
 	fmt.Println("DONE")
