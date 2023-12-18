@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go v1.49.4
 	github.com/grokify/goauth v0.20.7
 	github.com/grokify/gocharts/v2 v2.16.1
-	github.com/grokify/mogo v0.62.4
+	github.com/grokify/mogo v0.62.5
 	github.com/jessevdk/go-flags v1.5.0
 )
 
