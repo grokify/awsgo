@@ -103,7 +103,7 @@ func (cfg AWSConfig) Config() *aws.Config {
 	if len(cfg.Endpoint) > 0 {
 		ac.Endpoint = aws.String(cfg.Endpoint)
 	}
-	ac.Region = pointer.Pointer(cfg.RegionOrDefault(RegionDefault))
+	ac.Region = pointer.Pointer(cfg.RegionOrDefault())
 	ac.S3ForcePathStyle = aws.Bool(cfg.PathStyleForce)
 	return ac
 }
@@ -118,14 +118,14 @@ func (cfg AWSConfig) ConfigV2(ctx context.Context) (aws2.Config, error) {
 	); err != nil {
 		return ac, err
 	} else {
-		ac.Region = cfg.RegionOrDefault(RegionDefault)
+		ac.Region = cfg.RegionOrDefault()
 		return ac, nil
 	}
 }
 
-func (cfg AWSConfig) RegionOrDefault(def string) string {
+func (cfg AWSConfig) RegionOrDefault() string {
 	if region := strings.TrimSpace(cfg.Region); region == "" {
-		return def
+		return RegionDefault
 	} else {
 		return region
 	}
