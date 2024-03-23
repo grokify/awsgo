@@ -37,7 +37,7 @@ func main() {
 
 	fmt.Printf("NUM CODES (%d)\n", len(codes))
 
-	prods, err := prc.Products("   AmazonRDS")
+	prods, err := prc.Products("AmazonRDS")
 	logutil.FatalErr(err)
 	fmtutil.MustPrintJSON(prods)
 
