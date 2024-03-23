@@ -24,8 +24,6 @@ import (
 https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
 https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
 
-https://pkg.go.dev/github.com/aws/aws-sdk-go-v2
-
 */
 
 const (
@@ -105,13 +103,6 @@ func (cfg AWSConfig) Config() *aws.Config {
 	if len(cfg.Endpoint) > 0 {
 		ac.Endpoint = aws.String(cfg.Endpoint)
 	}
-	/*
-		if cm.Region == "" {
-			ac.Region = aws.String(cm.Region)
-		} else {
-			ac.Region = aws.String(RegionUSWest1)
-		}
-	*/
 	ac.Region = pointer.Pointer(cfg.RegionOrDefault(RegionDefault))
 	ac.S3ForcePathStyle = aws.Bool(cfg.PathStyleForce)
 	return ac
