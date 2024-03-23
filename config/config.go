@@ -1,6 +1,7 @@
 package config
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"strings"
@@ -9,6 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
+
+	aws2 "github.com/aws/aws-sdk-go-v2/aws"
+	config2 "github.com/aws/aws-sdk-go-v2/config"
+	credentials2 "github.com/aws/aws-sdk-go-v2/credentials"
+
 	"github.com/grokify/goauth"
 	"github.com/grokify/mogo/pointer"
 )
@@ -17,6 +23,8 @@ import (
 
 https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
 https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
+
+https://pkg.go.dev/github.com/aws/aws-sdk-go-v2
 
 */
 
@@ -38,7 +46,7 @@ type AWSConfig struct {
 	SharedProfile   string // `.aws/credentials`
 	StaticID        string
 	StaticSecret    string
-	StaticToken     string
+	StaticToken     string // optional per https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
 	Endpoint        string
 	Region          string
 	PathStyleForce  bool
@@ -106,6 +114,21 @@ func (cfg AWSConfig) Config() *aws.Config {
 	ac.Region = pointer.Pointer(cfg.RegionOrDefault(RegionUSEast1))
 	ac.S3ForcePathStyle = aws.Bool(cfg.PathStyleForce)
 	return ac
+}
+
+func (cfg AWSConfig) ConfigV2() (aws2.Config, error) {
+	// https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/
+	if ac, err := config2.LoadDefaultConfig(
+		context.TODO(),
+		config2.WithCredentialsProvider(
+			credentials2.NewStaticCredentialsProvider(
+				cfg.StaticID, cfg.StaticSecret, cfg.StaticToken)),
+	); err != nil {
+		return ac, err
+	} else {
+		ac.Region = cfg.RegionOrDefault(RegionUSEast1)
+		return ac, nil
+	}
 }
 
 func (cfg AWSConfig) RegionOrDefault(def string) string {
