@@ -35,6 +35,7 @@ const (
 
 	RegionUSEast1 = "us-east-1"
 	RegionUSWest1 = "us-west-1"
+	RegionDefault = RegionUSEast1 // from AWS: "If you don’t select a region, then us-east-1 will be used by default." https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html
 )
 
 var ErrAWSConfigCannotBeNil = errors.New("config.AWSConfig cannot be nil")
@@ -111,22 +112,22 @@ func (cfg AWSConfig) Config() *aws.Config {
 			ac.Region = aws.String(RegionUSWest1)
 		}
 	*/
-	ac.Region = pointer.Pointer(cfg.RegionOrDefault(RegionUSEast1))
+	ac.Region = pointer.Pointer(cfg.RegionOrDefault(RegionDefault))
 	ac.S3ForcePathStyle = aws.Bool(cfg.PathStyleForce)
 	return ac
 }
 
-func (cfg AWSConfig) ConfigV2() (aws2.Config, error) {
+func (cfg AWSConfig) ConfigV2(ctx context.Context) (aws2.Config, error) {
 	// https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/
 	if ac, err := config2.LoadDefaultConfig(
-		context.TODO(),
+		ctx,
 		config2.WithCredentialsProvider(
 			credentials2.NewStaticCredentialsProvider(
 				cfg.StaticID, cfg.StaticSecret, cfg.StaticToken)),
 	); err != nil {
 		return ac, err
 	} else {
-		ac.Region = cfg.RegionOrDefault(RegionUSEast1)
+		ac.Region = cfg.RegionOrDefault(RegionDefault)
 		return ac, nil
 	}
 }
