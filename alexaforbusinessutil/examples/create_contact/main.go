@@ -13,6 +13,7 @@ https://console.aws.amazon.com/iam/home
 
 */
 
+/*
 import (
 	"fmt"
 	"log"
@@ -78,3 +79,4 @@ func main() {
 
 	fmt.Println("DONE")
 }
+*/
