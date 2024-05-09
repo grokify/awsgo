@@ -5,12 +5,11 @@ go 1.22
 toolchain go1.22.1
 
 require (
-	github.com/aws/aws-sdk-go v1.52.2
+	github.com/aws/aws-sdk-go v1.52.5
 	github.com/aws/aws-sdk-go-v2 v1.26.1
 	github.com/aws/aws-sdk-go-v2/config v1.27.11
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.6
-	github.com/aws/aws-secretsmanager-caching-go v1.1.3
 	github.com/grokify/goauth v0.20.15
 	github.com/grokify/gocharts/v2 v2.18.6
 	github.com/grokify/mogo v0.63.10
