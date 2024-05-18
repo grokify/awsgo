@@ -2,14 +2,20 @@ package iamutil
 
 import (
 	"context"
+	"errors"
 
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"github.com/grokify/awsgo/config"
 )
 
+var (
+	ErrIAMClientNotSet  = errors.New("aws iam client not set")
+	ErrPolicyNameNotSet = errors.New("aws policy name not set")
+)
+
 type IAMService struct {
-	AWSIAMClient  *iam.Client
-	PolicyService *PolicyService
+	AWSIAMClient *iam.Client
+	Policies     *PolicyService
 }
 
 func NewIAMService(ctx context.Context, cfg *config.AWSConfig, optFns ...func(*iam.Options)) (*IAMService, error) {
@@ -19,6 +25,6 @@ func NewIAMService(ctx context.Context, cfg *config.AWSConfig, optFns ...func(*i
 	}
 	iamClient := iam.NewFromConfig(awsV2Cfg, optFns...)
 	return &IAMService{
-		AWSIAMClient:  iamClient,
-		PolicyService: &PolicyService{AWSIAMClient: iamClient}}, nil
+		AWSIAMClient: iamClient,
+		Policies:     &PolicyService{AWSIAMClient: iamClient}}, nil
 }

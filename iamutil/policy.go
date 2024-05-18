@@ -3,7 +3,6 @@ package iamutil
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/iam"
@@ -19,8 +18,10 @@ type PolicyService struct {
 // CreatePolicy
 // https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/iam
 // https://docs.aws.amazon.com/code-library/latest/ug/go_2_iam_code_examples.html
-func (svc PolicyService) CreatePolicy(ctx context.Context, params CreatePolicyInput, optFns ...func(*iam.Options)) (*types.Policy, *iam.CreatePolicyOutput, error) {
-	if polInput, err := params.Request(); err != nil {
+func (svc PolicyService) Create(ctx context.Context, params CreatePolicyInput, optFns ...func(*iam.Options)) (*types.Policy, *iam.CreatePolicyOutput, error) {
+	if svc.AWSIAMClient == nil {
+		return nil, nil, ErrIAMClientNotSet
+	} else if polInput, err := params.Request(); err != nil {
 		return nil, nil, err
 	} else if result, err := svc.AWSIAMClient.CreatePolicy(ctx, polInput); err != nil {
 		return nil, nil, err
@@ -49,7 +50,7 @@ type CreatePolicyInput struct {
 
 func (input CreatePolicyInput) Request() (*iam.CreatePolicyInput, error) {
 	if strings.TrimSpace(input.PolicyName) == "" {
-		return nil, errors.New("poicy name cannot be empty")
+		return nil, ErrPolicyNameNotSet
 	} else if b, err := json.Marshal(input.PolicyDocument); err != nil {
 		return nil, err
 	} else {
