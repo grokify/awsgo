@@ -20,12 +20,13 @@ type PolicyService struct {
 // https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/iam
 // https://docs.aws.amazon.com/code-library/latest/ug/go_2_iam_code_examples.html
 func (svc PolicyService) CreatePolicy(ctx context.Context, params CreatePolicyInput, optFns ...func(*iam.Options)) (*types.Policy, *iam.CreatePolicyOutput, error) {
-	polInput, err := params.Request()
-	result, err := svc.AWSIAMClient.CreatePolicy(ctx, polInput)
-	if err != nil {
+	if polInput, err := params.Request(); err != nil {
 		return nil, nil, err
+	} else if result, err := svc.AWSIAMClient.CreatePolicy(ctx, polInput); err != nil {
+		return nil, nil, err
+	} else {
+		return result.Policy, result, nil
 	}
-	return result.Policy, result, nil
 }
 
 func ParsePolicy(b []byte) (*policy.Policy, error) {
