@@ -30,14 +30,14 @@ func (svc RoleService) Create(ctx context.Context, params CreateRoleInput, optFn
 	}
 }
 
-func CreatePolicyDocumentCreateRoleWithTrustedUserARN(roleName string, trustedUserArn string) policy.Policy {
+func CreatePolicyDocumentCreateRoleWithTrustedUserARN(roleName string, trustedUserARN string) policy.Policy {
 	trustPolicy := policy.Policy{
 		Version: policy.VersionLatest,
 		Statements: policy.NewStatementOrSlice([]policy.Statement{
 			{
 				Effect:    policy.EffectAllow,
-				Principal: policy.NewAWSPrincipal(trustedUserArn),
-				Action:    policy.NewStringOrSlice(true, "sts:AssumeRole"),
+				Principal: policy.NewAWSPrincipal(trustedUserARN),
+				Action:    policy.NewStringOrSlice(true, ActionSTSAssumeRole),
 			},
 		}...),
 	}
@@ -66,7 +66,7 @@ type CreateRoleInput struct {
 
 func (input CreateRoleInput) Request() (*iam.CreateRoleInput, error) {
 	if strings.TrimSpace(input.RoleName) == "" {
-		return nil, ErrPolicyNameNotSet
+		return nil, ErrRoleNameNotSet
 	} else if b, err := json.Marshal(input.AssumeRolePolicyDocument); err != nil {
 		return nil, err
 	} else {
