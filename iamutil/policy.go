@@ -23,7 +23,7 @@ func (svc PolicyService) Create(ctx context.Context, params CreatePolicyInput, o
 		return nil, nil, ErrIAMClientNotSet
 	} else if polInput, err := params.Request(); err != nil {
 		return nil, nil, err
-	} else if result, err := svc.AWSIAMClient.CreatePolicy(ctx, polInput); err != nil {
+	} else if result, err := svc.AWSIAMClient.CreatePolicy(ctx, polInput, optFns...); err != nil {
 		return nil, nil, err
 	} else {
 		return result.Policy, result, nil
