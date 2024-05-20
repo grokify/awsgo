@@ -12,7 +12,7 @@ type TrustedAdvisorService struct {
 	AWSSvcClient *trustedadvisor.Client
 }
 
-func NewTrustedAdvisorService(ctx context.Context, cfg *config.AWSConfig, optFns ...func(*trustedadvisor.Options)) (*TrustedAdvisorService, error) {
+func NewService(ctx context.Context, cfg *config.AWSConfig, optFns ...func(*trustedadvisor.Options)) (*TrustedAdvisorService, error) {
 	awsV2Cfg, err := cfg.ConfigV2(ctx)
 	if err != nil {
 		return nil, err

@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/grokify/awsgo/config"
-	trustedadvisorutil "github.com/grokify/awsgo/trustedadvisoruntil"
+	"github.com/grokify/awsgo/trustedadvisorutil"
 	"github.com/grokify/mogo/log/logutil"
 	flags "github.com/jessevdk/go-flags"
 )
@@ -26,7 +26,7 @@ func main() {
 	cfg, err := config.AWSConfigCredentialsSetFile(opts.CredsFile, opts.CredsKey)
 	logutil.FatalErr(err)
 
-	tcsvc, err := trustedadvisorutil.NewTrustedAdvisorService(context.Background(), cfg)
+	tcsvc, err := trustedadvisorutil.NewService(context.Background(), cfg)
 	logutil.FatalErr(err)
 
 	recs, err := tcsvc.ListRecommendations(context.Background(), nil)
