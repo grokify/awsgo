@@ -48,7 +48,7 @@ func main() {
 		})
 	logutil.FatalErr(err)
 
-	fmtutil.PrintJSON(resp)
+	fmtutil.MustPrintJSON(resp)
 
 	fmt.Printf("DIMENSION COUNT (%d)\n", len(resp.DimensionValueAttributes))
 
