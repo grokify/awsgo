@@ -1,5 +1,4 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
-cloud.google.com/go v0.113.0 h1:g3C70mn3lWfckKBiCVsAshabrDg01pQ0pnX1MNtnMkA=
 cloud.google.com/go/auth v0.4.2 h1:sb0eyLkhRtpq5jA+a8KWw0W70YcdVca7KJ8TM0AFYDg=
 cloud.google.com/go/auth v0.4.2/go.mod h1:Kqvlz1cf1sNA0D+sYJnkPQOP+JMHkuHeIgVmCRtZOLc=
 cloud.google.com/go/auth/oauth2adapt v0.2.2 h1:+TTV8aXpjeChS9M+aTtN/TjdQnzJvmzKFt//oWu7HX4=
@@ -25,6 +24,8 @@ github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.7 h1:4OYVp0705xu8yjdyoWi
 github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.7/go.mod h1:vd7ESTEvI76T2Na050gODNmNU7+OyKrIKroYTu4ABiI=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.8.0 h1:hT8rVHwugYE2lEfdFE0QWVo81lF7jMrYJVDWI+f+VxU=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.8.0/go.mod h1:8tu/lYfQfFe6IGnaOdrpVgEL2IrrDOf6/m9RQum4NkY=
+github.com/aws/aws-sdk-go-v2/service/costexplorer v1.38.3 h1:PA0C+1L55J1T/+lbOqZUdVLMMCHK/zuR4mKJTyB4dho=
+github.com/aws/aws-sdk-go-v2/service/costexplorer v1.38.3/go.mod h1:tixcI/0N745XN/7tA8acF1Tryt9m3XAQHXl4e+Rb7n4=
 github.com/aws/aws-sdk-go-v2/service/iam v1.32.3 h1:F42/2xfjHsC1qKXlDtHpajyNUplYPdn2f2yal6l3o5o=
 github.com/aws/aws-sdk-go-v2/service/iam v1.32.3/go.mod h1:0xqsq1/HsAC7+OaRMFUHfFtM5wmuFeX4VlbpxNAc2qY=
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.2 h1:Ji0DY1xUsUr3I8cHps0G+XM3WWU16lP6yG8qu1GAZAs=
