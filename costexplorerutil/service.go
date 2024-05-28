@@ -39,7 +39,7 @@ type GetCostAndUsageWithResourcesInput struct {
 	StartDate     time.Time         // required
 	EndDate       time.Time         // required
 	GroupBy       []types.GroupDefinition
-	Metrics       []types.Metric
+	Metrics       Metrics
 	NextPageToken string // optional
 }
 
@@ -52,7 +52,7 @@ func (input GetCostAndUsageWithResourcesInput) Request() costexplorer.GetCostAnd
 			End:   pointer.Pointer(input.EndDate.Format(timeutil.RFC3339FullDate)),
 		},
 		GroupBy: input.GroupBy,
-		Metrics: metricsToStringSlice(input.Metrics),
+		Metrics: input.Metrics.ToStrings(),
 	}
 	if strings.TrimSpace(input.NextPageToken) != "" {
 		req.NextPageToken = pointer.Pointer(input.NextPageToken)
@@ -60,7 +60,9 @@ func (input GetCostAndUsageWithResourcesInput) Request() costexplorer.GetCostAnd
 	return req
 }
 
-func metricsToStringSlice(metrics []types.Metric) []string {
+type Metrics []types.Metric
+
+func (metrics Metrics) ToStrings() []string {
 	var s []string
 	for _, m := range metrics {
 		s = append(s, string(m))
