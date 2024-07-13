@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.27.16
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.26
 	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.38.4
-	github.com/aws/aws-sdk-go-v2/service/iam v1.32.4
+	github.com/aws/aws-sdk-go-v2/service/iam v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.3
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.4.4
 	github.com/grokify/goauth v0.21.3
