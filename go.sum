@@ -38,8 +38,8 @@ github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.0 h1:Uco4o19bi3AmBapImNzuMk+r
 github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.0/go.mod h1:+HLFhCpnG08hBee8bUdfd1mBK+rFKPt4O5igR9lXDfk=
 github.com/aws/aws-sdk-go-v2/service/sts v1.32.0 h1:GiQUjZM2KUZX68o/LpZ1xqxYMuvoxpRrOwYARYog3vc=
 github.com/aws/aws-sdk-go-v2/service/sts v1.32.0/go.mod h1:dKnu7M4MAS2SDlng1ytxd03H+y0LoUfEQ5E2VaaSw/4=
-github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.7.4 h1:nRb5ob63Uxg8tic4l/ItAarII3oB6XEgrKJkz3Vz8Oo=
-github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.7.4/go.mod h1:t7e3stogkjV4uFszufPEY+t0S/GKuhdDXTRXTkjD8Qk=
+github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.6 h1:sKbi0n2wPcyDpvq37Sy8iMiPI0Ov9irD9pQw7Dui/CY=
+github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.6/go.mod h1:d6Id7sNpsdcIsIItZt6uDd648w4CNOeOx10Tx5xwfMI=
 github.com/aws/smithy-go v1.22.1 h1:/HPHZQ0g7f4eUeK6HKglFz8uwVfZKgoI25rb/J+dnro=
 github.com/aws/smithy-go v1.22.1/go.mod h1:irrKGvNn1InZwb2d7fkIRNucdfwR8R+Ts3wxYa/cJHg=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
