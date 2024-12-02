@@ -38,8 +38,8 @@ github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.6 h1:JnhTZR3PiYDNKlXy50/pNeix
 github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.6/go.mod h1:URronUEGfXZN1VpdktPSD1EkAL9mfrV+2F4sjH38qOY=
 github.com/aws/aws-sdk-go-v2/service/sts v1.33.2 h1:s4074ZO1Hk8qv65GqNXqDjmkf4HSQqJukaLuuW0TpDA=
 github.com/aws/aws-sdk-go-v2/service/sts v1.33.2/go.mod h1:mVggCnIWoM09jP71Wh+ea7+5gAp53q+49wDFs1SW5z8=
-github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.6 h1:sKbi0n2wPcyDpvq37Sy8iMiPI0Ov9irD9pQw7Dui/CY=
-github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.6/go.mod h1:d6Id7sNpsdcIsIItZt6uDd648w4CNOeOx10Tx5xwfMI=
+github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.7 h1:JiORevB+FfngWexy3U9mhjIDYBz+h2Hm82lzW3i2CcA=
+github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.7/go.mod h1:pIXA7kB/lvnA4Nqy/Xpzn6X9RrZe6yf6izkzIchtNVA=
 github.com/aws/smithy-go v1.22.1 h1:/HPHZQ0g7f4eUeK6HKglFz8uwVfZKgoI25rb/J+dnro=
 github.com/aws/smithy-go v1.22.1/go.mod h1:irrKGvNn1InZwb2d7fkIRNucdfwR8R+Ts3wxYa/cJHg=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
@@ -97,8 +97,8 @@ github.com/grokify/goauth v0.22.0 h1:0BI3bCMMQT1qKQOvIDDal+19JqKEQIt6itthFsQsx6k
 github.com/grokify/goauth v0.22.0/go.mod h1:Dvp9HpXPtSpB1m0On6GU/Xo4O6BMSOtinOWZZV0+EV4=
 github.com/grokify/gocharts/v2 v2.20.1 h1:NoAscJSawyYPn3rd8vaR9wUgDUX/TBiSUf/zK2frIyo=
 github.com/grokify/gocharts/v2 v2.20.1/go.mod h1:oIcEArwgeJYpnQkIfL0tC3JgwaHWpaw+nJv7s6d5j6g=
-github.com/grokify/mogo v0.65.7 h1:XcCm4D/WienTv0yTFnyLNaJP3F7YfGS9LTmpuSXSgGc=
-github.com/grokify/mogo v0.65.7/go.mod h1:npug5+hF1jiAxt8MNWvwU8f+K39Dwp71gJv3lxsIAkM=
+github.com/grokify/mogo v0.66.0 h1:lWsbVYM0oJUpuMfA4mdJp+c2k1aRlLky34b2T7l/ehU=
+github.com/grokify/mogo v0.66.0/go.mod h1:npug5+hF1jiAxt8MNWvwU8f+K39Dwp71gJv3lxsIAkM=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=
 github.com/huandu/xstrings v1.5.0/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/jessevdk/go-flags v1.6.1 h1:Cvu5U8UGrLay1rZfv/zP7iLpSHGUZ/Ou68T0iX1bBK4=
