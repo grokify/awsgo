@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.38.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.7
-	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.7
+	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.8
 	github.com/grokify/goauth v0.22.6
 	github.com/grokify/gocharts/v2 v2.21.2
 	github.com/grokify/mogo v0.66.2
@@ -59,7 +59,7 @@ require (
 	go.opentelemetry.io/otel/metric v1.33.0 // indirect
 	go.opentelemetry.io/otel/trace v1.33.0 // indirect
 	golang.org/x/crypto v0.31.0 // indirect
-	golang.org/x/exp v0.0.0-20241210194714-1829a127f884 // indirect
+	golang.org/x/exp v0.0.0-20241215155358-4a5509556b9e // indirect
 	golang.org/x/image v0.23.0 // indirect
 	golang.org/x/net v0.32.0 // indirect
 	golang.org/x/oauth2 v0.24.0 // indirect
