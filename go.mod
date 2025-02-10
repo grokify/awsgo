@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.18
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.8.16
-	github.com/grokify/goauth v0.23.3
+	github.com/grokify/goauth v0.23.5
 	github.com/grokify/gocharts/v2 v2.22.0
 	github.com/grokify/mogo v0.67.9
 	github.com/jessevdk/go-flags v1.6.1
