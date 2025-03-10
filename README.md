@@ -36,9 +36,9 @@ AWS Basic Auth can be used using [`goauth`](https://github.com/grokify/goauth) w
 }
 ``````
 
- [build-status-svg]: https://github.com/grokify/awsgo/workflows/test/badge.svg
+ [build-status-svg]: https://github.com/grokify/awsgo/actions/workflows/test.yaml/badge.svg?branch=main
  [build-status-url]: https://github.com/grokify/awsgo/actions/workflows/test.yaml
- [lint-status-svg]: https://github.com/grokify/awsgo/workflows/lint/badge.svg
+ [lint-status-svg]: https://github.com/grokify/awsgo/actions/workflows/lint.yaml/badge.svg?branch=main
  [lint-status-url]: https://github.com/grokify/awsgo/actions/workflows/lint.yaml
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/awsgo
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/awsgo
