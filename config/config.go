@@ -95,9 +95,10 @@ func (cfg AWSConfig) Config() *aws.Config {
 	ac := &aws.Config{}
 	credsType := strings.ToLower(strings.TrimSpace(cfg.CredentialsType))
 
-	if credsType == CredentialsTypeStatic {
+	switch credsType {
+	case CredentialsTypeStatic:
 		ac.Credentials = credentials.NewStaticCredentials(cfg.StaticID, cfg.StaticSecret, cfg.StaticToken)
-	} else if credsType == CredentialsTypeShared {
+	case CredentialsTypeShared:
 		ac.Credentials = credentials.NewSharedCredentials("", cfg.SharedProfile)
 	}
 	if len(cfg.Endpoint) > 0 {
