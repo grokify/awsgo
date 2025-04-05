@@ -2,6 +2,7 @@ package inspector2util
 
 import (
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
@@ -9,6 +10,30 @@ import (
 )
 
 type Finding types.Finding
+
+func (f Finding) FilePathsInclPOMProperties() bool {
+	fp := f.FilePaths()
+	for _, fpx := range fp {
+		if strings.Contains(fpx, "pom.properties") {
+			return true
+		}
+	}
+	return false
+}
+
+func (f Finding) FilePaths() []string {
+	var out []string
+	if f.PackageVulnerabilityDetails != nil {
+		for _, v := range f.PackageVulnerabilityDetails.VulnerablePackages {
+			if v.FilePath != nil {
+				if fp := strings.TrimSpace(*v.FilePath); fp != "" {
+					out = append(out, fp)
+				}
+			}
+		}
+	}
+	return out
+}
 
 func (f Finding) ImageHashes() []string {
 	var hashes []string
@@ -23,7 +48,7 @@ func (f Finding) ImageHashes() []string {
 	return hashes
 }
 
-func (f Finding) ImageNames() []string {
+func (f Finding) ImageRepositoryNames() []string {
 	var out []string
 	for _, r := range f.Resources {
 		if r.Details != nil && r.Details.AwsEcrContainerImage != nil &&
@@ -65,4 +90,18 @@ func (f Finding) VulnerablePackages() []types.VulnerablePackage {
 	} else {
 		return []types.VulnerablePackage{}
 	}
+}
+
+// ImageRepoNameVulnID is used as a unique key across images.
+func (f Finding) ImageRepoNameVulnIDs(sep string) []string {
+	names := f.ImageRepositoryNames()
+	vulnID := f.VulnerabilityID()
+	var ids []string
+	for _, n := range names {
+		p := []string{}
+		p = append(p, n)
+		p = append(p, vulnID)
+		ids = append(ids, strings.Join(p, sep))
+	}
+	return ids
 }

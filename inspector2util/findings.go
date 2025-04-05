@@ -3,6 +3,7 @@ package inspector2util
 import (
 	"encoding/json"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2"
@@ -37,6 +38,17 @@ func (fs Findings) FilterImageHashes(hashesIncl []string) Findings {
 				out = append(out, f)
 				break
 			}
+		}
+	}
+	return out
+}
+
+func (fs Findings) FilterPOMPropertiesExcl() Findings {
+	var out Findings
+	for _, f := range fs {
+		fx := Finding(f)
+		if !fx.FilePathsInclPOMProperties() {
+			out = append(out, f)
 		}
 	}
 	return out
@@ -83,26 +95,9 @@ func (fs Findings) VendorCreatedAtYearly() map[string]int {
 func (fs Findings) VendorSeverities() map[string]int {
 	out := map[string]int{}
 	for _, f := range fs {
-		out[canonicalSeverity(Finding(f).VendorSeverity())]++
+		out[CanonicalSeverity(Finding(f).VendorSeverity())]++
 	}
 	return addTotal(out)
-}
-
-func canonicalSeverity(s string) string {
-	m := map[string]string{
-		"":          "None",
-		"critical":  "Critical",
-		"high":      "High",
-		"important": "High",
-		"medium":    "Medium",
-		"moderate":  "Medium",
-		"low":       "Low",
-	}
-	if v, ok := m[strings.ToLower(s)]; ok {
-		return v
-	} else {
-		return s
-	}
 }
 
 func addTotal(m map[string]int) map[string]int {
@@ -112,4 +107,15 @@ func addTotal(m map[string]int) map[string]int {
 	}
 	m["_total"] = totalCount
 	return m
+}
+
+// ImageRepoNameVulnID is used as a unique key across images.
+func (fs Findings) ImageRepoNameVulnIDs(sep string) []string {
+	var out []string
+	for _, f := range fs {
+		fx := Finding(f)
+		out = append(out, fx.ImageRepoNameVulnIDs(":")...)
+	}
+	sort.Strings(out)
+	return out
 }
