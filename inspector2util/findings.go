@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	"github.com/grokify/mogo/type/stringsutil"
 )
 
 func ReadFileListFindingsOutput(filename string) (inspector2.ListFindingsOutput, error) {
@@ -68,45 +69,14 @@ func (fs Findings) FindingOneRawMatch(s string) *Finding {
 	return nil
 }
 
-func (fs Findings) VendorCreatedAtMonthly() map[string]int {
-	out := map[string]int{}
+// ImageRepositoryNames returns a list of unique repo names
+func (fs Findings) ImageRepositoryNames() []string {
+	var out []string
 	for _, f := range fs {
-		if dt := Finding(f).VendorCreatedAt(); dt != nil {
-			out[dt.Format("2006-01")]++
-		} else {
-			out[""]++
-		}
+		fx := Finding(f)
+		out = append(out, fx.ImageRepositoryNames()...)
 	}
-	return addTotal(out)
-}
-
-func (fs Findings) VendorCreatedAtYearly() map[string]int {
-	out := map[string]int{}
-	for _, f := range fs {
-		if dt := Finding(f).VendorCreatedAt(); dt != nil {
-			out[dt.Format("2006")]++
-		} else {
-			out[""]++
-		}
-	}
-	return addTotal(out)
-}
-
-func (fs Findings) VendorSeverities() map[string]int {
-	out := map[string]int{}
-	for _, f := range fs {
-		out[CanonicalSeverity(Finding(f).VendorSeverity())]++
-	}
-	return addTotal(out)
-}
-
-func addTotal(m map[string]int) map[string]int {
-	totalCount := 0
-	for _, v := range m {
-		totalCount += v
-	}
-	m["_total"] = totalCount
-	return m
+	return stringsutil.SliceCondenseSpace(out, true, true)
 }
 
 // ImageRepoNameVulnID is used as a unique key across images.
@@ -114,8 +84,12 @@ func (fs Findings) ImageRepoNameVulnIDs(sep string) []string {
 	var out []string
 	for _, f := range fs {
 		fx := Finding(f)
-		out = append(out, fx.ImageRepoNameVulnIDs(":")...)
+		out = append(out, fx.ImageRepoNameVulnIDs(sepFilepathVersion)...)
 	}
 	sort.Strings(out)
 	return out
+}
+
+func (fs Findings) Stats() FindingsStats {
+	return FindingsStats{Findings: fs}
 }
