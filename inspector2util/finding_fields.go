@@ -55,7 +55,7 @@ func TableColumnsImageVulnerabilityPackages() []string {
 }
 
 // TableColumnsImageVulnerabilities returns rows where
-// each row is an image+vulnerabilty.
+// each row is an image+vulnerability.
 func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 	return []string{
 			ImageRepositoryName,

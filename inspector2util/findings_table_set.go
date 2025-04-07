@@ -10,19 +10,25 @@ func (fs Findings) TableSetVulnerabilities(opts *table.ColumnInsertOpts) (*table
 		return nil, err
 	} else {
 		tbl.Name = "Image Severity Count"
-		ts.Add(tbl)
+		if err := ts.Add(tbl); err != nil {
+			return nil, err
+		}
 	}
 	if tbl, err := fs.TableImagenameSeverityYear(opts); err != nil {
 		return nil, err
 	} else {
 		tbl.Name = "Image Severity Age Counts"
-		ts.Add(tbl)
+		if err := ts.Add(tbl); err != nil {
+			return nil, err
+		}
 	}
 	if tbl, err := fs.TableImageVulnerabilities([]string{}, map[int]string{}, opts); err != nil {
 		return nil, err
 	} else {
 		tbl.Name = "Vulnerabilities"
-		ts.Add(tbl)
+		if err := ts.Add(tbl); err != nil {
+			return nil, err
+		}
 	}
 	return ts, nil
 }
