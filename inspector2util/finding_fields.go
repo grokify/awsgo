@@ -15,6 +15,7 @@ const (
 	FindingSeverity                         = "find_severity"
 	ImageHash                               = "image_hash"
 	ImageRepositoryName                     = "image_repo_name"
+	ImageNameVulnerabilityID                = "image_name_vuln_id"
 	VulnerabilityCreated                    = "vuln_created"
 	VulnerabilityCreatedYear                = "vuln_created_year"
 	VulnerabilityCreatedAgeMonthsInt        = "vuln_created_age_months_int"
@@ -59,6 +60,7 @@ func TableColumnsImageVulnerabilityPackages() []string {
 func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 	return []string{
 			ImageRepositoryName,
+			ImageNameVulnerabilityID,
 			ImageHash,
 			FindingSeverity,
 			VulnerabilityCreatedYear,
@@ -68,8 +70,8 @@ func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 			PackagesNamesAndFilepathsAtVersion,
 			PackagesNamesAndFilepathsAtVersionFixed,
 		}, map[int]string{
-			3: table.FormatInt,
-			4: table.FormatDate,
+			4: table.FormatInt,
+			5: table.FormatDate,
 		}
 }
 
@@ -94,6 +96,9 @@ func (f Finding) VulnerabilityField(field string) (string, error) {
 	case ImageRepositoryName:
 		names := f.ImageRepositoryNames()
 		return strings.Join(names, ", "), nil
+	case ImageNameVulnerabilityID:
+		names := f.ImageRepositoryNames()
+		return strings.Join(names, "+") + sepFilepathVersion + pointer.Dereference(f.PackageVulnerabilityDetails.VulnerabilityId), nil
 	case VulnerabilityCreated:
 		return pointer.Dereference(f.PackageVulnerabilityDetails.VendorCreatedAt).Format(time.RFC3339), nil
 	case VulnerabilityCreatedYear:
