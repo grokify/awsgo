@@ -42,7 +42,13 @@ func (fs Findings) TableImageVulnerabilities(cols []string, fmtMap map[int]strin
 			t.Rows = append(t.Rows, row)
 		}
 	}
-	return &t, nil
+	if opts == nil {
+		return &t, nil
+	} else if err := t.ColumnInsert(*opts); err != nil {
+		return nil, err
+	} else {
+		return &t, nil
+	}
 }
 
 func (fs Findings) TablePivotImagenameSeverityCounts(opts *table.ColumnInsertOpts) (*table.Table, error) {
