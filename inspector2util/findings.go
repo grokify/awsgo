@@ -13,8 +13,7 @@ import (
 
 func ReadFileListFindingsOutput(filename string) (inspector2.ListFindingsOutput, error) {
 	out := inspector2.ListFindingsOutput{}
-	b, err := os.ReadFile(filename)
-	if err != nil {
+	if b, err := os.ReadFile(filename); err != nil {
 		return out, err
 	} else if err := json.Unmarshal(b, &out); err != nil {
 		return out, err
