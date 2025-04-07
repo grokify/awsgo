@@ -6,7 +6,10 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	"github.com/grokify/govex/severity"
 	"github.com/grokify/mogo/pointer"
+	"github.com/grokify/mogo/time/timeutil"
+	"github.com/grokify/mogo/type/stringsutil"
 )
 
 type Finding types.Finding
@@ -14,7 +17,7 @@ type Finding types.Finding
 func (f Finding) FilePathsInclPOMProperties() bool {
 	fp := f.FilePaths()
 	for _, fpx := range fp {
-		if strings.Contains(fpx, "pom.properties") {
+		if strings.Contains(fpx, filenamePomProperties) {
 			return true
 		}
 	}
@@ -33,6 +36,18 @@ func (f Finding) FilePaths() []string {
 		}
 	}
 	return out
+}
+
+func (f Finding) FindingSeverity(canonical bool) string {
+	if !canonical {
+		return string(f.Severity)
+	} else {
+		if can, _, err := severity.ParseSeverity(string(f.Severity)); err != nil {
+			return string(f.Severity)
+		} else {
+			return can
+		}
+	}
 }
 
 func (f Finding) ImageHashes() []string {
@@ -56,7 +71,7 @@ func (f Finding) ImageRepositoryNames() []string {
 			out = append(out, pointer.Dereference(r.Details.AwsEcrContainerImage.RepositoryName))
 		}
 	}
-	return out
+	return stringsutil.SliceCondenseSpace(out, true, true)
 }
 
 func (f Finding) VendorCreatedAt() *time.Time {
@@ -68,9 +83,27 @@ func (f Finding) VendorCreatedAt() *time.Time {
 	}
 }
 
-func (f Finding) VendorSeverity() string {
+func (f Finding) VendorCreatedAtAgeMonths() *float32 {
+	if dt := f.VendorCreatedAt(); dt == nil {
+		return nil
+	} else {
+		return pointer.Pointer(float32(time.Since(*dt)) / float32(timeutil.Day))
+	}
+}
+
+func (f Finding) VendorSeverity(canonical bool) string {
 	if f.PackageVulnerabilityDetails != nil && f.PackageVulnerabilityDetails.VendorSeverity != nil {
-		return pointer.Dereference(f.PackageVulnerabilityDetails.VendorSeverity)
+		if rawSeverity := strings.TrimSpace(
+			pointer.Dereference(
+				f.PackageVulnerabilityDetails.VendorSeverity)); rawSeverity == "" {
+			return ""
+		} else if !canonical {
+			return rawSeverity
+		} else if canonicalSev, _, err := severity.ParseSeverity(rawSeverity); err != nil {
+			return rawSeverity
+		} else {
+			return canonicalSev
+		}
 	} else {
 		return ""
 	}
@@ -78,7 +111,7 @@ func (f Finding) VendorSeverity() string {
 
 func (f Finding) VulnerabilityID() string {
 	if f.PackageVulnerabilityDetails != nil && f.PackageVulnerabilityDetails.VulnerabilityId != nil {
-		return pointer.Dereference(f.PackageVulnerabilityDetails.VulnerabilityId)
+		return strings.TrimSpace(pointer.Dereference(f.PackageVulnerabilityDetails.VulnerabilityId))
 	} else {
 		return ""
 	}
@@ -94,6 +127,9 @@ func (f Finding) VulnerablePackages() []types.VulnerablePackage {
 
 // ImageRepoNameVulnID is used as a unique key across images.
 func (f Finding) ImageRepoNameVulnIDs(sep string) []string {
+	if sep == "" {
+		sep = "@"
+	}
 	names := f.ImageRepositoryNames()
 	vulnID := f.VulnerabilityID()
 	var ids []string
