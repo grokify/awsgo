@@ -81,8 +81,8 @@ github.com/grokify/gocharts/v2 v2.23.1 h1:XmkmRIyfD9hw2f07VVz0GjuyVxXc03aNsyFhq/
 github.com/grokify/gocharts/v2 v2.23.1/go.mod h1:XLtPayK3oxkNzHE3IAkB8dT/M+KrJoPXPJXSAxAORc8=
 github.com/grokify/google-fonts v0.1.1 h1:dLU3TLuYVkD9/zbLyngAtvNwRG4K2X+ytjBSOF2aTtg=
 github.com/grokify/google-fonts v0.1.1/go.mod h1:bNYZ1YRctJ81DLbh06AzO7EBGFddcAjMWshgSz1pBWU=
-github.com/grokify/govex v0.10.0 h1:/aWpYhYnXr67O0DFRbdEtscsZrhdFDB6hzsm1ZIrVNg=
-github.com/grokify/govex v0.10.0/go.mod h1:x5hZzdWbHEoqIEjr/dfA5E1eobpekBp3vVEWRFd+5eA=
+github.com/grokify/govex v0.10.1 h1:rKwM4An+pGTUHl6l9UMmPO9U3EnDfW1sc583YO4wckA=
+github.com/grokify/govex v0.10.1/go.mod h1:C+hAqjTos9zH+uAjrm0HlBAZSsUdDTj/dEUAo6UtkI8=
 github.com/grokify/mogo v0.68.5 h1:XyDQMHLn7SaSIjCaQBDKJHCkRPA1w5PZyveBwnzGuno=
 github.com/grokify/mogo v0.68.5/go.mod h1:tC2yl/H8ZK1pVvLFVFYoQQTYOreNizLW88gj9kNrZRM=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=
@@ -118,6 +118,8 @@ github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/relvacode/iso8601 v1.6.0 h1:eFXUhMJN3Gz8Rcq82f9DTMW0svjtAVuIEULglM7QHTU=
+github.com/relvacode/iso8601 v1.6.0/go.mod h1:FlNp+jz+TXpyRqgmM7tnzHHzBnz776kmAH2h3sZCn0I=
 github.com/richardlehane/mscfb v1.0.4 h1:WULscsljNPConisD5hR0+OyZjwK46Pfyr6mPu5ZawpM=
 github.com/richardlehane/mscfb v1.0.4/go.mod h1:YzVpcZg9czvAuhk9T+a3avCpcFPMUWm7gK3DypaEsUk=
 github.com/richardlehane/msoleps v1.0.1/go.mod h1:BWev5JBpU9Ko2WAgmZEuiz4/u3ZYTKbjLycmwiWUfWg=
@@ -165,8 +167,8 @@ golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 h1:nDVHiLt8aIbd/VzvPWN6kSOPE
 golang.org/x/exp v0.0.0-20250305212735-054e65f0b394/go.mod h1:sIifuuw/Yco/y6yb6+bDNfyeQ/MdPUy/hKEMYQV17cM=
 golang.org/x/image v0.26.0 h1:4XjIFEZWQmCZi6Wv8BoxsDhRU3RVnLX04dToTDAEPlY=
 golang.org/x/image v0.26.0/go.mod h1:lcxbMFAovzpnJxzXS3nyL83K27tmqtKzIJpctK8YO5c=
-golang.org/x/net v0.38.0 h1:vRMAPTMaeGqVhG5QyLJHqNDwecKTomGeqbnfZyKlBI8=
-golang.org/x/net v0.38.0/go.mod h1:ivrbrMbzFq5J41QOQh0siUuly180yBYtLp+CKbEaFx8=
+golang.org/x/net v0.39.0 h1:ZCu7HMWDxpXpaiKdhzIfaltL9Lp31x/3fCP11bc6/fY=
+golang.org/x/net v0.39.0/go.mod h1:X7NRbYVEA+ewNkCNyJ513WmMdQ3BineSwVtN2zD/d+E=
 golang.org/x/oauth2 v0.29.0 h1:WdYw2tdTK1S8olAzWHdgeqfy+Mtm9XNhv/xJsY65d98=
 golang.org/x/oauth2 v0.29.0/go.mod h1:onh5ek6nERTohokkhCD/y2cV4Do3fxFHFuAejCkRWT8=
 golang.org/x/sync v0.13.0 h1:AauUjRAJ9OSnvULf/ARrrVywoJDy0YS2AwQ98I37610=
