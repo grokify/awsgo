@@ -45,8 +45,16 @@ func (f Finding) FindingSeverity(canonical bool) string {
 		if can, _, err := severity.ParseSeverity(string(f.Severity)); err != nil {
 			return string(f.Severity)
 		} else {
-			return can
+			return strings.TrimSpace(can)
 		}
+	}
+}
+
+func (f Finding) FindingOrVendorSeverity(canonical bool) string {
+	if sev := f.FindingSeverity(canonical); sev != "" {
+		return sev
+	} else {
+		return f.VendorSeverity(canonical)
 	}
 }
 
