@@ -4,7 +4,7 @@ import (
 	"github.com/grokify/gocharts/v2/data/table"
 )
 
-func (fs Findings) TableSetVulnerabilities(opts *table.ColumnInsertOpts) (*table.TableSet, error) {
+func (fs Findings) TableSetVulnerabilities(opts *ReportOptions) (*table.TableSet, error) {
 	ts := table.NewTableSet("")
 	if tbl, err := fs.TablePivotImagenameSeverityCounts(opts); err != nil {
 		return nil, err

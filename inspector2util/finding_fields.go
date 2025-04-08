@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/grokify/gocharts/v2/data/table"
+	"github.com/grokify/govex"
 	"github.com/grokify/mogo/pointer"
 	"github.com/grokify/mogo/time/timeutil"
 )
@@ -19,6 +20,7 @@ const (
 	VulnerabilityCreated                    = "vuln_created"
 	VulnerabilityCreatedYear                = "vuln_created_year"
 	VulnerabilityCreatedAgeMonthsInt        = "vuln_created_age_months_int"
+	VulnerabilitySLADueDate                 = "vuln_sla_due_date"
 	VulnerabilityID                         = "vuln_id"
 	VulnerabilitySeverity                   = "vuln_severity"
 	VulnerabilitySourceURL                  = "vuln_url"
@@ -60,30 +62,32 @@ func TableColumnsImageVulnerabilityPackages() []string {
 func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 	return []string{
 			ImageRepositoryName,
-			ImageNameVulnerabilityID,
-			ImageHash,
 			FindingSeverity,
 			VulnerabilityCreatedYear,
+			VulnerabilitySLADueDate,
 			VulnerabilityCreated,
+			ImageNameVulnerabilityID,
+			ImageHash,
 			VulnerabilityID,
 			VulnerabilitySourceURL,
 			PackagesNamesAndFilepathsAtVersion,
 			PackagesNamesAndFilepathsAtVersionFixed,
 		}, map[int]string{
-			4: table.FormatInt,
-			5: table.FormatDate,
+			2: table.FormatInt,
+			3: table.FormatDate,
+			7: table.FormatURL,
 		}
 }
 
-func (f Finding) MustVulnerabilityField(field, def string) string {
-	if v, err := f.VulnerabilityField(field); err != nil {
+func (f Finding) MustVulnerabilityField(field, def string, opts *govex.ValueOpts) string {
+	if v, err := f.VulnerabilityField(field, opts); err != nil {
 		return def
 	} else {
 		return v
 	}
 }
 
-func (f Finding) VulnerabilityField(field string) (string, error) {
+func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string, error) {
 	if f.PackageVulnerabilityDetails == nil {
 		return "", nil
 	}
@@ -116,6 +120,16 @@ func (f Finding) VulnerabilityField(field string) (string, error) {
 		return strings.Join(f.PackageVulnerabilityDetails.ReferenceUrls, ", "), nil
 	case VulnerabilitySeverity:
 		return pointer.Dereference(f.PackageVulnerabilityDetails.VendorSeverity), nil
+	case VulnerabilitySLADueDate:
+		if opts == nil || opts.SLAMap == nil || len(*opts.SLAMap) == 0 ||
+			f.PackageVulnerabilityDetails.VendorCreatedAt == nil {
+			return "", nil
+		} else if slaDays, ok := (*opts.SLAMap)[f.FindingOrVendorSeverity(true)]; !ok {
+			return "", nil
+		} else {
+			return f.PackageVulnerabilityDetails.VendorCreatedAt.Add(
+				time.Duration(slaDays) * timeutil.Day).Format(time.RFC3339), nil
+		}
 	case VulnerabilitySourceURL:
 		return pointer.Dereference(f.PackageVulnerabilityDetails.SourceUrl), nil
 	case PackagesFilepathsAtVersion:
@@ -152,10 +166,10 @@ func (f Finding) VulnerabilityField(field string) (string, error) {
 }
 
 // VulnerabilitySlices returns one slice per vulnerable package.
-func (f Finding) VulnerabilityFields(fields []string) ([]string, error) {
+func (f Finding) VulnerabilityFields(fields []string, opts *govex.ValueOpts) ([]string, error) {
 	var row []string
 	for _, field := range fields {
-		if v, err := f.VulnerabilityField(field); err != nil {
+		if v, err := f.VulnerabilityField(field, opts); err != nil {
 			return []string{}, err
 		} else {
 			row = append(row, v)
@@ -168,7 +182,7 @@ func (f Finding) VulnerabilityFields(fields []string) ([]string, error) {
 }
 
 // PackageSlices returns one slice per vulnerable package.
-func (f Finding) PackageSlices(fields []string) ([][]string, error) {
+func (f Finding) PackageSlices(fields []string, opts *govex.ValueOpts) ([][]string, error) {
 	var rows [][]string
 	fmtMap := map[int]string{}
 	for _, res := range f.Resources {
@@ -186,39 +200,39 @@ func (f Finding) PackageSlices(fields []string) ([][]string, error) {
 				case ImageRepositoryName:
 					row = append(row, imgName)
 				case VulnerabilityCreated:
-					if v, err := f.VulnerabilityField(VulnerabilityCreated); err != nil {
+					if v, err := f.VulnerabilityField(VulnerabilityCreated, opts); err != nil {
 						return rows, err
 					} else {
 						row = append(row, v)
 						fmtMap[i] = table.FormatTime
 					}
 				case VulnerabilityCreatedYear:
-					if v, err := f.VulnerabilityField(VulnerabilityCreatedYear); err != nil {
+					if v, err := f.VulnerabilityField(VulnerabilityCreatedYear, opts); err != nil {
 						return rows, err
 					} else {
 						row = append(row, v)
 						fmtMap[i] = table.FormatInt
 					}
 				case VulnerabilityID:
-					if v, err := f.VulnerabilityField(VulnerabilityID); err != nil {
+					if v, err := f.VulnerabilityField(VulnerabilityID, opts); err != nil {
 						return rows, err
 					} else {
 						row = append(row, v)
 					}
 				case VulnerabilitySeverity:
-					if v, err := f.VulnerabilityField(VulnerabilitySeverity); err != nil {
+					if v, err := f.VulnerabilityField(VulnerabilitySeverity, opts); err != nil {
 						return rows, err
 					} else {
 						row = append(row, v)
 					}
 				case VulnerabilitySourceURL:
-					if v, err := f.VulnerabilityField(VulnerabilitySourceURL); err != nil {
+					if v, err := f.VulnerabilityField(VulnerabilitySourceURL, opts); err != nil {
 						return rows, err
 					} else {
 						row = append(row, v)
 					}
 				case VulnerabilityReferenceURLs:
-					if v, err := f.VulnerabilityField(VulnerabilityReferenceURLs); err != nil {
+					if v, err := f.VulnerabilityField(VulnerabilityReferenceURLs, opts); err != nil {
 						return rows, err
 					} else {
 						row = append(row, v)

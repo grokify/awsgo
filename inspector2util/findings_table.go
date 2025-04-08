@@ -3,11 +3,12 @@ package inspector2util
 import (
 	"github.com/grokify/gocharts/v2/data/histogram"
 	"github.com/grokify/gocharts/v2/data/table"
+	"github.com/grokify/govex"
 	"github.com/grokify/govex/severity"
 )
 
 // Table is used as a unique key across images.
-func (fs Findings) TablePackages(cols []string) (*table.Table, error) {
+func (fs Findings) TablePackages(cols []string, opts *govex.ValueOpts) (*table.Table, error) {
 	t := table.NewTable("")
 	if len(cols) == 0 {
 		cols = TableColumnsImageVulnerabilityPackages()
@@ -15,7 +16,7 @@ func (fs Findings) TablePackages(cols []string) (*table.Table, error) {
 	t.Columns = cols
 	for _, f := range fs {
 		f2 := Finding(f)
-		if rows, err := f2.PackageSlices(cols); err != nil {
+		if rows, err := f2.PackageSlices(cols, opts); err != nil {
 			return nil, err
 		} else {
 			t.Rows = append(t.Rows, rows...)
@@ -24,7 +25,10 @@ func (fs Findings) TablePackages(cols []string) (*table.Table, error) {
 	return &t, nil
 }
 
-func (fs Findings) TableImageVulnerabilities(cols []string, fmtMap map[int]string, opts *table.ColumnInsertOpts) (*table.Table, error) {
+func (fs Findings) TableImageVulnerabilities(cols []string, fmtMap map[int]string, opts *ReportOptions) (*table.Table, error) {
+	if opts == nil {
+		opts = &ReportOptions{}
+	}
 	t := table.NewTable("")
 	if len(cols) == 0 {
 		cols, fmtMap = TableColumnsImageVulnerabilities()
@@ -36,44 +40,57 @@ func (fs Findings) TableImageVulnerabilities(cols []string, fmtMap map[int]strin
 	}
 	for _, f := range fs {
 		f2 := Finding(f)
-		if row, err := f2.VulnerabilityFields(cols); err != nil {
+		if row, err := f2.VulnerabilityFields(cols, opts.VulnerabilityValueOptions); err != nil {
 			return nil, err
 		} else {
 			t.Rows = append(t.Rows, row)
 		}
 	}
-	if opts == nil {
-		return &t, nil
-	} else if err := t.ColumnInsert(*opts); err != nil {
-		return nil, err
-	} else {
+	if len(opts.ColumnInsertOptions) == 0 {
 		return &t, nil
 	}
+	for _, copts := range opts.ColumnInsertOptions {
+		if err := t.ColumnInsert(copts); err != nil {
+			return nil, err
+		}
+	}
+	return &t, nil
 }
 
-func (fs Findings) TablePivotImagenameSeverityCounts(opts *table.ColumnInsertOpts) (*table.Table, error) {
+func (fs Findings) TablePivotImagenameSeverityCounts(opts *ReportOptions) (*table.Table, error) {
+	if opts == nil {
+		opts = &ReportOptions{}
+	}
 	hsets := fs.HistogramSets()
 	hset := hsets.HistogramSetOneTwo()
 	hset.BinsOrder = severity.SeveritiesAll()
-	if tbl, err := hset.TablePivot("Image Severities", "Image Name", false, true, false, true); err != nil {
+
+	tbl, err := hset.TablePivot("Image Severities", "Image Name", false, true, false, true)
+	if err != nil {
 		return nil, err
-	} else if opts == nil {
-		return tbl, nil
-	} else if err := tbl.ColumnInsert(*opts); err != nil {
-		return nil, err
-	} else {
+	}
+	if len(opts.ColumnInsertOptions) == 0 {
 		return tbl, nil
 	}
+	for _, copts := range opts.ColumnInsertOptions {
+		if err := tbl.ColumnInsert(copts); err != nil {
+			return nil, err
+		}
+	}
+	return tbl, nil
 }
 
-func (fs Findings) TableImagenameSeverityYear(opts *table.ColumnInsertOpts) (*table.Table, error) {
+func (fs Findings) TableImagenameSeverityYear(opts *ReportOptions) (*table.Table, error) {
 	h := histogram.NewHistogram("")
+	if opts == nil {
+		opts = &ReportOptions{}
+	}
 	for _, f := range fs {
 		f2 := Finding(f)
 		m := map[string]string{
-			ImageRepositoryName:              f2.MustVulnerabilityField(ImageRepositoryName, ""),
-			FindingSeverity:                  f2.MustVulnerabilityField(FindingSeverity, ""),
-			VulnerabilityCreatedAgeMonthsInt: f2.MustVulnerabilityField(VulnerabilityCreatedYear, ""),
+			ImageRepositoryName:              f2.MustVulnerabilityField(ImageRepositoryName, "", opts.VulnerabilityValueOptions),
+			FindingSeverity:                  f2.MustVulnerabilityField(FindingSeverity, "", opts.VulnerabilityValueOptions),
+			VulnerabilityCreatedAgeMonthsInt: f2.MustVulnerabilityField(VulnerabilityCreatedYear, "", opts.VulnerabilityValueOptions),
 		}
 		h.AddMap(m, 1)
 	}
@@ -83,13 +100,15 @@ func (fs Findings) TableImagenameSeverityYear(opts *table.ColumnInsertOpts) (*ta
 		return nil, err
 	}
 	tbl.FormatMap = map[int]string{2: table.FormatInt}
-	if opts == nil {
-		return tbl, nil
-	} else if err := tbl.ColumnInsert(*opts); err != nil {
-		return nil, err
-	} else {
+	if len(opts.ColumnInsertOptions) == 0 {
 		return tbl, nil
 	}
+	for _, copts := range opts.ColumnInsertOptions {
+		if err := tbl.ColumnInsert(copts); err != nil {
+			return nil, err
+		}
+	}
+	return tbl, nil
 }
 
 // HistogramSets returns histogram sets using the fields
