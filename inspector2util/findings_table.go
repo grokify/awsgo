@@ -99,7 +99,10 @@ func (fs Findings) TableImagenameSeverityYear(opts *ReportOptions) (*table.Table
 	if err != nil {
 		return nil, err
 	}
-	tbl.FormatMap = map[int]string{2: table.FormatInt}
+	tbl.FormatMap = map[int]string{
+		2: table.FormatInt,
+		3: table.FormatInt,
+	}
 	if len(opts.ColumnInsertOptions) == 0 {
 		return tbl, nil
 	}
