@@ -82,7 +82,7 @@ func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 		}
 }
 
-func (f Finding) MustVulnerabilityField(field, def string, opts *govex.ValueOpts) string {
+func (f Finding) MustVulnerabilityField(field, def string, opts *govex.ValueOptions) string {
 	if v, err := f.VulnerabilityField(field, opts); err != nil {
 		return def
 	} else {
@@ -90,7 +90,7 @@ func (f Finding) MustVulnerabilityField(field, def string, opts *govex.ValueOpts
 	}
 }
 
-func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string, error) {
+func (f Finding) VulnerabilityField(field string, opts *govex.ValueOptions) (string, error) {
 	if f.PackageVulnerabilityDetails == nil {
 		return "", nil
 	}
@@ -113,10 +113,11 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string
 	case VulnerabilityCreatedAgeMonthsInt:
 		if f.PackageVulnerabilityDetails.VendorCreatedAt == nil {
 			return "", nil
+		} else {
+			return fmt.Sprintf("%.0f",
+				float64(time.Since(*f.PackageVulnerabilityDetails.VendorCreatedAt))/
+					float64(timeutil.Day*30)), nil
 		}
-		return fmt.Sprintf("%.0f",
-			float64(time.Since(*f.PackageVulnerabilityDetails.VendorCreatedAt))/
-				float64(timeutil.Day*30)), nil
 	case VulnerabilityID:
 		return pointer.Dereference(f.PackageVulnerabilityDetails.VulnerabilityId), nil
 	case VulnerabilityReferenceURLs:
@@ -124,14 +125,17 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string
 	case VulnerabilitySeverity:
 		return pointer.Dereference(f.PackageVulnerabilityDetails.VendorSeverity), nil
 	case VulnerabilitySLADueDate:
-		if opts == nil || opts.SLAMap == nil || len(*opts.SLAMap) == 0 ||
-			f.PackageVulnerabilityDetails.VendorCreatedAt == nil {
+		if opts == nil || opts.SLAOptions == nil {
 			return "", nil
-		} else if slaDays, ok := (*opts.SLAMap)[f.FindingOrVendorSeverity(true)]; !ok {
+		} else if dueDate, err := opts.SLAOptions.DueDate(
+			f.FindingOrVendorSeverity(true),
+			f.PackageVulnerabilityDetails.VendorCreatedAt,
+			nil); err != nil {
+			return "", err
+		} else if dueDate == nil {
 			return "", nil
 		} else {
-			return f.PackageVulnerabilityDetails.VendorCreatedAt.Add(
-				time.Duration(slaDays) * timeutil.Day).Format(time.RFC3339), nil
+			return dueDate.Format(time.RFC3339), nil
 		}
 	case VulnerabilitySourceURL:
 		return pointer.Dereference(f.PackageVulnerabilityDetails.SourceUrl), nil
@@ -182,7 +186,7 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string
 }
 
 // VulnerabilitySlices returns one slice per vulnerable package.
-func (f Finding) VulnerabilityFields(fields []string, opts *govex.ValueOpts) ([]string, error) {
+func (f Finding) VulnerabilityFields(fields []string, opts *govex.ValueOptions) ([]string, error) {
 	var row []string
 	for _, field := range fields {
 		if v, err := f.VulnerabilityField(field, opts); err != nil {
@@ -198,7 +202,7 @@ func (f Finding) VulnerabilityFields(fields []string, opts *govex.ValueOpts) ([]
 }
 
 // PackageSlices returns one slice per vulnerable package.
-func (f Finding) PackageSlices(fields []string, opts *govex.ValueOpts) ([][]string, error) {
+func (f Finding) PackageSlices(fields []string, opts *govex.ValueOptions) ([][]string, error) {
 	var rows [][]string
 	fmtMap := map[int]string{}
 	for _, res := range f.Resources {
