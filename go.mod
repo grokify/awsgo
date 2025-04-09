@@ -9,15 +9,15 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.36.3
 	github.com/aws/aws-sdk-go-v2/config v1.29.13
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.66
-	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.48.1
+	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.9.2
-	github.com/grokify/goauth v0.23.9
-	github.com/grokify/gocharts/v2 v2.23.1
-	github.com/grokify/govex v0.10.1
-	github.com/grokify/mogo v0.68.5
+	github.com/grokify/goauth v0.23.10
+	github.com/grokify/gocharts/v2 v2.23.2
+	github.com/grokify/govex v0.10.2
+	github.com/grokify/mogo v0.68.6
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/micahhausler/aws-iam-policy v0.4.2
 )
@@ -47,7 +47,7 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.3.6 // indirect
 	github.com/googleapis/gax-go/v2 v2.14.1 // indirect
 	github.com/grokify/base36 v1.0.5 // indirect
-	github.com/grokify/google-fonts v0.1.1 // indirect
+	github.com/grokify/google-fonts v0.1.2 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -72,7 +72,7 @@ require (
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	golang.org/x/crypto v0.37.0 // indirect
-	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
+	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0 // indirect
 	golang.org/x/image v0.26.0 // indirect
 	golang.org/x/net v0.39.0 // indirect
 	golang.org/x/oauth2 v0.29.0 // indirect
