@@ -10,7 +10,7 @@ import (
 
 type Packages []types.VulnerablePackage
 
-func (ps Packages) FilepathsContainsPOMProperities() int {
+func (ps Packages) FilepathsContainsPOMProperties() int {
 	return strslices.Contains(ps.Filepaths(), filenamePomProperties)
 }
 

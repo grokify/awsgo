@@ -152,7 +152,7 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string
 	case PackagesFilepathsPOMProperites:
 		if f.PackageVulnerabilityDetails != nil {
 			pkgs := Packages(f.PackageVulnerabilityDetails.VulnerablePackages)
-			if havePOMProperties := pkgs.FilepathsContainsPOMProperities(); havePOMProperties > 0 {
+			if havePOMProperties := pkgs.FilepathsContainsPOMProperties(); havePOMProperties > 0 {
 				return "all", nil
 			} else if havePOMProperties < 0 {
 				return "none", nil
