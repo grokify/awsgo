@@ -7,5 +7,5 @@ import (
 
 type ReportOptions struct {
 	ColumnInsertOptions       []table.ColumnInsertOpts
-	VulnerabilityValueOptions *govex.ValueOpts
+	VulnerabilityValueOptions *govex.ValueOptions
 }

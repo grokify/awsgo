@@ -8,7 +8,7 @@ import (
 )
 
 // Table is used as a unique key across images.
-func (fs Findings) TablePackages(cols []string, opts *govex.ValueOpts) (*table.Table, error) {
+func (fs Findings) TablePackages(cols []string, opts *govex.ValueOptions) (*table.Table, error) {
 	t := table.NewTable("")
 	if len(cols) == 0 {
 		cols = TableColumnsImageVulnerabilityPackages()
