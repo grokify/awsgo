@@ -5,9 +5,24 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
 	"github.com/grokify/mogo/type/stringsutil"
+	"github.com/grokify/mogo/type/strslices"
 )
 
 type Packages []types.VulnerablePackage
+
+func (ps Packages) FilepathsContainsPOMProperities() int {
+	return strslices.Contains(ps.Filepaths(), filenamePomProperties)
+}
+
+func (ps Packages) Filepaths() []string {
+	var paths []string
+	for _, p := range ps {
+		if v := Package(p).FilepathString(); v != "" {
+			paths = append(paths, v)
+		}
+	}
+	return stringsutil.SliceCondenseSpace(paths, true, true)
+}
 
 func (ps Packages) FilepathsAtVersion() string {
 	var paths []string

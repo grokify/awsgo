@@ -31,6 +31,7 @@ const (
 	PackageInfoVersionFixed                 = "pkg_version_fixed"
 	PackagesFilepathsAtVersion              = "pkgs_filepaths_version"
 	PackagesFilepathsAtVersionFixed         = "pkgs_filepaths_version_fixed"
+	PackagesFilepathsPOMProperites          = "pkgs_filepaths_pom_properties"
 	PackagesNamesAtVersion                  = "pkgs_names_version"
 	PackagesNamesAtVersionsFixed            = "pkgs_names_version_fixed"
 	PackagesNamesAndFilepathsAtVersion      = "pkgs_names_filepaths_version"
@@ -70,12 +71,14 @@ func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 			ImageHash,
 			VulnerabilityID,
 			VulnerabilitySourceURL,
+			PackagesFilepathsPOMProperites,
 			PackagesNamesAndFilepathsAtVersion,
 			PackagesNamesAndFilepathsAtVersionFixed,
 		}, map[int]string{
 			2: table.FormatInt,
 			3: table.FormatDate,
-			7: table.FormatURL,
+			4: table.FormatDate,
+			8: table.FormatURL,
 		}
 }
 
@@ -145,6 +148,19 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOpts) (string
 			return pkgs.FilepathsAtVersionFixed(), nil
 		} else {
 			return "", nil
+		}
+	case PackagesFilepathsPOMProperites:
+		if f.PackageVulnerabilityDetails != nil {
+			pkgs := Packages(f.PackageVulnerabilityDetails.VulnerablePackages)
+			if havePOMProperties := pkgs.FilepathsContainsPOMProperities(); havePOMProperties > 0 {
+				return "all", nil
+			} else if havePOMProperties < 0 {
+				return "none", nil
+			} else {
+				return "some", nil
+			}
+		} else {
+			return "false", nil
 		}
 	case PackagesNamesAndFilepathsAtVersion:
 		if f.PackageVulnerabilityDetails != nil {
