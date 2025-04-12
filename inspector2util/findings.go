@@ -8,7 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
-	"github.com/grokify/mogo/type/stringsutil"
+	"github.com/grokify/mogo/type/strslices"
 )
 
 func ReadFileListFindingsOutput(filename string) (inspector2.ListFindingsOutput, error) {
@@ -24,36 +24,6 @@ func ReadFileListFindingsOutput(filename string) (inspector2.ListFindingsOutput,
 
 type Findings []types.Finding
 
-func (fs Findings) FilterImageHashes(hashesIncl []string) Findings {
-	var out Findings
-	hashesInclMap := map[string]int{}
-	for _, h := range hashesIncl {
-		hashesInclMap[h]++
-	}
-	for _, f := range fs {
-		fx := Finding(f)
-		imgHashes := fx.ImageHashes()
-		for _, h := range imgHashes {
-			if _, ok := hashesInclMap[h]; ok {
-				out = append(out, f)
-				break
-			}
-		}
-	}
-	return out
-}
-
-func (fs Findings) FilterPOMPropertiesExcl() Findings {
-	var out Findings
-	for _, f := range fs {
-		fx := Finding(f)
-		if !fx.FilePathsInclPOMProperties() {
-			out = append(out, f)
-		}
-	}
-	return out
-}
-
 func (fs Findings) FindingOneRawMatch(s string) *Finding {
 	for _, f := range fs {
 		b, err := json.Marshal(f)
@@ -68,6 +38,16 @@ func (fs Findings) FindingOneRawMatch(s string) *Finding {
 	return nil
 }
 
+// ImageHashes returns a list of unique repo names
+func (fs Findings) ImageHashes() []string {
+	var out []string
+	for _, f := range fs {
+		fx := Finding(f)
+		out = append(out, fx.ImageHashes()...)
+	}
+	return strslices.CondenseSpace(out, true, true)
+}
+
 // ImageRepositoryNames returns a list of unique repo names
 func (fs Findings) ImageRepositoryNames() []string {
 	var out []string
@@ -75,7 +55,7 @@ func (fs Findings) ImageRepositoryNames() []string {
 		fx := Finding(f)
 		out = append(out, fx.ImageRepositoryNames()...)
 	}
-	return stringsutil.SliceCondenseSpace(out, true, true)
+	return strslices.CondenseSpace(out, true, true)
 }
 
 // ImageRepoNameVulnID is used as a unique key across images.
@@ -87,6 +67,14 @@ func (fs Findings) ImageRepoNameVulnIDs(sep string) []string {
 	}
 	sort.Strings(out)
 	return out
+}
+
+func (fs Findings) ImageSet(hashesIncl []string) (*ImageSet, error) {
+	if rs, err := fs.ResourceSet([]types.ResourceType{ResourceTypeAwsEcrContainerImage}); err != nil {
+		return nil, err
+	} else {
+		return rs.ImageSet(hashesIncl)
+	}
 }
 
 func (fs Findings) ResourceSet(inclResourceTypes []types.ResourceType) (*ResourceSet, error) {

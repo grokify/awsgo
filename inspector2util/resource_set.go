@@ -2,10 +2,13 @@ package inspector2util
 
 import (
 	"errors"
+	"slices"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
 	"github.com/grokify/gocharts/v2/data/table"
+	"github.com/grokify/mogo/pointer"
 	"github.com/grokify/mogo/type/maputil"
+	"github.com/grokify/mogo/type/slicesutil"
 )
 
 type ResourceSet struct {
@@ -32,6 +35,22 @@ func (rs *ResourceSet) ImageRepositoryNames() []string {
 		}
 	}
 	return maputil.Keys(m)
+}
+
+func (rs *ResourceSet) ImageSet(hashesIncl []string) (*ImageSet, error) {
+	hashesIncl = slicesutil.Dedupe(hashesIncl)
+	is := NewImageSet()
+	for _, r := range rs.Set {
+		if r.Details != nil && r.Details.AwsEcrContainerImage != nil {
+			if len(hashesIncl) > 0 && !slices.Contains(
+				hashesIncl, pointer.Dereference(r.Details.AwsEcrContainerImage.ImageHash)) {
+				continue
+			} else if err := is.Add(*r.Details.AwsEcrContainerImage); err != nil {
+				return nil, err
+			}
+		}
+	}
+	return is, nil
 }
 
 func (rs *ResourceSet) ImageTags() []string {
