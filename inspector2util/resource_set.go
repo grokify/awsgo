@@ -20,7 +20,7 @@ func (rs *ResourceSet) Add(r Resource) error {
 	if r.Id == nil {
 		return errors.New("no resource id")
 	}
-	rs.Set[*r.Id] = Resource(r)
+	rs.Set[*r.Id] = r
 	return nil
 }
 
