@@ -17,6 +17,7 @@ const (
 	ImageHash                               = "image_hash"
 	ImageRepositoryName                     = "image_repo_name"
 	ImageNameVulnerabilityID                = "image_name_vuln_id"
+	ImageTags                               = "image_tags"
 	VulnerabilityCreated                    = "vuln_created"
 	VulnerabilityCreatedYear                = "vuln_created_year"
 	VulnerabilityCreatedAgeMonthsInt        = "vuln_created_age_months_int"

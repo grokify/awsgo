@@ -89,6 +89,30 @@ func (fs Findings) ImageRepoNameVulnIDs(sep string) []string {
 	return out
 }
 
+func (fs Findings) ResourceSet(inclResourceTypes []types.ResourceType) (*ResourceSet, error) {
+	rs := NewResourceSet()
+	for _, f := range fs {
+		for _, r := range f.Resources {
+			if len(inclResourceTypes) == 0 {
+				if err := rs.Add(Resource(r)); err != nil {
+					return rs, err
+				}
+			} else {
+				for _, rt := range inclResourceTypes {
+					if r.Type == rt {
+						if err := rs.Add(Resource(r)); err != nil {
+							return rs, err
+						} else {
+							break
+						}
+					}
+				}
+			}
+		}
+	}
+	return rs, nil
+}
+
 func (fs Findings) Stats() FindingsStats {
 	return FindingsStats{Findings: fs}
 }
