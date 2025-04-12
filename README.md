@@ -6,7 +6,7 @@
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![License][license-svg]][license-url]
 
-AWSgo provices helper libraries for the AWS Go SDK:
+AWSgo provides helper libraries for the AWS Go SDK:
 
 * Dev Guide: https://aws.amazon.com/sdk-for-go/
 * GitHub: https://github.com/aws/aws-sdk-go
