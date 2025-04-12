@@ -37,7 +37,7 @@ func (stats FindingsStats) VendorCreatedAtYearly() map[string]int {
 func (stats FindingsStats) VendorSeverities(canonicalSev bool) map[string]int {
 	out := map[string]int{}
 	for _, f := range stats.Findings {
-		out[CanonicalSeverity(Finding(f).VendorSeverity(canonicalSev))]++
+		out[Finding(f).VendorSeverity(canonicalSev)]++
 	}
 	return addTotal(out)
 }
