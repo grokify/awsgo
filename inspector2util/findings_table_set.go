@@ -1,11 +1,21 @@
 package inspector2util
 
 import (
+	"errors"
+
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
 	"github.com/grokify/gocharts/v2/data/table"
 )
 
-func (fs Findings) TableSetImageVulnerabilities(opts *ReportOptions) (*table.TableSet, error) {
+func (fs Findings) ImageVulnerabilitesReporter() ImageVulnerabilitesReporter {
+	return ImageVulnerabilitesReporter{Findings: &fs}
+}
+
+func (vex ImageVulnerabilitesReporter) TableSet(opts *ReportOptions) (*table.TableSet, error) {
+	if vex.Findings == nil {
+		return nil, errors.New("findings cannot be nil")
+	}
+	fs := vex.Findings
 	ts := table.NewTableSet("")
 	// Sheet for Image Severity Counts
 	if tbl, err := fs.TablePivotImagenameSeverityCounts(opts); err != nil {
