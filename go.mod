@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.36.1
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.3
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.4
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.9.2
 	github.com/grokify/goauth v0.23.10
 	github.com/grokify/gocharts/v2 v2.23.2
