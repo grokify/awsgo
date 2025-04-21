@@ -2,6 +2,7 @@ package s3util
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -152,13 +153,13 @@ func (cm *S3ClientMore) ObjectFileUploadOld(bucket, key, filename string) (*s3ma
 	}
 }
 
-func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3.PutObjectOutput, error) {
+func (cm *S3ClientMore) ObjectHTTPRequestPut(ctx context.Context, bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3.PutObjectOutput, error) {
 	if err := checkBucketAndKey(bucket, key); err != nil {
 		return nil, err
 	} else if sclient == nil {
 		sclient = &httpsimple.Client{}
 	}
-	if resp, err := sclient.Do(sreq); err != nil {
+	if resp, err := sclient.Do(ctx, sreq); err != nil {
 		return nil, err
 	} else if resp.StatusCode >= 300 {
 		return nil, fmt.Errorf("http status code (%d)", resp.StatusCode)
@@ -167,13 +168,13 @@ func (cm *S3ClientMore) ObjectHTTPRequestPut(bucket, key string, sreq httpsimple
 	}
 }
 
-func (cm *S3ClientMore) ObjectHTTPRequestUpload(bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3manager.UploadOutput, error) {
+func (cm *S3ClientMore) ObjectHTTPRequestUpload(ctx context.Context, bucket, key string, sreq httpsimple.Request, sclient *httpsimple.Client) (*s3manager.UploadOutput, error) {
 	if err := checkBucketAndKey(bucket, key); err != nil {
 		return nil, err
 	} else if sclient == nil {
 		sclient = &httpsimple.Client{}
 	}
-	if resp, err := sclient.Do(sreq); err != nil {
+	if resp, err := sclient.Do(ctx, sreq); err != nil {
 		return nil, err
 	} else if resp.StatusCode >= 300 {
 		return nil, fmt.Errorf("http status code (%d)", resp.StatusCode)
