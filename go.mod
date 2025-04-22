@@ -15,9 +15,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.4
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.9.2
 	github.com/grokify/goauth v0.23.10
-	github.com/grokify/gocharts/v2 v2.23.2
-	github.com/grokify/govex v0.10.3
-	github.com/grokify/mogo v0.68.10
+	github.com/grokify/gocharts/v2 v2.23.5
+	github.com/grokify/govex v0.11.0
+	github.com/grokify/mogo v0.68.11
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/micahhausler/aws-iam-policy v0.4.2
 )
@@ -47,7 +47,7 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.3.6 // indirect
 	github.com/googleapis/gax-go/v2 v2.14.1 // indirect
 	github.com/grokify/base36 v1.0.5 // indirect
-	github.com/grokify/google-fonts v0.1.2 // indirect
+	github.com/grokify/google-fonts v0.1.3 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -80,8 +80,8 @@ require (
 	golang.org/x/text v0.24.0 // indirect
 	gonum.org/v1/gonum v0.16.0 // indirect
 	google.golang.org/api v0.229.0 // indirect
-	google.golang.org/genproto v0.0.0-20250414145226-207652e42e2e // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250414145226-207652e42e2e // indirect
-	google.golang.org/grpc v1.71.1 // indirect
+	google.golang.org/genproto v0.0.0-20250421163800-61c742ae3ef0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250421163800-61c742ae3ef0 // indirect
+	google.golang.org/grpc v1.72.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 )

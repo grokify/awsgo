@@ -65,7 +65,11 @@ func (fs Findings) TablePivotImagenameSeverityCounts(opts *ReportOptions) (*tabl
 	hset := hsets.HistogramSetOneTwo()
 	hset.BinsOrder = severity.SeveritiesAll()
 
-	tbl, err := hset.TablePivot("Image Severities", "Image Name", false, true, false, true)
+	tbl, err := hset.TablePivot("Image Severities", "Image Name",
+		&histogram.SetTablePivotOpts{
+			ColTotalRight:  true,
+			RowTotalBottom: true,
+		})
 	if err != nil {
 		return nil, err
 	}
