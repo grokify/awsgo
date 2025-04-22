@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	"github.com/grokify/mogo/type/maputil"
 	"github.com/grokify/mogo/type/strslices"
 )
 
@@ -66,6 +67,22 @@ func (fs Findings) ImageRepoNameVulnIDs(sep string) []string {
 		out = append(out, fx.ImageRepoNameVulnIDs(sepFilepathVersion)...)
 	}
 	sort.Strings(out)
+	return out
+}
+
+// ImageRepoNameVulnID is used as a unique key across images.
+func (fs Findings) ImageRepoNameVulnIDsMapSeverity() map[string][]string {
+	out := maputil.MapStringSlice{}
+	for _, f := range fs {
+		fx := Finding(f)
+		rvids := fx.ImageRepoNameVulnIDs(sepFilepathVersion)
+		fsev := fx.FindingSeverity(true)
+		if _, ok := out[fsev]; !ok {
+			out[fsev] = []string{}
+		}
+		out[fsev] = append(out[fsev], rvids...)
+	}
+	out.Sort(true)
 	return out
 }
 
