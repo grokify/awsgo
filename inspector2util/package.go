@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	"github.com/grokify/govex/poam"
+	"github.com/grokify/mogo/pointer"
 )
 
 type Package types.VulnerablePackage
@@ -91,6 +93,14 @@ func (p Package) NameString() string {
 	} else {
 		return strings.TrimSpace(*p.Name)
 	}
+}
+
+func (p Package) POAMItem() poam.POAMItemUpgradeRemedationPackage {
+	return poam.POAMItemUpgradeRemedationPackage{
+		Name:           pointer.Dereference(p.Name),
+		CurVersion:     pointer.Dereference(p.Version),
+		FixVersion:     pointer.Dereference(p.FixedInVersion),
+		PackageManager: string(p.PackageManager)}
 }
 
 func (p Package) VersionString() string {
