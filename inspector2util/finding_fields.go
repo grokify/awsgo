@@ -189,7 +189,6 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOptions) (str
 	default:
 		return "", fmt.Errorf("field unknown or not supported (%s)", field)
 	}
-	return "", fmt.Errorf("field unknown or not supported (%s)", field)
 }
 
 // VulnerabilitySlices returns one slice per vulnerable package.
