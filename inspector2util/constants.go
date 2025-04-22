@@ -8,6 +8,9 @@ const (
 	sepFilepathVersion = "@"
 	sepJoinDispolay    = ", "
 
+	yesnoYes = "Yes"
+	yesnoNo  = "No"
+
 	filenamePomProperties = "pom.properties"
 
 	ResourceTypeAwsEc2Instance       = types.ResourceTypeAwsEc2Instance

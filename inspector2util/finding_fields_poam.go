@@ -9,7 +9,6 @@ import (
 	"github.com/grokify/govex"
 	"github.com/grokify/govex/poam"
 	"github.com/grokify/govex/severity"
-	"github.com/grokify/mogo/time/timeutil"
 	"github.com/grokify/mogo/type/slicesutil"
 )
 
@@ -24,6 +23,12 @@ func (f Finding) POAMItemClosed() bool {
 }
 
 func (f Finding) POAMItemValue(field poam.POAMField, opts *govex.ValueOptions, overrides func(field poam.POAMField) (*string, error)) (string, error) {
+	var dateFormat string
+	if opts != nil && opts.DateFormat != "" {
+		dateFormat = opts.DateFormat
+	} else {
+		dateFormat = time.DateOnly
+	}
 	// Step 1: check overrides
 	if overrides != nil {
 		if v, err := overrides(field); err != nil {
@@ -40,6 +45,26 @@ func (f Finding) POAMItemValue(field poam.POAMField, opts *govex.ValueOptions, o
 	switch field {
 	case poam.FieldWeaknessDetectorSource:
 		return "Inspector", nil
+	case poam.FieldBindingOperationalDirective2201Tracking:
+		if opts == nil || opts.CISAKEVC == nil {
+			return "", nil
+		} else if cveID := f.CVEID(); cveID == nil {
+			return yesnoNo, nil
+		} else if kev := opts.CISAKEVC.CVE(*cveID); kev == nil {
+			return yesnoNo, nil
+		} else {
+			return yesnoYes, nil
+		}
+	case poam.FieldBindingOperationalDirective2201DueDate:
+		if opts == nil || opts.CISAKEVC == nil {
+			return "", nil
+		} else if cveID := f.CVEID(); cveID == nil {
+			return "", nil
+		} else if kev := opts.CISAKEVC.CVE(*cveID); kev == nil {
+			return "", nil
+		} else {
+			return kev.DueDate, nil
+		}
 	case poam.FieldControls:
 		if f.Type == types.FindingTypePackageVulnerability {
 			return "RA-5", nil
@@ -54,9 +79,9 @@ func (f Finding) POAMItemValue(field poam.POAMField, opts *govex.ValueOptions, o
 		}
 	case poam.FieldOriginalDetectionDate:
 		if opts != nil && opts.SLAOptions != nil && opts.SLAOptions.SLAStartDateFixed != nil {
-			return opts.SLAOptions.SLAStartDateFixed.Format(timeutil.DateMDY), nil
+			return opts.SLAOptions.SLAStartDateFixed.Format(dateFormat), nil
 		} else if f.FirstObservedAt != nil {
-			return f.FirstObservedAt.Format(timeutil.DateMDY), nil
+			return f.FirstObservedAt.Format(dateFormat), nil
 		} else {
 			return "", nil
 		}
@@ -77,7 +102,7 @@ func (f Finding) POAMItemValue(field poam.POAMField, opts *govex.ValueOptions, o
 			if dueDate, err := opts.SLAOptions.SLAMap.DueDate(sev, *slaStart); err != nil {
 				return "", err
 			} else {
-				return dueDate.Format(timeutil.DateMDY), nil
+				return dueDate.Format(dateFormat), nil
 			}
 		} else {
 			return "", nil

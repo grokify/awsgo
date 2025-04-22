@@ -118,6 +118,16 @@ func (f Finding) VendorSeverity(canonical bool) string {
 	}
 }
 
+func (f Finding) CVEID() *string {
+	if vulnID := f.VulnerabilityID(); vulnID == "" {
+		return nil
+	} else if vulnIDUpper := strings.ToUpper(vulnID); !strings.HasPrefix(vulnIDUpper, "CVE-") {
+		return nil
+	} else {
+		return &vulnIDUpper
+	}
+}
+
 func (f Finding) VulnerabilityID() string {
 	if f.PackageVulnerabilityDetails != nil && f.PackageVulnerabilityDetails.VulnerabilityId != nil {
 		return strings.TrimSpace(pointer.Dereference(f.PackageVulnerabilityDetails.VulnerabilityId))
