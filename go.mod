@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.9.2
 	github.com/grokify/goauth v0.23.10
 	github.com/grokify/gocharts/v2 v2.23.5
-	github.com/grokify/govex v0.11.0
+	github.com/grokify/govex v0.11.1
 	github.com/grokify/mogo v0.68.11
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/micahhausler/aws-iam-policy v0.4.2
