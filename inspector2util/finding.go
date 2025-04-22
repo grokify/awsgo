@@ -9,6 +9,7 @@ import (
 	"github.com/grokify/govex/severity"
 	"github.com/grokify/mogo/pointer"
 	"github.com/grokify/mogo/time/timeutil"
+	"github.com/grokify/mogo/type/slicesutil"
 	"github.com/grokify/mogo/type/stringsutil"
 )
 
@@ -136,7 +137,7 @@ func (f Finding) VulnerablePackages() []types.VulnerablePackage {
 // ImageRepoNameVulnID is used as a unique key across images.
 func (f Finding) ImageRepoNameVulnIDs(sep string) []string {
 	if sep == "" {
-		sep = "@"
+		sep = sepFilepathVersion
 	}
 	names := f.ImageRepositoryNames()
 	vulnID := f.VulnerabilityID()
@@ -147,5 +148,5 @@ func (f Finding) ImageRepoNameVulnIDs(sep string) []string {
 		p = append(p, vulnID)
 		ids = append(ids, strings.Join(p, sep))
 	}
-	return ids
+	return slicesutil.Dedupe(ids)
 }

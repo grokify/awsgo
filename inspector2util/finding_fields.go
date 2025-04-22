@@ -14,6 +14,7 @@ import (
 const (
 	FindingDescription                      = "find_desc"
 	FindingSeverity                         = "find_severity"
+	FindingTitle                            = "find_title"
 	ImageHash                               = "image_hash"
 	ImageRepositoryName                     = "image_repo_name"
 	ImageNameVulnerabilityID                = "image_name_vuln_id"
@@ -96,8 +97,12 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOptions) (str
 		return "", nil
 	}
 	switch field {
+	case FindingDescription:
+		return pointer.Dereference(f.Description), nil
 	case FindingSeverity:
 		return f.FindingSeverity(true), nil
+	case FindingTitle:
+		return pointer.Dereference(f.Title), nil
 	case ImageHash:
 		hashes := f.ImageHashes()
 		return strings.Join(hashes, ", "), nil
@@ -184,6 +189,7 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOptions) (str
 	default:
 		return "", fmt.Errorf("field unknown or not supported (%s)", field)
 	}
+	return "", fmt.Errorf("field unknown or not supported (%s)", field)
 }
 
 // VulnerabilitySlices returns one slice per vulnerable package.
