@@ -3,6 +3,7 @@ package inspector2util
 import (
 	"errors"
 	"slices"
+	"sort"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
 	"github.com/grokify/gocharts/v2/data/table"
@@ -42,10 +43,15 @@ func (rs *ResourceSet) ImageSet(hashesIncl []string) (*ImageSet, error) {
 	is := NewImageSet()
 	for _, r := range rs.Set {
 		if r.Details != nil && r.Details.AwsEcrContainerImage != nil {
-			if len(hashesIncl) > 0 && !slices.Contains(
-				hashesIncl, pointer.Dereference(r.Details.AwsEcrContainerImage.ImageHash)) {
-				continue
-			} else if err := is.Add(*r.Details.AwsEcrContainerImage); err != nil {
+			if len(hashesIncl) > 0 {
+				if !slices.Contains(
+					hashesIncl, pointer.Dereference(r.Details.AwsEcrContainerImage.ImageHash)) {
+					continue
+				}
+			}
+			img := *r.Details.AwsEcrContainerImage
+			sort.Strings(img.ImageTags)
+			if err := is.Add(img); err != nil {
 				return nil, err
 			}
 		}
