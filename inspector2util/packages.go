@@ -44,6 +44,15 @@ func (ps Packages) FilepathsAtVersionFixed() string {
 	return sliceCondenseSpaceAndJoin(paths)
 }
 
+func (ps Packages) NameAtVersionAtFilepaths() []string {
+	var out []string
+	for _, pi := range ps {
+		px := Package(pi)
+		out = append(out, px.NameAtVersionAtFilepath())
+	}
+	return stringsutil.SliceCondenseSpace(out, true, true)
+}
+
 func (ps Packages) NamesAndFilepathsAtVersion() string {
 	var paths []string
 	for _, p := range ps {

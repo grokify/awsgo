@@ -77,6 +77,20 @@ func (p Package) NameAtVersion() string {
 	}
 }
 
+// NameAtVersionAtFilepath can be treated as a package id.
+func (p Package) NameAtVersionAtFilepath() string {
+	name := p.NameString()
+	ver := p.VersionString()
+	fp := p.FilepathString()
+	if name == "" && ver == "" && fp == "" {
+		return ""
+	} else {
+		return strings.Join(
+			[]string{name, ver, fp},
+			sepFilepathVersion)
+	}
+}
+
 func (p Package) NameAtVersionFixed() string {
 	fp := p.NameString()
 	ver := p.VersionFixedString()
