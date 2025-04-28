@@ -17,3 +17,11 @@ func (fs Findings) POAMItems() []poam.POAMItem {
 func (fs Findings) POAMTable(opts *govex.ValueOptions, overrides func(field poam.POAMField) (*string, error)) (*table.Table, error) {
 	return poam.Table(fs.POAMItems(), opts, overrides)
 }
+
+func (vex ImageVulnerabilitesReporter) POAMWriteFile(filename string, opts *ReportOptions) error {
+	if ts, err := vex.TableSet(opts); err != nil {
+		return err
+	} else {
+		return ts.WriteXLSX(filename)
+	}
+}

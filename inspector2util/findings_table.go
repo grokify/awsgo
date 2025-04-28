@@ -68,8 +68,7 @@ func (fs Findings) TablePivotImagenameSeverityCounts(opts *ReportOptions) (*tabl
 	tbl, err := hset.TablePivot("Image Severities", "Image Name",
 		&histogram.SetTablePivotOpts{
 			ColTotalRight:  true,
-			RowTotalBottom: true,
-		})
+			RowTotalBottom: true})
 	if err != nil {
 		return nil, err
 	}
@@ -92,13 +91,16 @@ func (fs Findings) TableImagenameSeverityYear(opts *ReportOptions) (*table.Table
 	for _, f := range fs {
 		f2 := Finding(f)
 		m := map[string]string{
-			ImageRepositoryName:              f2.MustVulnerabilityField(ImageRepositoryName, "", opts.VulnerabilityValueOptions),
-			FindingSeverity:                  f2.MustVulnerabilityField(FindingSeverity, "", opts.VulnerabilityValueOptions),
-			VulnerabilityCreatedAgeMonthsInt: f2.MustVulnerabilityField(VulnerabilityCreatedYear, "", opts.VulnerabilityValueOptions),
+			ImageRepositoryName:      f2.MustVulnerabilityField(ImageRepositoryName, "", opts.VulnerabilityValueOptions),
+			FindingSeverity:          f2.MustVulnerabilityField(FindingSeverity, "", opts.VulnerabilityValueOptions),
+			VulnerabilityCreatedYear: f2.MustVulnerabilityField(VulnerabilityCreatedYear, "", opts.VulnerabilityValueOptions),
 		}
 		h.AddMap(m, 1)
 	}
-	tbl, err := h.TableMap([]string{ImageRepositoryName, FindingSeverity, VulnerabilityCreatedAgeMonthsInt},
+	tbl, err := h.TableMap([]string{
+		ImageRepositoryName,
+		FindingSeverity,
+		VulnerabilityCreatedYear},
 		"vuln_count", nil)
 	if err != nil {
 		return nil, err
@@ -124,7 +126,7 @@ func (fs Findings) HistogramSets() *histogram.HistogramSets {
 	for _, f := range fs {
 		fx := Finding(f)
 		imgNames := fx.ImageRepositoryNames()
-		vulnSev := fx.VendorSeverity(true)
+		vulnSev := fx.FindingSeverity(true)
 		vulnID := fx.VulnerabilityID()
 		for _, imgName := range imgNames {
 			hsets.Add(imgName, vulnSev, vulnID, 1, true)

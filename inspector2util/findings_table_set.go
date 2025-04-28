@@ -59,3 +59,11 @@ func (vex ImageVulnerabilitesReporter) TableSet(opts *ReportOptions) (*table.Tab
 	}
 	return ts, nil
 }
+
+func (vex ImageVulnerabilitesReporter) WriteFileXLSX(filename string, opts *ReportOptions) error {
+	if ts, err := vex.TableSet(opts); err != nil {
+		return err
+	} else {
+		return ts.WriteXLSX(filename)
+	}
+}
