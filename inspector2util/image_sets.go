@@ -35,14 +35,16 @@ func (sets *ImageSets) AddImagesByRepositoryName(imgs ...types.AwsEcrContainerIm
 	return nil
 }
 
-func (sets *ImageSets) FilterLatestByRepositoryName(imageTagOverrides []string) *ImageSets {
+func (sets *ImageSets) FilterLatestByRepositoryName(imageTagOverrides []string) (*ImageSets, error) {
 	latestSets := NewImageSets()
 	for _, set := range sets.Data {
 		if imgs := set.ImagesByTagsOrLatest(imageTagOverrides); len(imgs) > 0 {
-			latestSets.AddImagesByRepositoryName(imgs...)
+			if err := latestSets.AddImagesByRepositoryName(imgs...); err != nil {
+				return nil, err
+			}
 		}
 	}
-	return latestSets
+	return latestSets, nil
 }
 
 func (sets *ImageSets) ImageSetByRepositoryNameTagsOrLatest(repoTagOverrides []string) (*ImageSet, error) {
