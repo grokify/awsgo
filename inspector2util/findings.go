@@ -2,13 +2,17 @@ package inspector2util
 
 import (
 	"encoding/json"
+	"errors"
 	"os"
+	"slices"
 	"sort"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	"github.com/grokify/mogo/encoding/jsonutil/jsonraw"
 	"github.com/grokify/mogo/type/maputil"
+	"github.com/grokify/mogo/type/stringsutil"
 	"github.com/grokify/mogo/type/strslices"
 )
 
@@ -94,6 +98,82 @@ func (fs Findings) ImageSet(hashesIncl []string) (*ImageSet, error) {
 	}
 }
 
+func (fs Findings) ImageSetRepoNameByTagsOrLatest(imageTagOverrides []string) (*ImageSet, error) {
+	if is, err := fs.ImageSet([]string{}); err != nil {
+		return nil, err
+	} else if iss, err := is.ImageSetsByRepoName(); err != nil {
+		return nil, err
+	} else {
+		return iss.ImageSetByRepositoryNameTagsOrLatest(imageTagOverrides)
+	}
+}
+
+// MergeByImageRepoNameAndVulnID merges select fields including images and packages.
+func (fs Findings) MergeByImageRepoNameAndVulnID() (Findings, error) {
+	merger := NewFindingMerger()
+	if err := merger.Add(fs...); err != nil {
+		return Findings{}, err
+	} else {
+		return merger.Merge()
+	}
+}
+
+// MergeFilteredByImageRepoNameAndVulnID merges select fields including images and packages.
+// Image repo name and vulnid must be the same.
+func (fs Findings) MergeFilteredByImageRepoNameAndVulnID() (*types.Finding, error) {
+	if len(fs) == 0 {
+		return nil, errors.New("no findings to merge")
+	} else if len(fs) == 1 {
+		f, err := jsonraw.Clone(fs[0])
+		return &f, err
+	}
+	vulnIDs := fs.VulnerabilityIDs()
+	if len(vulnIDs) == 0 {
+		return nil, errors.New("no vuln ids, requires one")
+	} else if len(vulnIDs) > 1 {
+		return nil, errors.New("multiple vuln ids, requires one")
+	}
+	names := fs.ImageRepositoryNames()
+	if len(names) == 0 {
+		return nil, errors.New("no image repo names, requires one")
+	} else if len(names) > 1 {
+		return nil, errors.New("multiple image repo names, requires one")
+	}
+	var merged Finding
+	for i, fi := range fs {
+		if i == 0 {
+			if try, err := jsonraw.Clone(fi); err != nil {
+				return nil, err
+			} else {
+				if try.PackageVulnerabilityDetails == nil {
+					try.PackageVulnerabilityDetails = &types.PackageVulnerabilityDetails{}
+				}
+				merged = Finding(try)
+			}
+			continue
+		}
+		fx := Finding(fi)
+		imageHashesMerged := merged.ImageHashes()
+		for _, ri := range fi.Resources {
+			rx := Resource(ri)
+			if !slices.Contains(imageHashesMerged, rx.ImageHash()) {
+				merged.Resources = append(merged.Resources, ri)
+			}
+		}
+		mergedPkgIDs := merged.VulnerablePackagesIDs()
+		ps := fx.VulnerablePackages()
+		for _, pi := range ps {
+			px := Package(pi)
+			if !slices.Contains(mergedPkgIDs, px.NameAtVersionAtFilepath()) {
+				merged.PackageVulnerabilityDetails.VulnerablePackages = append(
+					merged.PackageVulnerabilityDetails.VulnerablePackages, pi)
+			}
+		}
+	}
+	mergedT := types.Finding(merged)
+	return &mergedT, nil
+}
+
 func (fs Findings) ResourceSet(inclResourceTypes []types.ResourceType) (*ResourceSet, error) {
 	rs := NewResourceSet()
 	for _, f := range fs {
@@ -120,4 +200,13 @@ func (fs Findings) ResourceSet(inclResourceTypes []types.ResourceType) (*Resourc
 
 func (fs Findings) Stats() FindingsStats {
 	return FindingsStats{Findings: fs}
+}
+
+func (fs Findings) VulnerabilityIDs() []string {
+	var out []string
+	for _, fi := range fs {
+		fx := Finding(fi)
+		out = append(out, fx.VulnerabilityID())
+	}
+	return stringsutil.SliceCondenseSpace(out, true, true)
 }
