@@ -136,12 +136,27 @@ func (f Finding) VulnerabilityID() string {
 	}
 }
 
-func (f Finding) VulnerablePackages() []types.VulnerablePackage {
+func (f Finding) VulnerablePackages() Packages {
 	if f.PackageVulnerabilityDetails != nil {
 		return f.PackageVulnerabilityDetails.VulnerablePackages
 	} else {
 		return []types.VulnerablePackage{}
 	}
+}
+
+func (f Finding) VulnerablePackagesX() []Package {
+	var out []Package
+	if f.PackageVulnerabilityDetails != nil {
+		for _, pi := range f.PackageVulnerabilityDetails.VulnerablePackages {
+			out = append(out, Package(pi))
+		}
+	}
+	return out
+}
+
+func (f Finding) VulnerablePackagesIDs() []string {
+	pkgs := f.VulnerablePackages()
+	return pkgs.NameAtVersionAtFilepaths()
 }
 
 // ImageRepoNameVulnID is used as a unique key across images.
