@@ -19,6 +19,25 @@ func (fs Findings) FilterImageHashes(hashesIncl []string) Findings {
 	return out
 }
 
+func (fs Findings) FilterImageTags(tagsIncl []string) Findings {
+	var out Findings
+	inclMap := map[string]int{}
+	for _, h := range tagsIncl {
+		inclMap[h]++
+	}
+	for _, f := range fs {
+		fx := Finding(f)
+		imgTags := fx.ImageTags()
+		for _, h := range imgTags {
+			if _, ok := inclMap[h]; ok {
+				out = append(out, f)
+				break
+			}
+		}
+	}
+	return out
+}
+
 func (fs Findings) FilterPOMPropertiesExcl() Findings {
 	var out Findings
 	for _, f := range fs {

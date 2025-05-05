@@ -1,7 +1,6 @@
 package inspector2util
 
 import (
-	"sort"
 	"strings"
 	"time"
 
@@ -60,16 +59,15 @@ func (f Finding) FindingOrVendorSeverity(canonical bool) string {
 }
 
 func (f Finding) ImageHashes() []string {
-	var hashes []string
+	var out []string
 	for _, res := range f.Resources {
 		if res.Details != nil &&
 			res.Details.AwsEcrContainerImage != nil &&
 			res.Details.AwsEcrContainerImage.ImageHash != nil {
-			hashes = append(hashes, pointer.Dereference(res.Details.AwsEcrContainerImage.ImageHash))
+			out = append(out, pointer.Dereference(res.Details.AwsEcrContainerImage.ImageHash))
 		}
 	}
-	sort.Strings(hashes)
-	return hashes
+	return stringsutil.SliceCondenseSpace(out, true, true)
 }
 
 func (f Finding) ImageRepositoryNames() []string {
@@ -78,6 +76,16 @@ func (f Finding) ImageRepositoryNames() []string {
 		if r.Details != nil && r.Details.AwsEcrContainerImage != nil &&
 			r.Details.AwsEcrContainerImage.RepositoryName != nil {
 			out = append(out, pointer.Dereference(r.Details.AwsEcrContainerImage.RepositoryName))
+		}
+	}
+	return stringsutil.SliceCondenseSpace(out, true, true)
+}
+
+func (f Finding) ImageTags() []string {
+	var out []string
+	for _, res := range f.Resources {
+		if res.Details != nil && res.Details.AwsEcrContainerImage != nil {
+			out = append(out, res.Details.AwsEcrContainerImage.ImageTags...)
 		}
 	}
 	return stringsutil.SliceCondenseSpace(out, true, true)
