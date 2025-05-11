@@ -17,7 +17,7 @@ require (
 	github.com/grokify/goauth v0.23.12
 	github.com/grokify/gocharts/v2 v2.24.4
 	github.com/grokify/govex v0.11.3
-	github.com/grokify/mogo v0.68.18
+	github.com/grokify/mogo v0.69.1
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/micahhausler/aws-iam-policy v0.4.2
 )
