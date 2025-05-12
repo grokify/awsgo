@@ -109,6 +109,14 @@ func (p Package) NameString() string {
 	}
 }
 
+func (p Package) PackageType() string {
+	if fp := strings.TrimSpace(pointer.Dereference(p.FilePath)); strings.Contains(fp, "BOOT-INF") || strings.Contains(fp, "WEB-INF") {
+		return "application"
+	} else {
+		return "os"
+	}
+}
+
 func (p Package) POAMItem() poam.POAMItemUpgradeRemedationPackage {
 	return poam.POAMItemUpgradeRemedationPackage{
 		Name:           pointer.Dereference(p.Name),

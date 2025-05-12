@@ -73,6 +73,34 @@ func (ps Packages) NamesAndFilepathsAtVersionFixed() string {
 	return sliceCondenseSpaceAndJoin(paths)
 }
 
+func (ps Packages) PackagesManagers() []string {
+	var out []string
+	for _, p := range ps {
+		out = append(out, string(p.PackageManager))
+	}
+	return stringsutil.SliceCondenseSpace(out, true, true)
+}
+
+func (ps Packages) PackagesTypes() string {
+	if len(ps) == 0 {
+		return ""
+	}
+	pkgTypes := map[string]int{}
+	for _, p := range ps {
+		px := Package(p)
+		pkgTypes[px.PackageType()]++
+	}
+	switch len(pkgTypes) {
+	case 0:
+		return ""
+	case 1:
+		for k := range pkgTypes {
+			return k
+		}
+	}
+	return "both"
+}
+
 func sliceCondenseSpaceAndJoin(s []string) string {
 	if s = stringsutil.SliceCondenseSpace(s, true, true); len(s) == 0 {
 		return ""

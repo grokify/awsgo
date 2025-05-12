@@ -34,10 +34,12 @@ const (
 	PackagesFilepathsAtVersion              = "pkgs_filepaths_version"
 	PackagesFilepathsAtVersionFixed         = "pkgs_filepaths_version_fixed"
 	PackagesFilepathsPOMProperites          = "pkgs_filepaths_pom_properties"
+	PackagesManagers                        = "pkgs_mgrs"
 	PackagesNamesAtVersion                  = "pkgs_names_version"
 	PackagesNamesAtVersionsFixed            = "pkgs_names_version_fixed"
 	PackagesNamesAndFilepathsAtVersion      = "pkgs_names_filepaths_version"
 	PackagesNamesAndFilepathsAtVersionFixed = "pkgs_names_filepaths_version_fixed"
+	PackagesTypes                           = "pkgs_types"
 )
 
 // TableColumnsImageVulnerabilityPackages returns rows where
@@ -66,13 +68,15 @@ func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
 	return []string{
 			ImageRepositoryName,
 			FindingSeverity,
-			VulnerabilityCreatedYear,
-			VulnerabilityCreated,
-			VulnerabilitySLADueDate,
+			VulnerabilityCreatedYear, // table.FormatInt
+			VulnerabilityCreated,     // table.FormatDate
+			VulnerabilitySLADueDate,  // table.FormatDate
 			ImageNameVulnerabilityID,
 			ImageHash,
 			VulnerabilityID,
-			VulnerabilitySourceURL,
+			VulnerabilitySourceURL, // table.FormatURL
+			PackagesManagers,
+			PackagesTypes,
 			PackagesFilepathsPOMProperites,
 			PackagesNamesAndFilepathsAtVersion,
 			PackagesNamesAndFilepathsAtVersionFixed,
@@ -172,6 +176,13 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOptions) (str
 		} else {
 			return "false", nil
 		}
+	case PackagesManagers:
+		if f.PackageVulnerabilityDetails != nil {
+			pkgs := Packages(f.PackageVulnerabilityDetails.VulnerablePackages)
+			return strings.Join(pkgs.PackagesManagers(), ","), nil
+		} else {
+			return "", nil
+		}
 	case PackagesNamesAndFilepathsAtVersion:
 		if f.PackageVulnerabilityDetails != nil {
 			pkgs := Packages(f.PackageVulnerabilityDetails.VulnerablePackages)
@@ -183,6 +194,13 @@ func (f Finding) VulnerabilityField(field string, opts *govex.ValueOptions) (str
 		if f.PackageVulnerabilityDetails != nil {
 			pkgs := Packages(f.PackageVulnerabilityDetails.VulnerablePackages)
 			return pkgs.NamesAndFilepathsAtVersionFixed(), nil
+		} else {
+			return "", nil
+		}
+	case PackagesTypes:
+		if f.PackageVulnerabilityDetails != nil {
+			pkgs := Packages(f.PackageVulnerabilityDetails.VulnerablePackages)
+			return pkgs.PackagesTypes(), nil
 		} else {
 			return "", nil
 		}
