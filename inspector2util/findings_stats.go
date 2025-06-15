@@ -68,7 +68,7 @@ func (stats FindingsStats) ImagenameVulnidCounts() map[string]int {
 
 func (stats FindingsStats) ImagenameVulnidRevCounts() map[string]int {
 	counts := stats.ImagenameVulnidCounts()
-	return maputil.MapComparableInt[string](counts).ReverseCountsString()
+	return maputil.MapCompInt[string](counts).ReverseCountsString()
 }
 
 func addTotal(m map[string]int) map[string]int {

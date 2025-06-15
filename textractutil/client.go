@@ -181,7 +181,7 @@ func DocumentFromFilename(name string) (*textract.Document, error) {
 
 func DocumentFromImage(i image.Image) (*textract.Document, error) {
 	i2 := imageutil.Image{Image: i}
-	b, err := i2.BytesJPEG(nil)
+	b, err := i2.JPEGBytes(nil)
 	if err != nil {
 		return nil, err
 	}
