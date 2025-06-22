@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.36.5
 	github.com/aws/aws-sdk-go-v2/config v1.29.17
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.70
-	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.51.1
+	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.51.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.37.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.6
