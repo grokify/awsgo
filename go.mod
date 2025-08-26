@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.52.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.44.1
-	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.40.0
+	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.10.1
 	github.com/grokify/goauth v0.23.18
