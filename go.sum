@@ -20,8 +20,8 @@ github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.4 h1:j7vjtr1YIssWQOMeOWR
 github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.4/go.mod h1:yDmJgqOiH4EA8Hndnv4KwAo8jCGTSnM5ASG1nBI+toA=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3 h1:bIqFDwgGXXN1Kpp99pDOdKMTTb5d2KyU5X/BZxjOkRo=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3/go.mod h1:H5O/EsxDWyU+LP/V8i5sm8cxoZgc2fdNR9bxlOFrQTo=
-github.com/aws/aws-sdk-go-v2/service/costexplorer v1.52.1 h1:MRfsy+UosplTbrTui5cUVJ4era6XBjZv0lEGUgcG86Q=
-github.com/aws/aws-sdk-go-v2/service/costexplorer v1.52.1/go.mod h1:XhV87ldg1xBh4WjKcc6aW3SFwzaIjNhuPtDEhZ5/gds=
+github.com/aws/aws-sdk-go-v2/service/costexplorer v1.55.1 h1:yEZfnwOa8/8YCIIEWExve49egfeh8FtpA9hOaornXuY=
+github.com/aws/aws-sdk-go-v2/service/costexplorer v1.55.1/go.mod h1:f/ER3zNaUahkZhyOVN/kP9NFJtK3So2VS7CqEToN/j8=
 github.com/aws/aws-sdk-go-v2/service/iam v1.44.1 h1:V82Oyj0zU2QFJL+qvvdAqt2YYsRO0QNb9RewnvDWpdo=
 github.com/aws/aws-sdk-go-v2/service/iam v1.44.1/go.mod h1:aZ7pMz0bZfPi485gVCIinav3M61EbkGENEMlcMMWuhI=
 github.com/aws/aws-sdk-go-v2/service/inspector2 v1.40.0 h1:u57xVdqtt4O5UkA02bf0BCmENrZCz/VVi3fPSw6MZAE=
