@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.47.1
 	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.44.0
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.38.2
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.12.2
 	github.com/grokify/goauth v0.23.19
 	github.com/grokify/gocharts/v2 v2.24.18
