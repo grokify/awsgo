@@ -17,9 +17,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.39.2
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.13.2
 	github.com/grokify/goauth v0.23.19
-	github.com/grokify/gocharts/v2 v2.24.19
+	github.com/grokify/gocharts/v2 v2.24.20
 	github.com/grokify/govex v0.13.1
-	github.com/grokify/mogo v0.70.20
+	github.com/grokify/mogo v0.70.21
 	github.com/grokify/sogo v0.12.1
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/micahhausler/aws-iam-policy v0.4.2
@@ -90,7 +90,7 @@ require (
 	golang.org/x/image v0.30.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.28.0 // indirect
 	gonum.org/v1/gonum v0.16.0 // indirect
 	google.golang.org/api v0.248.0 // indirect
