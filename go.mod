@@ -19,8 +19,8 @@ require (
 	github.com/grokify/goauth v0.23.19
 	github.com/grokify/gocharts/v2 v2.24.20
 	github.com/grokify/govex v0.13.3
-	github.com/grokify/mogo v0.70.22
-	github.com/grokify/sogo v0.12.4
+	github.com/grokify/mogo v0.71.0
+	github.com/grokify/sogo v0.12.6
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/micahhausler/aws-iam-policy v0.4.2
 )
@@ -94,7 +94,7 @@ require (
 	golang.org/x/text v0.29.0 // indirect
 	gonum.org/v1/gonum v0.16.0 // indirect
 	google.golang.org/api v0.249.0 // indirect
-	google.golang.org/genproto v0.0.0-20250908214217-97024824d090 // indirect
+	google.golang.org/genproto v0.0.0-20250922171735-9219d122eba9 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250908214217-97024824d090 // indirect
 	google.golang.org/grpc v1.75.1 // indirect
 	google.golang.org/protobuf v1.36.9 // indirect
