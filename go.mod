@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.31.16
 	github.com/aws/aws-sdk-go-v2/credentials v1.18.20
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.20.20
-	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.59.1
+	github.com/aws/aws-sdk-go-v2/service/costexplorer v1.59.4
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.44.9
@@ -30,8 +30,8 @@ require (
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.12 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.12 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.12 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.13 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.13 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.4 // indirect
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.32.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.2 // indirect
