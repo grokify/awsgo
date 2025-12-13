@@ -3,7 +3,7 @@ package inspector2util
 import (
 	"github.com/grokify/gocharts/v2/data/table"
 	"github.com/grokify/govex"
-	"github.com/grokify/govex/poam"
+	"github.com/grokify/govex/reports/poam"
 )
 
 func (fs Findings) POAMItems() []poam.POAMItem {

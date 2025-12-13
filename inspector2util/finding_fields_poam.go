@@ -7,7 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
 	"github.com/grokify/govex"
-	"github.com/grokify/govex/poam"
+	"github.com/grokify/govex/reports/poam"
 	"github.com/grokify/govex/severity"
 	"github.com/grokify/mogo/type/slicesutil"
 )
@@ -97,9 +97,9 @@ func (f Finding) POAMItemValue(field poam.POAMField, opts *govex.ValueOptions, o
 		} else if f.FirstObservedAt != nil {
 			slaStart = f.FirstObservedAt
 		}
-		if opts.SLAOptions.SLAMap != nil {
+		if opts.SLAOptions.SLAPolicy != nil {
 			sev := f.FindingOrVendorSeverity(true)
-			if dueDate, err := opts.SLAOptions.SLAMap.DueDate(sev, *slaStart); err != nil {
+			if dueDate, err := opts.SLAOptions.SLAPolicy.DueDate(sev, *slaStart); err != nil {
 				return "", err
 			} else {
 				return dueDate.Format(dateFormat), nil
@@ -143,11 +143,9 @@ func (f Finding) POAMItemUpgradeRemedationInfo(opts *govex.ValueOptions) poam.PO
 		Packages:        poam.POAMItemUpgradeRemedationPackages{},
 		SLADays:         0,
 	}
-	if opts != nil && opts.SLAOptions != nil && opts.SLAOptions.SLAMap != nil {
+	if opts != nil && opts.SLAOptions != nil && opts.SLAOptions.SLAPolicy != nil {
 		sev := f.FindingOrVendorSeverity(true)
-		if days, ok := (*opts.SLAOptions.SLAMap)[sev]; ok {
-			info.SLADays = days
-		}
+		info.SLADays = opts.SLAOptions.SLAPolicy.SeveritySLADays(sev)
 	}
 	if f.PackageVulnerabilityDetails != nil {
 		for _, vpkg := range f.PackageVulnerabilityDetails.VulnerablePackages {

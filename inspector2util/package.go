@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
-	"github.com/grokify/govex/poam"
+	"github.com/grokify/govex/reports/poam"
 	"github.com/grokify/mogo/pointer"
 )
 
