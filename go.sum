@@ -94,8 +94,8 @@ github.com/grokify/gocharts/v2 v2.26.7 h1:28XoCjEHJHRHFivgHwGZxr5ixdtaMmdncTy+lX
 github.com/grokify/gocharts/v2 v2.26.7/go.mod h1:dAmxSX13SLXozPJrU3Z0OxXjRj3wP41IPIrA6REM96g=
 github.com/grokify/google-fonts v0.1.9 h1:KgJgTyMbKUbwvImZ9EMsCTA2/PIDNO+h/E533t0ux9s=
 github.com/grokify/google-fonts v0.1.9/go.mod h1:QfXZ/LRQmQ2g389jfdVucuVIiVstQAHBlsOfaOb7RAQ=
-github.com/grokify/govex v0.17.1 h1:GzyPgAnmmu2Uaox3jUSeKUXjrbNztK88dKFwHAusRmc=
-github.com/grokify/govex v0.17.1/go.mod h1:r1xKy1xVKIvDyKqrf4lc9V4W2mKH3vXyUMTbmEbmdnM=
+github.com/grokify/govex v0.18.1 h1:viEjIuJRCAkJZJAurZE2OaC+u1PjAXsp1LeQVq1DFfI=
+github.com/grokify/govex v0.18.1/go.mod h1:r1xKy1xVKIvDyKqrf4lc9V4W2mKH3vXyUMTbmEbmdnM=
 github.com/grokify/mogo v0.72.3 h1:7sQp3T2yiS4IrDvE07G3L4RmOZpCBxGCqDLxDUygyYU=
 github.com/grokify/mogo v0.72.3/go.mod h1:3UOaBu4rJmNZ/RCrtBiDcNv1tHUFW1ydrq0i5TxOmP8=
 github.com/grokify/sogo v0.13.0 h1:uTsSYb8ESdl+BC0hxbaexmZLTe2t1xKZ+Mzfskaa3Z4=
