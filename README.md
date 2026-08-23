@@ -4,7 +4,6 @@
 [![Go Lint][go-lint-svg]][go-lint-url]
 [![Go SAST][go-sast-svg]][go-sast-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
-[![Lines of Code][loc-svg]][repo-url]
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
