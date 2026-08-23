@@ -65,27 +65,29 @@ func TableColumnsImageVulnerabilityPackages() []string {
 // TableColumnsImageVulnerabilities returns rows where
 // each row is an image+vulnerability.
 func TableColumnsImageVulnerabilities() ([]string, map[int]string) {
-	return []string{
-			ImageRepositoryName,
-			FindingSeverity,
-			VulnerabilityCreatedYear, // table.FormatInt
-			VulnerabilityCreated,     // table.FormatDate
-			VulnerabilitySLADueDate,  // table.FormatDate
-			ImageNameVulnerabilityID,
-			ImageHash,
-			VulnerabilityID,
-			VulnerabilitySourceURL, // table.FormatURL
-			PackagesManagers,
-			PackagesTypes,
-			PackagesFilepathsPOMProperites,
-			PackagesNamesAndFilepathsAtVersion,
-			PackagesNamesAndFilepathsAtVersionFixed,
-		}, map[int]string{
-			2: table.FormatInt,
-			3: table.FormatDate,
-			4: table.FormatDate,
-			8: table.FormatURL,
-		}
+	columns := []string{
+		ImageRepositoryName,
+		FindingSeverity,
+		VulnerabilityCreatedYear, // table.FormatInt
+		VulnerabilityCreated,     // table.FormatDate
+		VulnerabilitySLADueDate,  // table.FormatDate
+		ImageNameVulnerabilityID,
+		ImageHash,
+		VulnerabilityID,
+		VulnerabilitySourceURL, // table.FormatURL
+		PackagesManagers,
+		PackagesTypes,
+		PackagesFilepathsPOMProperites,
+		PackagesNamesAndFilepathsAtVersion,
+		PackagesNamesAndFilepathsAtVersionFixed,
+	}
+	formats := map[int]string{
+		2: table.FormatInt,
+		3: table.FormatDate,
+		4: table.FormatDate,
+		8: table.FormatURL,
+	}
+	return columns, formats
 }
 
 func (f Finding) MustVulnerabilityField(field, def string, opts *govex.ValueOptions) string {
