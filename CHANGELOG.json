@@ -1,0 +1,1796 @@
+{
+  "irVersion": "1.0",
+  "project": "awsgo",
+  "repository": "https://github.com/grokify/awsgo",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": [
+    "grokify",
+    "johncwang@gmail.com"
+  ],
+  "bots": [
+    "dependabot[bot]"
+  ],
+  "releases": [
+    {
+      "version": "v0.10.0",
+      "date": "2026-08-23",
+      "commit": "4c90829",
+      "highlights": [
+        {
+          "description": "New `awsgo` Cobra CLI (`cmd/awsgo`) as a unified toolbox for AWS operations, starting with `awsgo rds param-read`",
+          "commit": "6970a70"
+        },
+        {
+          "description": "New `regions.RegionsAzure()` Azure region dataset mirroring the existing AWS `Regions()`, plus a `parseandcount` CLI for region footprint analysis",
+          "commit": "63caa0e"
+        },
+        {
+          "description": "`rdsutil`: `DiffParameterValues()` for comparing RDS parameter maps",
+          "commit": "7a13b74"
+        },
+        {
+          "description": "`inspector2util`: streaming reader for large findings JSON files",
+          "commit": "884f6b4"
+        }
+      ],
+      "added": [
+        {
+          "description": "`cmd/awsgo`: scaffold Cobra CLI with `rds param-read` subcommand",
+          "commit": "6970a70"
+        },
+        {
+          "description": "`regions`: add `RegionsAzure()` covering standard Azure regions, following the existing AWS `Regions()` pattern",
+          "commit": "63caa0e"
+        },
+        {
+          "description": "`regions`: add `parseandcount` CLI for region footprint analysis by country/region grouping",
+          "commit": "db1e48d"
+        },
+        {
+          "description": "`rdsutil`: add `DiffParameterValues()` for comparing parameter maps",
+          "commit": "7a13b74"
+        },
+        {
+          "description": "`inspector2util`: add streaming reader for findings JSON files",
+          "commit": "884f6b4"
+        }
+      ],
+      "changed": [
+        {
+          "description": "`rdsutil`: retire the `cmd/param_read` example CLI, superseded by `awsgo rds param-read`; its fixture JSON files moved to `rdsutil/testdata/`",
+          "commit": "bc3f44a"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`README.md`: document all packages and the new `awsgo` CLI",
+          "commit": "f89d4ae"
+        },
+        {
+          "description": "Seed `docs/` with AWS architecture diagramming references (Workload Discovery, CloudMapper, cfn-diagram, etc.)",
+          "commit": "da1d376"
+        },
+        {
+          "description": "`inspector2util`: add package README",
+          "commit": "02e29a8"
+        },
+        {
+          "description": "`README.md`: update shields",
+          "commit": "4c90829"
+        }
+      ],
+      "tests": [
+        {
+          "description": "`regions`: add `RegionsAzure` validation and regression tests",
+          "commit": "142c5d6"
+        },
+        {
+          "description": "`rdsutil`: add `ParametersResponseReadFile` test",
+          "commit": "1cbc552"
+        },
+        {
+          "description": "`rdsutil`: add tests for `DiffParameterValues`",
+          "commit": "a87b48b"
+        },
+        {
+          "description": "`inspector2util`: add tests for the findings stream reader",
+          "commit": "112f3f6"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/credentials`",
+          "commit": "68cf59c"
+        },
+        {
+          "description": "bump `github.com/grokify/mogo` from 0.72.3 to 0.72.5",
+          "commit": "52f45c8"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/service/costexplorer`",
+          "commit": "b05478f"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`",
+          "commit": "c2fb966"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/service/secretsmanager`",
+          "commit": "6be21ea"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/service/dynamodb`",
+          "commit": "21572c9"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`",
+          "commit": "3c2250c"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/config`",
+          "commit": "7c6aeac"
+        },
+        {
+          "description": "bump `github.com/aws/aws-sdk-go-v2/service/inspector2`",
+          "commit": "daaf8f3"
+        },
+        {
+          "description": "bump `actions/checkout` from 6 to 7",
+          "commit": "aa33062"
+        },
+        {
+          "description": "bump `actions/setup-go` from 6 to 7",
+          "commit": "75f8ec0"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`workflows`: move to shared workflow filenames and update to shared workflow files",
+          "commit": "5674af6"
+        },
+        {
+          "description": "`.gitignore`: ignore `.goauth.json` to prevent local OAuth credentials from being staged",
+          "commit": "45b934e"
+        },
+        {
+          "description": "`go mod`: periodic dependency updates",
+          "commit": "25b4bfb"
+        }
+      ]
+    },
+    {
+      "version": "v0.9.1",
+      "date": "2025-12-13",
+      "commit": "33209e5",
+      "build": [
+        {
+          "description": "bump actions/checkout from 5 to 6",
+          "commit": "e229cfe"
+        },
+        {
+          "description": "bump golangci/golangci-lint-action from 8 to 9",
+          "commit": "e86e6dc"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2 from 1.39.5 to 1.39.6",
+          "commit": "e3d7867"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`go mod`: update",
+          "commit": "33209e5"
+        }
+      ]
+    },
+    {
+      "version": "v0.9.0",
+      "date": "2025-11-01",
+      "commit": "bdd7471",
+      "highlights": [
+        {
+          "description": "New `dynamodbutil` package for DynamoDB operations"
+        }
+      ],
+      "added": [
+        {
+          "description": "`dynamodbutil`: add",
+          "commit": "e89e0b4"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/grokify/sogo from 0.12.4 to 0.12.8",
+          "commit": "e7f246e"
+        },
+        {
+          "description": "bump github.com/grokify/govex from 0.13.1 to 0.13.3",
+          "commit": "ceecae8"
+        },
+        {
+          "description": "bump actions/setup-go from 5 to 6",
+          "commit": "12ca6e3"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.70.18 to 0.70.20",
+          "commit": "aab8d20"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "d74e2c2"
+        },
+        {
+          "description": "bump actions/checkout from 4 to 5",
+          "commit": "b354304"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`go mod`: update",
+          "commit": "bdd7471"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "3ec60b0"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "8f6471e"
+        },
+        {
+          "description": "`workflows`: update go versions",
+          "commit": "ddeeb8b"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "69a3328"
+        }
+      ]
+    },
+    {
+      "version": "v0.8.3",
+      "date": "2025-08-03",
+      "commit": "0eba491",
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/credentials",
+          "commit": "1b5dba9"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "57ee875"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "033a257"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.23.15 to 0.23.16",
+          "commit": "a7ddb7d"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/inspector2",
+          "commit": "bcf6b5c"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "659b05e"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.70.9 to 0.70.10",
+          "commit": "29e53e3"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "44f9cda"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "688dc44"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/inspector2",
+          "commit": "fb419a0"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "f44739f"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "23b026e"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/inspector2",
+          "commit": "cb6db21"
+        },
+        {
+          "description": "bump github.com/grokify/govex from 0.12.1 to 0.12.5",
+          "commit": "1b2315f"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "3fc2c01"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`go mod`: update",
+          "commit": "0eba491"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "eb994c1"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "61b6f2c"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "979bba5"
+        }
+      ]
+    },
+    {
+      "version": "v0.8.2",
+      "date": "2025-05-12",
+      "commit": "18dbe2e",
+      "highlights": [
+        {
+          "description": "`inspector2util`: package-manager and package-type introspection helpers"
+        }
+      ],
+      "added": [
+        {
+          "description": "`inspector2util`: add `Packages.PackagesManagers()`, `Packages.PackagesTypes()`",
+          "commit": "0676d1e"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/grokify/gocharts/v2 from 2.24.1 to 2.24.4",
+          "commit": "4b25a8b"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`go mod`: update",
+          "commit": "18dbe2e"
+        }
+      ]
+    },
+    {
+      "version": "v0.8.1",
+      "date": "2025-05-05",
+      "commit": "9b8aeb9",
+      "highlights": [
+        {
+          "description": "`inspector2util`: image tag filtering support for findings"
+        }
+      ],
+      "added": [
+        {
+          "description": "`inspector2util`: add `Finding.ImageTags()`, `Findings.FilterImageTags()`",
+          "commit": "2007652"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump golangci/golangci-lint-action from 7 to 8",
+          "commit": "76fac49"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`go mod`: update",
+          "commit": "9b8aeb9"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "fa05d36"
+        }
+      ]
+    },
+    {
+      "version": "v0.8.0",
+      "date": "2025-04-28",
+      "commit": "bad83a4",
+      "highlights": [
+        {
+          "description": "`inspector2util`: POAM (Plan of Action & Milestones) support via `github.com/grokify/govex/poam`"
+        },
+        {
+          "description": "`inspector2util`: XLSX export plus finding/image-set merge and dedup helpers"
+        }
+      ],
+      "added": [
+        {
+          "description": "`inspector2util`: add `Finding.VulnerablePackagesIDs()`, `Finding.VulnerablePackagesX()`",
+          "commit": "3d52b51"
+        },
+        {
+          "description": "`inspector2util`: add XLSX functions",
+          "commit": "f9721a3"
+        },
+        {
+          "description": "`inspector2util`: add `Findings.MergeByImageRepoNameAndVulnID()`, `Findings.MergeFilteredByImageRepoNameAndVulnID()`",
+          "commit": "fef7b80"
+        },
+        {
+          "description": "`inspector2util`: add `FindingMerger{}`",
+          "commit": "d2ad2b4"
+        },
+        {
+          "description": "`inspector2util`: add `ImageSets{}`; add funcs to `ImageSet{}`",
+          "commit": "7b42639"
+        },
+        {
+          "description": "`inspector2util`: add `Resources{}`, `Resources.ImageHashes()`; enhance `ResourceSet.ImageSet()` to sort `ImageTags`",
+          "commit": "ec81f8a"
+        },
+        {
+          "description": "`inspector2util`: add `Package.NameAtVersionAtFilepath()`, `Packages.NameAtVersionAtFilepaths()`",
+          "commit": "02468ef"
+        },
+        {
+          "description": "`inspector2util`: add `Findings.POAMItems()`",
+          "commit": "97c7b70"
+        },
+        {
+          "description": "`inspector2util`: add POAM support via `github.com/grokify/govex/poam`",
+          "commit": "3c7ed38"
+        },
+        {
+          "description": "`inspector2util`: add `Findings.ImageRepoNameVulnIDsMapSeverity()`",
+          "commit": "4533eaa"
+        },
+        {
+          "description": "`inspector2util`: add `ImageSet{}`",
+          "commit": "c146ab7"
+        },
+        {
+          "description": "`inspector2util`: add `ResourceSet{}`; update `Findings.TableSetImageVulnerabilities()`",
+          "commit": "df9201e"
+        },
+        {
+          "description": "`inspector2util`: add `PackagesFilepathsPOMProperites`, `Packages.FilepathsContainsPOMProperities()`",
+          "commit": "0afb98b"
+        }
+      ],
+      "changed": [
+        {
+          "description": "`inspector2util`: add `Finding.CVEID()`; `Finding.POAMItemValue()` support for `poam.FieldBindingOperationalDirective2201Tracking` and `poam.FieldBindingOperationalDirective2201DueDate`",
+          "commit": "f42bfea"
+        },
+        {
+          "description": "`inspector2util`: add `Finding.VulnerabilityField()` field support",
+          "commit": "1a285a9"
+        },
+        {
+          "description": "`inspector2util`: reorg files",
+          "commit": "26ae7f0"
+        },
+        {
+          "description": "`inspector2util`: use `govex/severity` from internal severity handling",
+          "commit": "cdd2cc2"
+        },
+        {
+          "description": "`inspector2util`: add ability to use fixed SLA start date",
+          "commit": "1150c21"
+        },
+        {
+          "description": "`inspector2util`: update `Findings.TableImagenameSeverityYear()` table `FormatMap`",
+          "commit": "a1f3ad3"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`README.md`: fix misspelling",
+          "commit": "c1c28c6"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.55.6 to 1.55.7",
+          "commit": "51e3bef"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.68.8 to 0.68.10",
+          "commit": "cb452ef"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "c4b8191"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "574643d"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/credentials",
+          "commit": "d3571dc"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`inspector2util`: fix various",
+          "commit": "bad83a4"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "46a0199"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "c818891"
+        },
+        {
+          "description": "`inspector2util`: fix various",
+          "commit": "4377e7d"
+        },
+        {
+          "description": "`go mod`: update",
+          "commit": "4afe7f5"
+        },
+        {
+          "description": "`go mod`: update for dep",
+          "commit": "cc586af"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "15a92bf"
+        },
+        {
+          "description": "`inspector2util`: fix various",
+          "commit": "7c6499d"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "fd467be"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "26e3612"
+        },
+        {
+          "description": "`inspector2util`: fix misspelling",
+          "commit": "14fef42"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "87b23d6"
+        }
+      ]
+    },
+    {
+      "version": "v0.7.2",
+      "date": "2025-04-08",
+      "commit": "2a5229c",
+      "highlights": [
+        {
+          "description": "`inspector2util`: SLA due-date tracking and configurable report options"
+        }
+      ],
+      "added": [
+        {
+          "description": "`inspector2util`: add `ReportOptions{}`",
+          "commit": "2a5229c"
+        },
+        {
+          "description": "`inspector2util`: add `VulnerabilitySLADueDate`",
+          "commit": "8718d8c"
+        },
+        {
+          "description": "`inspector2util`: add `Finding.FindingOrVendorSeverity()`",
+          "commit": "c22920e"
+        }
+      ],
+      "internal": [
+        {
+          "description": "go mod: update",
+          "commit": "b381036"
+        }
+      ]
+    },
+    {
+      "version": "v0.7.1",
+      "date": "2025-04-07",
+      "commit": "a66b0d3",
+      "highlights": [
+        {
+          "description": "`inspector2util`: composite image+vulnerability identifiers"
+        }
+      ],
+      "added": [
+        {
+          "description": "`inspector2util`: add `ImageNameVulnerabilityID` for image+vuln UID",
+          "commit": "3ffd556"
+        }
+      ],
+      "changed": [
+        {
+          "description": "`inspector2util`: minor update",
+          "commit": "a66b0d3"
+        },
+        {
+          "description": "`inspector2util`: add `ColumnInsertOpts` support to `Findings.TableImageVulnerabilities()`",
+          "commit": "0fdfbeb"
+        }
+      ],
+      "internal": [
+        {
+          "description": "go mod: update",
+          "commit": "71c2e44"
+        }
+      ]
+    },
+    {
+      "version": "v0.7.0",
+      "date": "2025-04-07",
+      "commit": "c8d51da",
+      "highlights": [
+        {
+          "description": "New `inspector2util` package for AWS Inspector2 vulnerability finding analysis and reporting"
+        }
+      ],
+      "added": [
+        {
+          "description": "`inspector2util`: add `Findings.TableSetVulnerabilities()`",
+          "commit": "83c35d9"
+        },
+        {
+          "description": "`inspector2util`: add `Packages{}`",
+          "commit": "d78742e"
+        },
+        {
+          "description": "`inspector2util.Finding{}`: add various incl `TableColumnsImageVulnerabilities()`",
+          "commit": "1446e7f"
+        },
+        {
+          "description": "`inspector2util`: add `Findings.TablePackages()` and support",
+          "commit": "83666b4"
+        },
+        {
+          "description": "`inspector2util`: init",
+          "commit": "8b1df4b"
+        }
+      ],
+      "changed": [
+        {
+          "description": "`inspector2util`: create `FindingsStats{}`",
+          "commit": "a111279"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`README.md`: update GitHub action badge links",
+          "commit": "8fb2572"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/grokify/gocharts/v2 from 2.22.6 to 2.23.1",
+          "commit": "4858adb"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "90e2a00"
+        },
+        {
+          "description": "bump golangci/golangci-lint-action from 6 to 7",
+          "commit": "2315c2b"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.23.6 to 0.23.8",
+          "commit": "bd676ed"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "1973b85"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2 from 1.36.2 to 1.36.3",
+          "commit": "6b576a8"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.23.3 to 0.23.5",
+          "commit": "2e973a2"
+        }
+      ],
+      "infrastructure": [
+        {
+          "description": "`workflows`: update name",
+          "commit": "b0bcb83"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`inspector2util`: fix various",
+          "commit": "c8d51da"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "1c1fec0"
+        },
+        {
+          "description": "`golangci-lint`: fix misspelling",
+          "commit": "1173f2c"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "587022a"
+        },
+        {
+          "description": "`golangci-lint`: fix various",
+          "commit": "d622bfe"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "0707a38"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "ba8cab1"
+        },
+        {
+          "description": "go test: update go versions",
+          "commit": "4527094"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "759a09d"
+        }
+      ]
+    },
+    {
+      "version": "v0.6.2",
+      "date": "2025-02-09",
+      "commit": "6260450",
+      "documentation": [
+        {
+          "description": "`README.md`: add `golangci-lint` shield",
+          "commit": "6260450"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/grokify/goauth from 0.23.0 to 0.23.2",
+          "commit": "bc3fa09"
+        }
+      ],
+      "internal": [
+        {
+          "description": "go mod: update",
+          "commit": "83dc0cc"
+        }
+      ]
+    },
+    {
+      "version": "v0.6.1",
+      "date": "2025-01-12",
+      "commit": "f99e22e",
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "75cd9ee"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "701cc3e"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2 from 1.32.6 to 1.32.7",
+          "commit": "e95a76d"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.22.5 to 0.22.6",
+          "commit": "cd31cab"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.66.0 to 0.66.1",
+          "commit": "5923a94"
+        }
+      ],
+      "internal": [
+        {
+          "description": "update years",
+          "commit": "f99e22e"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "89dbec4"
+        }
+      ]
+    },
+    {
+      "version": "v0.6.0",
+      "date": "2024-12-02",
+      "commit": "302b300",
+      "highlights": [
+        {
+          "description": "`regions`: geography grouping via `RegionGeography{}`/`RegionGeographies()`, backed by `github.com/grokify/mogo/location`"
+        }
+      ],
+      "added": [
+        {
+          "description": "`regions`: add `RegionGeography{}`, `RegionGeographies()`",
+          "commit": "fc441f6"
+        }
+      ],
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "302b300"
+        },
+        {
+          "description": "`regions`: add content and use `github.com/grokify/mogo/location`",
+          "commit": "0546021"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "55056f5"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "88f0929"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/credentials",
+          "commit": "4605b04"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "425d7af"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/trustedadvisor",
+          "commit": "f4da82a"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "250bbf7"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "77494d6"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "ef396ff"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.64.11 to 0.64.12",
+          "commit": "e38ee32"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "9c97798"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/trustedadvisor",
+          "commit": "875b592"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/costexplorer",
+          "commit": "85b9a62"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "239d26e"
+        },
+        {
+          "description": "bump github.com/grokify/gocharts/v2 from 2.19.8 to 2.20.1",
+          "commit": "ad8b8e6"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "dcf71bf"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.64.8 to 0.64.9",
+          "commit": "bfcc832"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "e16d15f"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "1a0de53"
+        }
+      ],
+      "infrastructure": [
+        {
+          "description": "`build`: update go versions",
+          "commit": "0cdfdab"
+        }
+      ]
+    },
+    {
+      "version": "v0.5.1",
+      "date": "2024-08-18",
+      "commit": "e77530f",
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "e77530f"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "fd92087"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "b8e2d50"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2 from 1.30.3 to 1.30.4",
+          "commit": "740149c"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.64.7 to 0.64.8",
+          "commit": "b2dc8ca"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.21.7 to 0.21.9",
+          "commit": "e08e49f"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.55.3 to 1.55.5",
+          "commit": "a35566d"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.54.19 to 1.55.3",
+          "commit": "8bd9b68"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "b9a61cc"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.21.5 to 0.21.7",
+          "commit": "cf3d448"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "d08eda8"
+        }
+      ]
+    },
+    {
+      "version": "v0.5.0",
+      "date": "2024-07-14",
+      "commit": "4fb7b63",
+      "highlights": [
+        {
+          "description": "New `costexplorerutil` package for AWS Cost Explorer metrics"
+        }
+      ],
+      "added": [
+        {
+          "description": "`costexplorerutil`: add `Metrics{}`",
+          "commit": "445a80c"
+        },
+        {
+          "description": "`costexplorerutil`: init",
+          "commit": "9064241"
+        }
+      ],
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "4fb7b63"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "6a9be9e"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "57b52a7"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "2216dba"
+        },
+        {
+          "description": "golangci: fix various",
+          "commit": "3d60eca"
+        },
+        {
+          "description": "`trustedadvisorutil`: fix path misspelling",
+          "commit": "624089a"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.53.10 to 1.54.19",
+          "commit": "f55b9f6"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "a7d1905"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/credentials",
+          "commit": "7f6ebb2"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "f5896ae"
+        },
+        {
+          "description": "bump github.com/grokify/gocharts/v2 from 2.19.2 to 2.19.4",
+          "commit": "843ff7b"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2 from 1.27.0 to 1.27.2",
+          "commit": "b83ffbb"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.21.2 to 0.21.3",
+          "commit": "7a9f00b"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.53.5 to 1.53.10",
+          "commit": "b99a245"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/iam",
+          "commit": "f61eb96"
+        }
+      ]
+    },
+    {
+      "version": "v0.4.0",
+      "date": "2024-05-19",
+      "commit": "82234c2",
+      "highlights": [
+        {
+          "description": "New `iamutil`, `trustedadvisorutil`, and `secretsmanagerutil` packages for IAM, Trusted Advisor, and Secrets Manager"
+        }
+      ],
+      "added": [
+        {
+          "description": "`trustedadvisorutil`: init",
+          "commit": "82234c2"
+        },
+        {
+          "description": "`iamutil`: add `UserService{}`",
+          "commit": "4d7f4fa"
+        },
+        {
+          "description": "`iamutil`: add `RoleService{{}`",
+          "commit": "f52dc74"
+        },
+        {
+          "description": "`iamutil`: init, add `IAMService{}`, `PolicyService{}`, `PolicyService.CreatePolicy()`",
+          "commit": "b7e939b"
+        }
+      ],
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "1e8f1a9"
+        },
+        {
+          "description": "`iamutil`: enable optsFns passthrough",
+          "commit": "d63d366"
+        },
+        {
+          "description": "`iamutil`: streamline code",
+          "commit": "9a1c577"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "b592993"
+        },
+        {
+          "description": "`feat: `scretsmanagerutil`: init",
+          "commit": "07bef61"
+        },
+        {
+          "description": "`alexaforbusinessutil`: admove due to removal in upstream dep `github.com/aws/aws-sdk-go@1.52.1`",
+          "commit": "e7f7c82"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`README.md`: add link to Go doc",
+          "commit": "ae58017"
+        },
+        {
+          "description": "`iam/README.md`:update docs",
+          "commit": "88ebb66"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2 from 1.26.1 to 1.27.0",
+          "commit": "f4beacd"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "638f462"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.52.2 to 1.53.0",
+          "commit": "45ad998"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+          "commit": "3f69492"
+        },
+        {
+          "description": "bump golangci/golangci-lint-action from 5 to 6",
+          "commit": "a297fdd"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.14 to 0.20.15",
+          "commit": "d5e61d7"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.51.29 to 1.51.31",
+          "commit": "348711d"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.51.25 to 1.51.29",
+          "commit": "99e91ae"
+        },
+        {
+          "description": "bump golangci/golangci-lint-action from 4 to 5",
+          "commit": "ef28bdc"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.63.8 to 0.63.9",
+          "commit": "4b8a2f2"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.51.20 to 1.51.25",
+          "commit": "c2eb2da"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.13 to 0.20.14",
+          "commit": "48766bd"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.12 to 0.20.13",
+          "commit": "ec90677"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "96e3bd4"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.51.10 to 1.51.20",
+          "commit": "160881b"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/credentials",
+          "commit": "5fbd5e0"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go-v2/config",
+          "commit": "570aba0"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.51.6 to 1.51.10",
+          "commit": "3f1414a"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.63.3 to 0.63.5",
+          "commit": "024edac"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`iamutil`: add constants",
+          "commit": "c6d67ec"
+        },
+        {
+          "description": "`iamutil`: update names",
+          "commit": "6e928b1"
+        }
+      ]
+    },
+    {
+      "version": "v0.3.1",
+      "date": "2024-03-23",
+      "commit": "66ecf71",
+      "highlights": [
+        {
+          "description": "`config`: default-region resolution and `aws-sdk-go-v2` support"
+        }
+      ],
+      "added": [
+        {
+          "description": "`config`: add `RegionDefault`",
+          "commit": "f858ad8"
+        }
+      ],
+      "changed": [
+        {
+          "description": "`config`: `AWSConfig.RegionOrDefault()`: use AWS region default",
+          "commit": "66ecf71"
+        },
+        {
+          "description": "`config`: remove unneeded code",
+          "commit": "e884b18"
+        },
+        {
+          "description": "`config`: add suppoort for `aws-sdk-go-v2`",
+          "commit": "0ce6005"
+        },
+        {
+          "description": "go mod: update go versions",
+          "commit": "3f8b77d"
+        },
+        {
+          "description": "update years",
+          "commit": "d7dabc3"
+        }
+      ],
+      "fixed": [
+        {
+          "description": "`pricingutil`: remove unneeded spaces",
+          "commit": "ae3d299"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.50.34 to 1.51.5",
+          "commit": "ef51c98"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.50.9 to 1.50.34",
+          "commit": "6336c0b"
+        },
+        {
+          "description": "bump github.com/grokify/gocharts/v2 from 2.17.1 to 2.18.1",
+          "commit": "beb9133"
+        },
+        {
+          "description": "bump golangci/golangci-lint-action from 3 to 4",
+          "commit": "a3ed76f"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.10 to 0.20.11",
+          "commit": "385b118"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.49.15 to 1.50.9",
+          "commit": "ec626ed"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.62.8 to 0.63.0",
+          "commit": "a3546d6"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.8 to 0.20.10",
+          "commit": "f3374ac"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.49.13 to 1.49.15",
+          "commit": "4919c0f"
+        }
+      ]
+    },
+    {
+      "version": "v0.3.0",
+      "date": "2023-12-31",
+      "commit": "65ec1c3",
+      "highlights": [
+        {
+          "description": "New `pricingutil` package for the AWS Pricing API"
+        }
+      ],
+      "added": [
+        {
+          "description": "`alexaforbusinessutil`: add `create_contact` example",
+          "commit": "dc2584c"
+        },
+        {
+          "description": "`pricingutil`: add initial code for AWS pricing API",
+          "commit": "d8d7edd"
+        }
+      ],
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "65ec1c3"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "f1f37d1"
+        },
+        {
+          "description": "golangci: `alexaforbusiness`: fix `Error return value of `fmtutil.PrintJSON` is not checked (errcheck)`",
+          "commit": "e81badd"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "ded615b"
+        },
+        {
+          "description": "golangci: fix `Error return value of `fmtutil.PrintJSON` is not checked (errcheck)`",
+          "commit": "59569c7"
+        },
+        {
+          "description": "golangci: fix `ST1016`",
+          "commit": "b76d50c"
+        },
+        {
+          "description": "`config`: `AWSConfig` from `AWSConfigMore`; `textractutil.TextractClient` from `TexttractClientMore`",
+          "commit": "718b7ec"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.49.8 to 1.49.13",
+          "commit": "4bdbd5a"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.7 to 0.20.8",
+          "commit": "62a4211"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.49.4 to 1.49.8",
+          "commit": "3a7b729"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.62.4 to 0.62.5",
+          "commit": "0b6064b"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.48.16 to 1.49.4",
+          "commit": "c441ca0"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.5 to 0.20.7",
+          "commit": "d80130a"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.48.3 to 1.48.15",
+          "commit": "86b3a93"
+        },
+        {
+          "description": "bump actions/setup-go from 4 to 5",
+          "commit": "3bdf1a3"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.48.2 to 1.48.3",
+          "commit": "267c8ed"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.47.13 to 1.48.2",
+          "commit": "2484629"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.47.9 to 1.47.13",
+          "commit": "d8e9979"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.47.8 to 1.47.9",
+          "commit": "ff7b7c0"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.47.2 to 1.47.8",
+          "commit": "75d1930"
+        },
+        {
+          "description": "bump github.com/grokify/gocharts/v2 from 2.14.1 to 2.15.1",
+          "commit": "951792c"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.46.6 to 1.47.2",
+          "commit": "1f6298b"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.59.0 to 0.60.0",
+          "commit": "43c86c8"
+        }
+      ],
+      "internal": [
+        {
+          "description": "`s3util`: update closure usage",
+          "commit": "a5baa41"
+        },
+        {
+          "description": "`s3util`: update closure usage",
+          "commit": "b4e6cf5"
+        },
+        {
+          "description": "`alexaforbusinessutil`: remove use of import alias",
+          "commit": "052b237"
+        }
+      ]
+    },
+    {
+      "version": "v0.2.3",
+      "date": "2023-10-28",
+      "commit": "4bd3584",
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "4bd3584"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.46.1 to 1.46.5",
+          "commit": "a2de7f4"
+        }
+      ]
+    },
+    {
+      "version": "v0.2.2",
+      "date": "2023-10-21",
+      "commit": "a48501a",
+      "changed": [
+        {
+          "description": "golangci: fix `govet`: struct literal uses unkeyed fields",
+          "commit": "a48501a"
+        },
+        {
+          "description": "golangci: fix `govet`: struct literal uses unkeyed fields",
+          "commit": "2d421f0"
+        },
+        {
+          "description": "golangci: fix various",
+          "commit": "8294589"
+        },
+        {
+          "description": "golangci: fix various",
+          "commit": "0c18d39"
+        }
+      ]
+    },
+    {
+      "version": "v0.2.1",
+      "date": "2023-10-21",
+      "commit": "d3ebafc",
+      "highlights": [
+        {
+          "description": "`rdsutil`: parameter-set grouping and byte/file readers for parameter exports"
+        }
+      ],
+      "added": [
+        {
+          "description": "`rdsutil`: add `ParametersSets{}`, `ParameterGroupService.DescribeDBParameterGroupSets()`",
+          "commit": "ce7f458"
+        },
+        {
+          "description": "`rdsutil`: add `ParametersResponseReadBytes()`, `ParametersResponseReadFile()`",
+          "commit": "f7c92b2"
+        }
+      ],
+      "changed": [
+        {
+          "description": "golangci: init",
+          "commit": "d3ebafc"
+        },
+        {
+          "description": "go mod: disable `toolchain` for go 1.19 support",
+          "commit": "1ee3f20"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "ae3d2a5"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "4c96fd4"
+        }
+      ],
+      "fixed": [
+        {
+          "description": "`rdsutil`: update `Parameters.Table()` rows.",
+          "commit": "995231c"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`rdsutil`: add link",
+          "commit": "7dc7ae1"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.45.25 to 1.46.0",
+          "commit": "febe886"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.45.23 to 1.45.25",
+          "commit": "d812eb5"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.45.10 to 1.45.23",
+          "commit": "9ac9a15"
+        },
+        {
+          "description": "bump github.com/grokify/mogo from 0.55.0 to 0.56.0",
+          "commit": "09d6bfd"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.45.6 to 1.45.10",
+          "commit": "428f294"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.45.2 to 1.45.5",
+          "commit": "e72df28"
+        },
+        {
+          "description": "bump actions/checkout from 3 to 4",
+          "commit": "81b4a12"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.20.1 to 0.20.2",
+          "commit": "d3d1df9"
+        }
+      ],
+      "infrastructure": [
+        {
+          "description": "go test: update go versions",
+          "commit": "f7dbdc4"
+        }
+      ]
+    },
+    {
+      "version": "v0.2.0",
+      "date": "2023-09-03",
+      "commit": "53c34b7",
+      "highlights": [
+        {
+          "description": "New `rdsutil` package for RDS parameter group management"
+        }
+      ],
+      "added": [
+        {
+          "description": "`rdsutil`: add `ParametersSet{}`",
+          "commit": "4c3f7c4"
+        },
+        {
+          "description": "`rdsutil`: add `Parameters.Map()`, `Parameters.Names()`, `MapToParameters()`",
+          "commit": "3f6d9b4"
+        },
+        {
+          "description": "`rdsutil`: add `ParameterGroupService.ModifyDBParameterGroup()`",
+          "commit": "47b556c"
+        },
+        {
+          "description": "`rdsutil.RDSClientMore`: add `CreateDBClusterParameterGroup()`, `DescribeDBParameters()`, `DescribeEngineDefaultParameters()`, `Parameters{}`",
+          "commit": "f4a9f88"
+        },
+        {
+          "description": "`rdsutil`: add `RDSClientMore{}`, `NewRDSClientMore()`, `NewRDSClient()`",
+          "commit": "873386f"
+        },
+        {
+          "description": "`config`: add `NewAWSConfigMoreStatic()`",
+          "commit": "7213d3c"
+        }
+      ],
+      "changed": [
+        {
+          "description": "`rdsutil`: update `ParameterGroupService.ModifyDBParameterGroup()`",
+          "commit": "53c34b7"
+        },
+        {
+          "description": "`rdsutil`: update/simplify `ParameterGroupService.ModifyDBParameterGroup()`",
+          "commit": "d7aed91"
+        },
+        {
+          "description": "`rdsutil`: update `RDSClientMore.Parameter` from `RDSClientMore.ParameterGroup`",
+          "commit": "613c0d1"
+        },
+        {
+          "description": "update years",
+          "commit": "cc867ff"
+        },
+        {
+          "description": "`rdsutil`: add `RDSClientMore.ParameterGroup` field",
+          "commit": "71c8cab"
+        },
+        {
+          "description": "go mod: update",
+          "commit": "540c19c"
+        },
+        {
+          "description": "`rdsutil`: add `ParameterGroupService{}`, split service to `parameters_service.go` file",
+          "commit": "516ea8c"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`rdsutil`: add `README.md` with online reference links",
+          "commit": "97f7ee9"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/grokify/goauth from 0.19.0 to 0.20.1",
+          "commit": "107bd38"
+        }
+      ],
+      "infrastructure": [
+        {
+          "description": "go test: add Go `1.21.x`",
+          "commit": "624a91d"
+        }
+      ]
+    },
+    {
+      "version": "v0.1.1",
+      "date": "2023-08-28",
+      "commit": "e05a2c4",
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "beb1d3b"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/grokify/mogo from 0.52.0 to 0.54.1",
+          "commit": "e05a2c4"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.321 to 1.44.326",
+          "commit": "c829db5"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.316 to 1.44.321",
+          "commit": "4216ae4"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.312 to 1.44.316",
+          "commit": "42451bc"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.311 to 1.44.312",
+          "commit": "a526990"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.305 to 1.44.311",
+          "commit": "224a528"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.300 to 1.44.305",
+          "commit": "4409da1"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.297 to 1.44.300",
+          "commit": "dcfb629"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.293 to 1.44.297",
+          "commit": "d238ec5"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.288 to 1.44.293",
+          "commit": "db92605"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.282 to 1.44.288",
+          "commit": "1b5ef82"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.281 to 1.44.282",
+          "commit": "e8e20a9"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.280 to 1.44.281",
+          "commit": "14864cf"
+        },
+        {
+          "description": "bump github.com/grokify/goauth from 0.18.0 to 0.19.0",
+          "commit": "ae0bee5"
+        }
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2023-06-13",
+      "commit": "818f29b",
+      "highlights": [
+        {
+          "description": "Initial release: `s3util` and `textractutil` (renamed from `xtextract`) packages"
+        }
+      ],
+      "added": [
+        {
+          "description": "`s3util`: init",
+          "commit": "5f58756"
+        }
+      ],
+      "changed": [
+        {
+          "description": "go mod: update",
+          "commit": "b3ee78a"
+        },
+        {
+          "description": "golanci: fix various",
+          "commit": "c7a5cf5"
+        },
+        {
+          "description": "init",
+          "commit": "26e87d4"
+        },
+        {
+          "description": "`textractutil`: rename package from `xtextract`",
+          "commit": "d2a0d50"
+        },
+        {
+          "description": "`xtextract`: rename file",
+          "commit": "c4dec1c"
+        },
+        {
+          "description": "inital commit",
+          "commit": "0066049"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "`README.md`: update `go get`",
+          "commit": "3521539"
+        },
+        {
+          "description": "`README.md`: init",
+          "commit": "d3528ab"
+        }
+      ],
+      "build": [
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.274 to 1.44.280",
+          "commit": "ce7a184"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.265 to 1.44.274",
+          "commit": "2ad8d40"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.262 to 1.44.265",
+          "commit": "e56ee28"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.257 to 1.44.262",
+          "commit": "ab42d4a"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.247 to 1.44.257",
+          "commit": "995e623"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.242 to 1.44.247",
+          "commit": "2d1c2d5"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.238 to 1.44.241",
+          "commit": "9a25403"
+        },
+        {
+          "description": "bump github.com/aws/aws-sdk-go from 1.44.233 to 1.44.238",
+          "commit": "b41d996"
+        }
+      ],
+      "infrastructure": [
+        {
+          "description": "build: update branches; add `workflow_dispatch`",
+          "commit": "2f9b7ac"
+        },
+        {
+          "description": "build: init",
+          "commit": "8a1ce54"
+        }
+      ]
+    }
+  ]
+}
