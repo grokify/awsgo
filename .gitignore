@@ -1,5 +1,6 @@
 .DS_Store
 .env
+.goauth.json
 _*
 *.tar
 coverage.txt
