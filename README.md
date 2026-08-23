@@ -2,7 +2,6 @@
 
 [![Build Status][build-status-svg]][build-status-url]
 [![Lint Status][lint-status-svg]][lint-status-url]
-[![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![License][license-svg]][license-url]
 
@@ -40,8 +39,6 @@ AWS Basic Auth can be used using [`goauth`](https://github.com/grokify/goauth) w
  [build-status-url]: https://github.com/grokify/awsgo/actions/workflows/ci.yaml
  [lint-status-svg]: https://github.com/grokify/awsgo/actions/workflows/lint.yaml/badge.svg?branch=main
  [lint-status-url]: https://github.com/grokify/awsgo/actions/workflows/lint.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/awsgo
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/awsgo
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/awsgo
  [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/awsgo
  [loc-svg]: https://tokei.rs/b1/github/grokify/awsgo
