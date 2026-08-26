@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.44.7
 	github.com/aws/aws-sdk-go-v2/service/trustedadvisor v1.18.6
 	github.com/grokify/goauth v0.23.30
-	github.com/grokify/gocharts/v2 v2.27.0
+	github.com/grokify/gocharts/v2 v2.27.1
 	github.com/grokify/govex v0.21.0
 	github.com/grokify/mogo v0.74.7
 	github.com/grokify/sogo v0.15.0
