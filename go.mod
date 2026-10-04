@@ -1,6 +1,6 @@
 module github.com/grokify/awsgo
 
-go 1.26.1
+go 1.26.4
 
 require (
 	github.com/aws/aws-sdk-go v1.55.8
@@ -24,6 +24,8 @@ require (
 	github.com/micahhausler/aws-iam-policy v0.4.4
 	github.com/spf13/cobra v1.10.2
 )
+
+require github.com/grokify/priority-frameworks v0.4.0 // indirect
 
 require (
 	cloud.google.com/go/auth v0.23.2 // indirect
@@ -69,6 +71,7 @@ require (
 	github.com/olekukonko/errors v1.3.0 // indirect
 	github.com/olekukonko/ll v0.1.8 // indirect
 	github.com/olekukonko/tablewriter v1.1.4 // indirect
+	github.com/plexusone/findingspec v0.1.0
 	github.com/relvacode/iso8601 v1.8.0 // indirect
 	github.com/richardlehane/mscfb v1.0.8 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
