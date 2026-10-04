@@ -13,6 +13,11 @@ const (
 
 	filenamePomProperties = "pom.properties"
 
+	// Resource table field-name constants.
+	ImageHash           = "image_hash"
+	ImageRepositoryName = "image_repo_name"
+	ImageTags           = "image_tags"
+
 	ResourceTypeAwsEc2Instance       = types.ResourceTypeAwsEc2Instance
 	ResourceTypeAwsEcrContainerImage = types.ResourceTypeAwsEcrContainerImage
 	ResourceTypeAwsEcrRepository     = types.ResourceTypeAwsEcrRepository

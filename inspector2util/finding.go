@@ -5,11 +5,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
-	"github.com/grokify/govex/severity"
 	"github.com/grokify/mogo/pointer"
 	"github.com/grokify/mogo/time/timeutil"
 	"github.com/grokify/mogo/type/slicesutil"
 	"github.com/grokify/mogo/type/stringsutil"
+	"github.com/plexusone/findingspec/security"
 )
 
 type Finding types.Finding
@@ -41,13 +41,8 @@ func (f Finding) FilePaths() []string {
 func (f Finding) FindingSeverity(canonical bool) string {
 	if !canonical {
 		return string(f.Severity)
-	} else {
-		if can, _, err := severity.ParseSeverity(string(f.Severity)); err != nil {
-			return string(f.Severity)
-		} else {
-			return strings.TrimSpace(can)
-		}
 	}
+	return security.ParseScannerSeverity(string(f.Severity)).Name()
 }
 
 func (f Finding) FindingOrVendorSeverity(canonical bool) string {
@@ -109,21 +104,17 @@ func (f Finding) VendorCreatedAtAgeMonths() *float32 {
 }
 
 func (f Finding) VendorSeverity(canonical bool) string {
-	if f.PackageVulnerabilityDetails != nil && f.PackageVulnerabilityDetails.VendorSeverity != nil {
-		if rawSeverity := strings.TrimSpace(
-			pointer.Dereference(
-				f.PackageVulnerabilityDetails.VendorSeverity)); rawSeverity == "" {
-			return ""
-		} else if !canonical {
-			return rawSeverity
-		} else if canonicalSev, _, err := severity.ParseSeverity(rawSeverity); err != nil {
-			return rawSeverity
-		} else {
-			return canonicalSev
-		}
-	} else {
+	if f.PackageVulnerabilityDetails == nil || f.PackageVulnerabilityDetails.VendorSeverity == nil {
 		return ""
 	}
+	rawSeverity := strings.TrimSpace(pointer.Dereference(f.PackageVulnerabilityDetails.VendorSeverity))
+	if rawSeverity == "" {
+		return ""
+	}
+	if !canonical {
+		return rawSeverity
+	}
+	return security.ParseScannerSeverity(rawSeverity).Name()
 }
 
 func (f Finding) CVEID() *string {

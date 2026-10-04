@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
-	"github.com/grokify/govex/reports/poam"
 	"github.com/grokify/mogo/pointer"
 )
 
@@ -115,14 +114,6 @@ func (p Package) PackageType() string {
 	} else {
 		return "os"
 	}
-}
-
-func (p Package) POAMItem() poam.POAMItemUpgradeRemedationPackage {
-	return poam.POAMItemUpgradeRemedationPackage{
-		Name:           pointer.Dereference(p.Name),
-		CurVersion:     pointer.Dereference(p.Version),
-		FixVersion:     pointer.Dereference(p.FixedInVersion),
-		PackageManager: string(p.PackageManager)}
 }
 
 func (p Package) VersionString() string {
