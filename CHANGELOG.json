@@ -28,7 +28,8 @@
         { "description": "`inspector2util`: `FindingSeverity`/`VendorSeverity` canonicalize via findingspec severity (priority-frameworks) instead of govex/severity", "commit": "3327ae0" }
       ],
       "removed": [
-        { "description": "`inspector2util`: removed the govex-coupled POA&M / field-value / table-rendering layer (`VulnerabilityField`, `POAMItemValue`, `POAMTable`, `TablePackages`, `ReportOptions`, `ImageVulnerabilitesReporter`). Generate POA&M generically from findingspec via govex `reports/poam.FromFindings`", "commit": "3327ae0" }
+        { "description": "`inspector2util`: removed the govex-coupled POA&M / field-value / table-rendering layer (`VulnerabilityField`, `POAMItemValue`, `POAMTable`, `TablePackages`, `ReportOptions`, `ImageVulnerabilitesReporter`). Generate POA&M generically from findingspec via govex `reports/poam.FromFindings`", "commit": "3327ae0" },
+        { "description": "Removed `alexaforbusinessutil`: AWS discontinued Alexa for Business, so the package (an `aws-sdk-go` v1 example) has been dropped" }
       ],
       "dependencies": [
         { "description": "Added `github.com/plexusone/findingspec` v0.1.0", "commit": "415fb1f" },
