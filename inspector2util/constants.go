@@ -8,9 +8,6 @@ const (
 	sepFilepathVersion = "@"
 	sepJoinDispolay    = ", "
 
-	yesnoYes = "Yes"
-	yesnoNo  = "No"
-
 	filenamePomProperties = "pom.properties"
 
 	// Resource table field-name constants.
